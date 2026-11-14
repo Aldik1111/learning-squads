@@ -55,7 +55,7 @@ export function DemoPlans() {
       <h2 id="plans-faq-title">Frequently asked questions</h2>
       <details open><summary>Is Learning Squads free right now?</summary><p>Yes. All current MVP lessons, knowledge checks, Python practice, course groups, task results, and language partner calls are available without payment.</p></details>
       <details><summary>What does the $19/month preview do?</summary><p>It opens a demo confirmation. Selecting the demo plan changes only this page until you reload. It does not record a purchase, start a subscription, or unlock additional features.</p></details>
-      <details><summary>How do groups and practice calls work?</summary><p>Python and AI groups match up to four learners using their weekly availability. Spanish and French have separate partner invitations for people who list the matching primary language and are available now. A partner still needs to accept; availability is not guaranteed.</p></details>
+      <details><summary>How do groups and practice calls work?</summary><p>Python and AI groups match up to four learners using their weekly availability. Spanish and French have separate partner invitations for people who list the matching language and are available now. A partner still needs to accept; availability is not guaranteed.</p></details>
       <details><summary>Will my progress survive closing this tab?</summary><p>Your progress is saved to your guest account. Return in the same browser profile to continue. Clearing browser data can remove access to that account; account recovery is not available yet.</p></details>
     </section>
     <dialog className={`ls-plan-dialog ${styles.dialog}`} ref={dialog} aria-labelledby="plan-confirm-title" aria-describedby="plan-confirm-description">

@@ -45,10 +45,14 @@ export const getMyCalls = () => request<Call[]>("calls");
 export const finishPractice = (id: string) => request<Call>(`calls/${id}/finish`, "POST");
 export const getCall = (id: string) => request<Call>(`calls/${id}`);
 export const getNotifications = () => request<Notification[]>("notifications");
-export const markRead = (id: string) => request<void>(`notifications/${id}/read`, "PUT");
-export const acceptInvitation = (id: string) => request<void>(`invitations/${id}/accepted`, "PUT");
-export const declineInvitation = (id: string) => request<void>(`invitations/${id}/declined`, "PUT");
-export const cancelInvitation = (id: string) => request<void>(`invitations/${id}/cancelled`, "PUT");
+async function updateNotification(path:string) {
+  await request<void>(path,"PUT");
+  if(typeof window!=="undefined")window.dispatchEvent(new Event("ls:notifications-changed"));
+}
+export const markRead = (id: string) => updateNotification(`notifications/${id}/read`);
+export const acceptInvitation = (id: string) => updateNotification(`invitations/${id}/accepted`);
+export const declineInvitation = (id: string) => updateNotification(`invitations/${id}/declined`);
+export const cancelInvitation = (id: string) => updateNotification(`invitations/${id}/cancelled`);
 export const setMeetLink = (id: string, meetUrl: string) => request<Call>(`calls/${id}/meet`, "PUT", { meetUrl });
 export const recordMeetTransition = (id: string) => request<Call>(`calls/${id}/transition`, "POST");
 export const getStudyAvailability = () => request<StudyAvailability | null>("study-availability");

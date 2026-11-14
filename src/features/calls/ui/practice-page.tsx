@@ -14,7 +14,7 @@ export function PracticePage({ moduleId, language, moduleTitle, choices }: { mod
   const profile = useRemoteData(useCallback(()=>api.getProfile(),[]));
   const command = useCommand();
   return <>
-    <PageHeading eyebrow="Put a voice to it" title="A conversation starts with hello.">Practise {languageName} with someone who lists it as their primary language and is available now.</PageHeading>
+    <PageHeading eyebrow="Put a voice to it" title="A conversation starts with hello.">Practise {languageName} with someone who lists it among their languages and is available now.</PageHeading>
     <label className="ls-field" style={{maxWidth:720,marginBottom:28}}>Practice module<select value={moduleId} disabled={command.pending} onChange={event=>router.push(`/practice?module=${encodeURIComponent(event.target.value)}`)}>{choices.map(choice=><option key={choice.id} value={choice.id}>{choice.label}</option>)}</select></label>
     <div className="ls-two-columns">
       <section className="ls-panel"><p className="ls-eyebrow">{languageName} conversation</p><h2>{moduleTitle}</h2><p className="ls-muted">We will send an invitation to a randomly selected available person. They can choose to accept or decline.</p><p className="ls-muted">Aim for at least 15 minutes of practice per module. You can practise across multiple calls. There is no one-call-per-course limit.</p>

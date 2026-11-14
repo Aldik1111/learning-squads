@@ -58,6 +58,8 @@ try {
   console.log('Migration008 automatic groups, reassignment, privacy, language exception and DST PASS');
   sql(readFileSync('tests/server/task-board-integration.sql','utf8'));
   console.log('Expanded courses, private task board, explicit sharing/reassignment, revision and language matching PASS');
+  sql(readFileSync('tests/server/multilingual-matching.sql','utf8'));
+  console.log('Multilingual primary/additional matching, availability/freshness/self guards, pending dedup, expiry and unread notifications PASS');
   sql(`insert into auth.users(id) select ('30000000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid from generate_series(1,8)n;`);
   const groupActor=(id,statement)=>run('docker',['exec',container,'psql','-h','127.0.0.1','-U','postgres','-v','ON_ERROR_STOP=1','-tA','-c',`begin;set local role authenticated;select set_config('request.jwt.claim.sub','30000000-0000-4000-8000-00000000000${id}',true);${statement};commit;`],{encoding:'utf8'});
   for(let id=1;id<=8;id++) await groupActor(id,`select public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}')`);
@@ -77,6 +79,11 @@ try {
   await taskWrite(`80000000-0000-4000-8000-00000000000${winner}`,winner===1?'First editor':'Second editor');
   if(sql("select revision from public.ls_task_results where user_id='30000000-0000-4000-8000-000000000001' and task_id='python-clean-labels-task';").trim()!=='1')throw new Error('Task replay increments revision');
   console.log('New-course capacity race and concurrent task edit/replay PASS');
+  await groupActor(2,`select public.ls_update_profile('{"name":"Multilingual race QA","track":"french","level":"beginner","primaryLanguage":"en","knownLanguages":["qaa-multirace"],"timezone":"UTC","availableForCalls":true}')`);
+  const languageRace=await Promise.allSettled([1,2].map(()=>groupActor(1,`select public.ls_create_call('language','qaa-multirace',gen_random_uuid(),null)`)));
+  if(languageRace.filter(r=>r.status==='fulfilled').length!==1||languageRace.filter(r=>r.status==='rejected'&&String(r.reason.stderr).includes('INVITATION_PENDING')).length!==1)throw new Error('Concurrent additional-language invitations bypassed pending dedup');
+  if(sql("select count(*) from public.ls_invitations where sender_id='30000000-0000-4000-8000-000000000001' and recipient_id='30000000-0000-4000-8000-000000000002' and status='pending';").trim()!=='1')throw new Error('Additional-language race created duplicate invitations');
+  console.log('Concurrent additional-language matching: one invitation, one INVITATION_PENDING PASS');
   console.log('This fixture does NOT verify Supabase GoTrue/PostgREST, browser sessions or deployment.');
 } finally {
   try{docker(['stop',container]);}catch{/* May not exist if startup failed. */}
