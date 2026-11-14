@@ -11,6 +11,7 @@ const links = [
   { href: "/practice", label: "Practice" },
   { href: "/notifications", label: "Invitations" },
   { href: "/profile", label: "Your profile" },
+  { href: "/plans", label: "Plans" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
