@@ -1,6 +1,18 @@
 # Приёмка и демонстрация
 
-## Текущий v0.4 release: узкая облачная UI-проверка — 14.11.2026, 18:52–18:58 UTC
+## Текущий UI-001 release — 15.11.2026, 00:37–00:39 Asia/Qyzylorda
+
+Проверен [обновляемый адрес ветки сдачи](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app), SHA `bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb`. Vercel status для этого SHA: success, deployment `EDRU8hJrjSnrzXBsKWrm3piSHdsb`; [CI 43632996212](https://github.com/Aldik1111/learning-squads/actions/runs/43632996212) — success (typecheck/lint/unit/content/SQL/build). Адрес является branch alias, а не immutable deployment URL; при следующем выпуске его содержимое может измениться.
+
+- Новый внешний вид главной и три настоящих курса видимы; регистрация Vercel не требуется.
+- Повторяемый сценарий `tests/e2e/ui-refresh.js` прошёл: фильтры All/Programming/AI/Languages, `aria-pressed`, ровно соответствующие карточки; черновик Python сохраняется при переходе к knowledge check и восстановлен до исходного текста; профиль доступно назван на 320px, горизонтального переполнения страницы нет.
+- Supabase подключён: `GET /api/profile` вернул 200, форма профиля доступна. В ней ничего не сохраняли.
+- Тёмная карточка тарифной гипотезы и открытие/закрытие диалога Escape прошли. Реальной оплаты нет.
+- Ошибок в консоли нет; были предупреждения о неиспользованной предварительно загруженной CSS. Снимок новой главной просмотрен, хранится во внешнем QA-журнале.
+
+До выкладки локально прошли save/reload quiz3/4 с восстановлением ответов, профиль с языками/таймзоной, состояния quiz, desktop/mobile и диалог тарифа с фокусом/подтверждением/очисткой. Детали — [ui-refresh.md](ui-refresh.md). Публичный smoke не повторял эти записи, Python runtime, групповые сценарии, внешние Meet и независимую приёмку B. Автоматические группы и настоящие Meet-ссылки проверены на предыдущем 0afb9b4 ниже; новый UI не менял сервер/миграции.
+
+## Предыдущий v0.4 release: узкая облачная UI-проверка — 14.11.2026, 18:52–18:58 UTC
 
 Проверен [immutable release hvmrsg0mj](https://learning-squads-hvmrsg0mj-aldik1111.vercel.app), SHA `0afb9b446a7004fdf49824aa3c4bf5454343fac7`, ветка `codex/hackathon-release`, Vercel Ready подтверждён координатором. Настоящий облачный Supabase001–009 и Google-провайдер; ответы API не подменялись. Два новых независимых браузерных контекста без Vercel/Google-входа: `learning-release-v4-a`, `learning-release-v4-b`; только синтетические профили `Release v04 QA A/B`.
 

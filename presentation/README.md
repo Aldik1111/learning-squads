@@ -4,13 +4,15 @@ Nine English slides, five-minute Russian speaker notes plus two-minute Q&A, and 
 
 ## Published release
 
-Site: https://learning-squads-hvmrsg0mj-aldik1111.vercel.app
+Site: https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app (mutable branch alias, not an immutable deployment URL)
 
 Application branch: https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release
 
-Exact code: https://github.com/Aldik1111/learning-squads/tree/0afb9b446a7004fdf49824aa3c4bf5454343fac7
+Exact code: https://github.com/Aldik1111/learning-squads/tree/bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb
 
-Root verified Vercel Ready and CI success: https://github.com/Aldik1111/learning-squads/actions/runs/43628081290 . Published scoped browser checks PASS: two fresh profiles save/reload; UTC weekly availability places both in one Python group; real group calendar URL survives reload; Spanish has no group enrollment and creates a ready partner call. Spanish request/accept passed with real ready URL stable after reload and join button enabled. QA availability was switched off and saved. External Meet, timer, full quiz/Python and broad B acceptance were not rerun on this deployment. Initial page load timed out, then recovered on retry; no mocked responses.
+Current UI release bea9c82 is deployed successfully. Scoped public UI smoke PASS at15Nov00:37–00:39 UTC+5: three real courses/filters/aria-pressed, Python draft retention and anchors, 320px profile/no overflow, profile GET200 and enabled form, plans dialog/Escape, new homepage. No quiz submissions, profile writes, external Meet or Python runtime execution were repeated. Console: zero errors, minor unused CSS preload warnings. CI https://github.com/Aldik1111/learning-squads/actions/runs/43632996212 completed successfully: typecheck, lint, unit, content, SQL and build.
+
+Previous release 0afb9b4: root verified Vercel Ready and CI success: https://github.com/Aldik1111/learning-squads/actions/runs/43628081290 . Published scoped browser checks PASS: two fresh profiles save/reload; UTC weekly availability places both in one Python group; real group calendar URL survives reload; Spanish has no group enrollment and creates a ready partner call. Spanish request/accept passed with real ready URL stable after reload and join button enabled. QA availability was switched off and saved. External Meet, timer, full quiz/Python and broad B acceptance were not rerun on this deployment. Initial page load timed out, then recovered on retry; no mocked responses.
 
 ## Model and evidence
 
@@ -18,7 +20,7 @@ GROUPS-002: Python and AI have automatically numbered groups of up to four, one 
 
 Local Next.js app against local Supabase009: real group/Spanish Meet URLs remained stable after reload. A signed-in non-organizer joined without the creator, camera/microphone off. Two anonymous contexts and a retry were denied: participants should sign in to Google. Two-way audio/video and fifteen-minute participation were not tested. Root reported 28/28 unit tests, SQL concurrency and build PASS, cloud008/009 applied and RLS on eight checked tables. These local checks are not relabelled as deployed browser checks.
 
-Historical 5ad4: profile save/reload, $19 demo and judge guide checked. Slide4 intentionally retains that historical plans screenshot, labelled with its SHA. Historical d922: quiz4/4, real Python6/6, persistence and two-guest flow passed. Full records are separated in status.json. Independent B acceptance and captain submission remain outstanding; issue closure does not establish acceptance.
+Historical 5ad4: profile save/reload, $19 demo and judge guide checked. Slide4 now shows the real published bea9c82 homepage; the old plans image remains only as an historical asset. Historical d922: quiz4/4, real Python6/6, persistence and two-guest flow passed. Full records are separated in status.json. Independent B acceptance and captain submission remain outstanding; issue closure does not establish acceptance.
 
 ## Build and validation
 
@@ -56,4 +58,4 @@ The owner also approved all three first beginner modules with no pass threshold 
 
 ## Artifact validation
 
-Final PDF: nine English pages rendered and visually reviewed, with detailed review of changed practice/status slides. Clickable links target the new immutable URL and source branch. ZIP integrity and file SHA256 values checked after generation. These artifact checks do not replace application acceptance or submit materials to organizers.
+Final PDF: nine English pages rendered and visually reviewed, with detailed review of new published-homepage/status slides. Clickable links target the mutable release-branch site alias and exact code SHA. ZIP integrity and file SHA256 values checked after generation. These artifact checks do not replace application acceptance or submit materials to organizers.

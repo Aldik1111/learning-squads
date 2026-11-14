@@ -11,7 +11,7 @@ if status.get("release_alignment_pending"):
     raise SystemExit("GROUPS-002 sources await deployment URL/SHA and reviewed PDF. Do not package the previous PDF as the new release.")
 links = {
     "Рабочий сайт": status["live_url"],
-    "Исходники рабочей ветки": status["source_url"],
+    "Исходники точной версии": status["source_url"],
     "Точный код deployment": status["deployed_source_url"],
     "Презентация — 9 слайдов": "learning-squads-pitch.pdf",
     "Заметки — 5 минут + вопросы": "speaker-notes.md",
@@ -23,8 +23,8 @@ page = f'''<!doctype html>
 <title>Learning Squads — материалы сдачи</title>
 <style>body{{font:20px/1.6 system-ui,sans-serif;max-width:850px;margin:60px auto;padding:0 24px;background:#f5f6ef;color:#163d35}}a{{color:#225e4f}}li{{margin:14px 0}}small{{display:block;overflow-wrap:anywhere}}p{{max-width:65ch}}</style>
 <h1>Learning Squads</h1><p>Сайт, открытый код и английская презентация. Проверенный preview и готовность новой версии различаются; актуальные ограничения указаны в SUBMISSION.md. Дедлайн по подтверждению владельца: 15 ноября, 12:00 UTC+5.</p>
-<ul>{items}</ul><small>Проверенный deployment: {html.escape(status["evidence_sha"])}</small>
-<p>Ветка сдачи — codex/hackathon-release. Не подменять её текущим main с документацией. Открытие этого файла ничего не отправляет организаторам.</p></html>'''
+<ul>{items}</ul><small>Версия приложения: {html.escape(status["evidence_sha"])}</small>
+<p>Адрес сайта — обновляемый адрес ветки codex/hackathon-release, не immutable URL. Исходники указаны по точному SHA; main содержит документацию. Открытие этого файла ничего не отправляет организаторам.</p></html>'''
 (root / "submission-links.html").write_text(page + "\n", encoding="utf-8")
 payloads = {name: (root / name).read_bytes() for name in (
     "learning-squads-pitch.pdf", "speaker-notes.md", "SUBMISSION.md", "submission-links.html"
@@ -44,6 +44,7 @@ manifest = {
     "local_revision": status.get("local_revision"),
     "deployment": status.get("deployment"),
     "previous_release": status.get("previous_release"),
+    "previous_product_release": status.get("previous_product_release"),
     "artifact_validation": status.get("artifact_validation"),
     "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in payloads.items()},
 }

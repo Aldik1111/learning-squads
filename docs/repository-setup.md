@@ -4,7 +4,9 @@
 
 ## Последний выпуск GROUPS-002
 
-Актуальный сайт — [release v0.4](https://learning-squads-hvmrsg0mj-aldik1111.vercel.app), SHA `0afb9b446a7004fdf49824aa3c4bf5454343fac7`, ветка `codex/hackathon-release`. Vercel Ready и [Application checks](https://github.com/Aldik1111/learning-squads/actions/runs/43628081290) подтверждены. В Supabase применены 008–009, проверены RLS восьми новых таблиц и cleanup RPC. Google Calendar/Meet подключены; пять Google Secret и две публичные Supabase-переменные ограничены Preview этой release-ветки. Протокол новых браузерных проверок и его границы — [demo.md](demo.md); детали облака — [cloud-setup.md](cloud-setup.md).
+Обновление UI-001 от 15.11.2026: текущий frontend — SHA `bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb` на [обновляемом адресе release-ветки](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app). CI 43632996212 и публичный UI smoke прошли, см. [demo.md](demo.md). Main/PR/защита/доступы не менялись. Следующий абзац — предыдущий продуктовый выпуск.
+
+Предыдущий продуктовый выпуск — [release v0.4](https://learning-squads-hvmrsg0mj-aldik1111.vercel.app), SHA `0afb9b446a7004fdf49824aa3c4bf5454343fac7`, ветка `codex/hackathon-release`. Vercel Ready и [Application checks](https://github.com/Aldik1111/learning-squads/actions/runs/43628081290) подтверждены. В Supabase применены 008–009, проверены RLS восьми новых таблиц и cleanup RPC. Google Calendar/Meet подключены; пять Google Secret и две публичные Supabase-переменные ограничены Preview этой release-ветки. Протокол новых браузерных проверок и его границы — [demo.md](demo.md); детали облака — [cloud-setup.md](cloud-setup.md).
 
 Новый PR не создавался, main и его защита не менялись. Документ подготовлен в рабочей ветке; пункт #22 о его принятии через обычный PR ещё не закрыт. Ниже — историческая настройка и доказательства предыдущих выпусков, не текущий адрес сдачи.
 

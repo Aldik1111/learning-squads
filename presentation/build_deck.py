@@ -138,11 +138,11 @@ box(60,558,1160,72,INK,10)
 text("No signup form: a guest profile is created automatically.",86,580,1110,23,PAPER,bold=True)
 finish()
 
-# 4: actual new-release plans screen, full original capture retained
+# 4: current published homepage, original capture retained
 frame(4,"PRODUCT")
-title("A free MVP. A clear $19/month demo.")
-image = ImageReader(str(ROOT / "assets" / "published-plans-5ad4.png"))
-iw, ih = image.getSize(); crop_x, crop_y, crop_w, crop_h = 380, 250, 1140, 640
+title("A short lesson. A real next step.")
+image = ImageReader(str(ROOT / "assets" / "published-home-bea9.png"))
+iw, ih = image.getSize(); crop_x, crop_y, crop_w, crop_h = 80, 160, 1280, 480
 scale = min(1160/crop_w, 440/crop_h); dw, dh = crop_w*scale, crop_h*scale
 image_x = 60 + (1160-dw)/2
 c.saveState()
@@ -156,7 +156,7 @@ finish()
 # 5: GROUPS-002 approved rules; source draft until release alignment
 frame(5,"PRACTICE TOGETHER")
 title("One shared schedule. Two ways to practise.")
-text("GROUPS-002 · release 0afb9b4: profiles, groups and call-link checks passed",60,153,1160,20,CORAL,height=55)
+text("GROUPS-002 · group and call-link checks passed on the previous 0afb release",60,153,1160,20,CORAL,height=55)
 box(60,238,740,327,MINT,10)
 text("Python + How to use AI",84,262,690,29,bold=True)
 text("An automatically numbered group, up to 4 people.<br/>One active group per course, matched by shared availability.",84,313,686,22,MUTED,height=94)
@@ -231,7 +231,7 @@ for i,item in enumerate(STATUS["pending"]):
     text(item,742,320+i*64,470,22,PAPER,height=55)
 line(60,546,1220,546,"#4B6A59",1)
 text("Source code and evidence",60,571,530,24,PAPER,bold=True)
-text("GitHub · codex/hackathon-release",60,613,760,21,MINT)
+text(STATUS.get("source_label", "GitHub · codex/hackathon-release"),60,613,760,21,MINT)
 c.linkURL(STATUS["source_url"],(60,H-646,800,H-610),relative=0)
 if STATUS["live_url"]:
     text("Public website →",835,571,375,24,PAPER,bold=True)

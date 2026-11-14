@@ -1,5 +1,9 @@
 # Облачное окружение Learning Squads
 
+## UI-001 — 15.11.2026
+
+Выпущен новый frontend, SHA `bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb`, ветка `codex/hackathon-release`. Vercel deployment `EDRU8hJrjSnrzXBsKWrm3piSHdsb` — success по GitHub status; [Application checks](https://github.com/Aldik1111/learning-squads/actions/runs/43632996212) прошли. Текущий [публичный адрес ветки](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app) проверен отдельно через браузер: новое оформление/фильтры, lesson navigation, мобильный UI, диалог и реальный Supabase-профиль. Это обновляемый branch alias. Переменные Vercel, Google-доступы, схема БД и серверные API не менялись. Границы smoke — [demo.md](demo.md). Прежние immutable URLs ниже остаются историческими доказательствами.
+
 ## Обновление GROUPS-002 — 14.11.2026
 
 После явного разрешения владельца «Да, применить и выпустить новую версию» миграции `202611140008` и `202611140009` применены через SQL Editor одной транзакцией: `Success. No rows returned`. Повторный SELECT вернул `new_tables=8`, `all_rls_enabled=true`, `cleanup_exists=true` для `ls_get_cancelled_group_meetings(uuid,uuid[])`. Миграция отзывает прямые grants на восьми новых таблицах; в предупреждении редактора выбрано **Run and enable RLS**. История Supabase CLI по-прежнему не зарегистрирована: не повторять эти миграции через `db push` без сверки/repair. Старые записи и личные результаты сохранены, старые manual-group/Meet-write RPC отозваны; предыдущие deployments больше не подходят для приёмки групп.
