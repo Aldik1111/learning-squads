@@ -1,0 +1,14 @@
+.page { max-width: 850px; margin: auto; }
+.page nav { margin-bottom: 32px; }
+.page header ul { padding-left: 22px; line-height: 1.8; }
+.section { margin-block: 32px; }
+.material { line-height: 1.8; overflow-wrap: anywhere; }
+.material h1 { font-size: 1.6rem; }
+.material h2 { margin-top: 32px; }
+.material pre { overflow-x: auto; padding: 18px; border-radius: 10px; background: #edf3ee; font-size: .88rem; }
+.material code { font-family: Consolas, monospace; }
+.material blockquote { margin: 20px 0; border-left: 3px solid #366e5e; padding-left: 18px; }
+.material table { width: 100%; border-collapse: collapse; font-size: .88rem; table-layout: fixed; }
+.material th, .material td { padding: 10px; text-align: left; border-bottom: 1px solid #d8e1db; overflow-wrap: anywhere; }
+.material a { text-underline-offset: 4px; }
+.material > :first-child { margin-top: 0; }

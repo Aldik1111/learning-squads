@@ -2,6 +2,8 @@
 
 Status: isolated browser checks PASS on 2026-11-14. Application E2E is NOT RUN. These are repeatable scenarios, not installed Playwright tests or a production mock adapter.
 
+Update, 2026-11-14: the sentence above records the original isolated-harness stage. Real local application browser checks have since passed for learning, restored results/Python, profiles and multi-user product flows. Current environment, evidence and remaining published/Meet acceptance are recorded in [docs/demo.md](../../docs/demo.md). The historical scenarios below remain component checks; they do not alone prove application or deployment acceptance.
+
 ## Setup after bootstrap
 
 Use the agreed React/Next.js tooling from B. Mount `CourseCatalog` and `KnowledgeCheck` in a development-only harness with content from the three authored modules. Pass a controllable async callback which can resolve, reject, remain pending, return the wrong content version, or omit feedback. Make the simulated state explicit on the page. Do not bundle answer keys or a fixture callback into production routes. Component presentation types and adapter requirements are in `src/features/learning/ui/INTEGRATION.md`.

@@ -10,4 +10,4 @@ Aim for at least 15 minutes of practice for this module. These sections are sugg
 
 No partner available? Rehearse both parts and complete the knowledge questions; return to conversation practice later. There is no limit of one call per course. A team can also start a group call when two or more teammates choose to practise.
 
-The application's Meet timer, when implemented, measures time since you clicked the link. It cannot confirm that someone joined or stayed in the call. Reaching 15 minutes does not by itself certify completion. The policy for combining practice across sessions is still being agreed.
+The Meet timer measures time since you clicked the link. Choose **Finish this practice** when you finish. Completed sessions linked to this module accumulate toward 15 minutes; overlapping intervals count only once. The application cannot confirm that someone joined or stayed in the call. Reaching 15 minutes does not by itself certify learning or attendance.

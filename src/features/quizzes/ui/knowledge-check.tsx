@@ -30,6 +30,7 @@ export type QuizFeedback = {
 export type KnowledgeCheckProps = {
   quiz: QuizView;
   onSubmit: (answers: QuizAnswers) => Promise<QuizFeedback>;
+  initialAttempt?: { id: string; answers: Record<string, string>; feedback: QuizFeedback };
 };
 
 function matchesAttempt(result: QuizFeedback, quiz: QuizView, answers: QuizAnswers) {
@@ -46,14 +47,15 @@ function matchesAttempt(result: QuizFeedback, quiz: QuizView, answers: QuizAnswe
 
 export function KnowledgeCheck(props: KnowledgeCheckProps) {
   // A different module/version must never inherit answers or an in-flight result.
-  return <QuizAttempt key={JSON.stringify([props.quiz.moduleId, props.quiz.contentVersion])} {...props} />;
+  return <QuizAttempt key={JSON.stringify([props.quiz.moduleId, props.quiz.contentVersion, props.initialAttempt?.id])} {...props} />;
 }
 
-function QuizAttempt({ quiz, onSubmit }: KnowledgeCheckProps) {
+function QuizAttempt({ quiz, onSubmit, initialAttempt }: KnowledgeCheckProps) {
   const id = useId();
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const restored = initialAttempt && matchesAttempt(initialAttempt.feedback, quiz, initialAttempt.answers);
+  const [answers, setAnswers] = useState<Record<string, string>>(restored ? initialAttempt.answers : {});
   const [pending, setPending] = useState(false);
-  const [feedback, setFeedback] = useState<QuizFeedback | null>(null);
+  const [feedback, setFeedback] = useState<QuizFeedback | null>(restored ? initialAttempt.feedback : null);
   const [error, setError] = useState(false);
   const submitting = useRef(false);
   const resultHeading = useRef<HTMLHeadingElement>(null);
@@ -63,9 +65,9 @@ function QuizAttempt({ quiz, onSubmit }: KnowledgeCheckProps) {
   const complete = quiz.questions.length > 0 && answered === quiz.questions.length;
 
   useEffect(() => {
-    if (feedback) resultHeading.current?.focus();
+    if (feedback && feedback !== initialAttempt?.feedback) resultHeading.current?.focus();
     if (error) errorMessage.current?.focus();
-  }, [feedback, error]);
+  }, [feedback, error, initialAttempt?.feedback]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

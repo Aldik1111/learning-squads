@@ -2,7 +2,7 @@
 
 Three original English-language beginner modules for the hackathon: Python, How to use AI, and Spanish. Content is authored and locally checkable; it is not yet connected to an application. Titles, level and lesson scope are proposed editorial choices for review, not new product requirements.
 
-## Proposed content format v1 — pending T02 review
+## Content format v1 — integrated in T02/T07
 
 `catalog.json` lists course/module IDs and relative directories. Each directory contains:
 
@@ -13,11 +13,11 @@ Three original English-language beginner modules for the hackathon: Python, How 
 
 Paths resolve relative to their containing catalog/module/exercise file and must remain in `content/`. Content is UTF-8. IDs remain stable when prose changes; increment `contentVersion` for a changed published module and `exerciseVersion` for changed exercise behavior/cases. Saved attempts need both the ID and version; older attempt records must retain their original interpretation.
 
-This directory does not define the API or the runner component. B owns the final contracts in T02, API scoring in T07, Python isolation in T09 and progress rules. Adapt this proposal once T02 is agreed. A course currently has one authored module; the catalog supports adding more module entries without renaming existing IDs.
+The backend and frontend now share `src/contracts/index.ts`; the server loader and immutable SQL grading snapshots implement this format. A reviewed the backend agent's DTOs and the real PythonExercise integration on 2026-11-14. A course currently has one authored module; the catalog supports adding more module entries without renaming existing IDs.
 
 Quiz questions have one correct option. Return counts and feedback; there is deliberately no pass threshold, retry limit, forced order or automatic completion rule. The public repository contains the answer keys: these are learning checks, not a protected examination. Server-side grading avoids trusting submitted scores, not access to the public answers.
 
-The Spanish activity proposes at least 15 minutes of practice for this module. The timer is only time since the Meet-link transition; neither the activity nor its duration proves attendance or awards completion. Whether sessions accumulate remains open in #21. Materials and questions must work without a team or partner.
+Spanish requires at least 15 minutes of recorded practice for this module. The owner approved accumulating sessions on 2026-11-14. A participant's first Meet-link transition starts an interval; their explicit Finish action ends it. Completed intervals are combined without counting overlaps twice. This does not verify attendance or award test/course completion. Materials and questions work without a team or partner. Spanish content version2 clarifies this rule; version1 grading snapshots remain unchanged.
 
 ## Local authoring checks
 
