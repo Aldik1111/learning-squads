@@ -1,5 +1,30 @@
 # Приёмка и демонстрация
 
+## Расширение CONTENT-002 / TASKS-001 — 15.11.2026, #26
+
+CI [Application checks #43642752199](https://github.com/Aldik1111/learning-squads/actions/runs/43642752199) — PASS. Исходники: `24bdccf59eca3e0fa592408100cd06f9318437af` (`codex/a-learning-modules`), content commit `0753772`. Это пока **локально проверяемая версия**, не обновление опубликованного сайта. Прежние доказательства ниже не считаются проверкой новых функций.
+
+| Проверка | Факт |
+|---|---|
+| Контент | PASS: 6 курсов × 3 модуля, 72 quiz-вопроса, 18 task definitions, 6 Python exercises, 6 разговорных планов Spanish/French. Старые опубликованные версии сохранены. |
+| Python authoring | PASS: 36 reference cases, все 6 незавершённых starters и 29 ошибочных вариантов отклонены. Это CPython-проверка контента, не браузерный Pyodide. |
+| Сервер | PASS: 28 unit-тестов, TypeScript, ESLint, content/hygiene, production build. |
+| Изолированная SQL001–011 | PASS: grading всех 18 модулей, 6 Python metadata versions, private/current-group results, отмена публикации после выхода и возврата, stale-editor sharing race, revision/idempotency. 8 конкурентных вступлений нового курса → 2 группы по 4; 2 редактора → 1 запись + 1 конфликт. |
+| Локальный HTTP | PASS: реальные anonymous sessions, 6/18 каталог, 18 заданий, private save/replay/conflict, запрет unsafe links, dynamic Python case validation; несовместимые language/module отклонены до Google. |
+| French Meet | PASS: два новых локальных гостя, подбор fr для french-daily-plans, принятие приглашения, одна настоящая ready Google-ссылка у обоих. Таймеры не запускались; посещение и связь не проверялись. |
+| Cloud SQL-пакет | PASS в одноразовой БД: 001–009 → 010–011, транзакционный rollback при искусственной ошибке, сохранность старых попыток/встреч, итог 6/18/18 и RLS, закрытые прямые grants, отказ при повторе. В рабочее облако ещё не применён. |
+| Browser UI | На локальном `next start` (4191) PASS: проверка описания Done и HTTPS, private save/reload, конфликт двух вкладок сохраняет черновик и блокирует перезапись, явный reload получает новую версию, доска/диалог на 390px без горизонтального overflow, Escape. Прогон `tests/e2e/task-board-flow.js`. Остальные браузерные сценарии ниже дополняются отдельно. `next dev` непрерывно перезагружался, незавершённый dev-прогон не засчитан. |
+
+Дополнительные UI-проверки на той же локальной production-сборке — PASS:
+
+- Новый `python-list-filters` действительно выполнен в Pyodide: 6/6, сохранение сервером и восстановление после reload.
+- Переход Python module 2 → 3 не переносит чужой starter или выбранные quiz-ответы.
+- French lesson → task deep link открывает нужное задание без возможности группового sharing.
+- Два независимых синтетических профиля: включение sharing в UI и Save показывает результат и имя у сокомандника; отключение и Refresh у сокомандника убирает запись. Reassignment и stale-group races дополнительно проверены SQL, а не новым браузерным прогоном.
+
+Облачные 010–011 и release deploy ожидают восстановления доступа Chrome/Supabase. Адрес ветки сдачи пока соответствует прежнему `bea9c82`. Независимая приёмка B, двусторонняя видеосвязь и 15 минут разговора этим прогоном не подтверждаются.
+
+
 ## Текущий UI-001 release — 15.11.2026, 00:37–00:39 Asia/Qyzylorda
 
 Проверен [обновляемый адрес ветки сдачи](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app), SHA `bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb`. Vercel status для этого SHA: success, deployment `EDRU8hJrjSnrzXBsKWrm3piSHdsb`; [CI 43632996212](https://github.com/Aldik1111/learning-squads/actions/runs/43632996212) — success (typecheck/lint/unit/content/SQL/build). Адрес является branch alias, а не immutable deployment URL; при следующем выпуске его содержимое может измениться.

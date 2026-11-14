@@ -13,7 +13,7 @@ async (page) => {
   await page.goto(base+'/tasks?course=python',{waitUntil:'domcontentloaded',timeout:60000});
   await card(page).waitFor();
   await open(page);
-  await editor(page).getByLabel('Task status',{exact:true}).selectOption('done');
+  await editor(page).getByRole('combobox',{name:'Task status',exact:true}).selectOption('done');
   await editor(page).getByRole('textbox',{name:/^Your result/}).fill('   ');
   await editor(page).getByRole('button',{name:'Save task',exact:true}).click();
   await editor(page).getByText('Describe what you made before marking the task Done.',{exact:true}).waitFor();
