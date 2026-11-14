@@ -1,22 +1,22 @@
 {
   "date": "14.11.2026",
-  "stage": "GROUPS-002 source draft",
+  "stage": "Published release - acceptance pending",
   "repository": "https://github.com/Aldik1111/learning-squads",
   "source_url": "https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release",
-  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
-  "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
-  "evidence_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/0afb9b446a7004fdf49824aa3c4bf5454343fac7",
+  "live_url": "https://learning-squads-hvmrsg0mj-aldik1111.vercel.app",
+  "evidence_sha": "0afb9b446a7004fdf49824aa3c4bf5454343fac7",
   "verified": [
-    "Local groups tests + Meet mocks: PASS",
-    "Published 5ad4: profile and $19 demo: PASS",
-    "Earlier d922: quiz, Python, two guests: PASS"
+    "Published profiles + Python grouping: PASS",
+    "Published group / Spanish Meet links: PASS",
+    "Separate signed-in Meet admission: PASS"
   ],
   "pending": [
-    "Publish GROUPS-002; verify live flows",
-    "Real Meet admission; independent B check",
+    "Two-way video and 15-minute attendance",
+    "Independent B acceptance of this release",
     "Captain submission via emailed form link"
   ],
-  "snapshot_note": "Live plans page, 14 Nov 2026 · release 5ad4. Demo selection: no payment and no access gate.",
+  "snapshot_note": "Historical plans screenshot: release 5ad4, 14 Nov 2026. Not a screenshot of the new 0afb9b4 release.",
   "deck_language": "en",
   "speaker_notes_language": "ru",
   "official_faq": {
@@ -99,28 +99,71 @@
     ],
     "scope": "historical d922e3c only; not rerun on new release"
   },
-  "release_alignment_pending": true,
+  "release_alignment_pending": false,
   "product_model": {
     "decision": "GROUPS-002 v1",
     "python_ai": "Automatic numbered groups of up to four; one active group per course; shared availability; members-only chat, aggregate progress and calendar",
     "spanish": "No course groups; one-to-one pairing with an available self-reported primary Spanish speaker",
     "rescheduling": "Automatic rematching when availability becomes incompatible; personal learning progress retained",
-    "meet": "Server-created Calendar conferences; no manual URL entry; real access/admission not verified"
+    "meet": "Server-created Calendar conferences; no manual URL entry; signed-in non-organizer admission verified, anonymous admission denied"
   },
   "local_revision": {
-    "status": "Implemented locally; not published at the recorded live_url",
+    "status": "Local evidence retained separately from published scoped checks",
     "evidence": [
-      "Local groups/database checks reported passing by root/backend",
-      "14 mocked provider and local OAuth callback tests passed",
-      "TypeScript and targeted ESLint passed"
+      "28/28 unit tests, SQL concurrency and build reported PASS",
+      "Cloud migrations 008 and 009 applied; RLS enabled on eight checked tables",
+      "Local Next.js app against local Supabase009: real group and Spanish Meet URLs stable after reload",
+      "Signed-in non-organizer joined without creator, camera/microphone off",
+      "Two anonymous browser attempts and retry denied; Google sign-in required in tested configuration"
     ],
-    "google_real_account_verified": false,
-    "open_access": "Optional implementation, default off; separate explicit consent required; no access change claimed",
-    "required_for_final_package": [
-      "New deployed URL and exact SHA",
-      "Matching source branch and scoped verification results",
-      "Updated screenshot or explicitly historical label",
-      "Rebuild nine-slide PDF; render and visually check; rebuild ZIP"
-    ]
+    "google_real_account_verified": true,
+    "open_access": "Optional provider support defaults off; real OAuth setup completed. Admission test does not establish anonymous OPEN access or a change of default.",
+    "required_for_final_package": [],
+    "video_media_verified": false,
+    "fifteen_minute_attendance_verified": false
+  },
+  "release_candidate_sha": "0afb9b446a7004fdf49824aa3c4bf5454343fac7",
+  "release_candidate_source_url": "https://github.com/Aldik1111/learning-squads/tree/0afb9b446a7004fdf49824aa3c4bf5454343fac7",
+  "previous_release": {
+    "deployment_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+    "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
+    "checks": [
+      "Profile save/reload",
+      "Nonblocking $19 demo confirmation and judge guide"
+    ],
+    "screenshot": "assets/published-plans-5ad4.png"
+  },
+  "deployment": {
+    "status": "Ready",
+    "verification": "Vercel UI checked by root",
+    "ci_url": "https://github.com/Aldik1111/learning-squads/actions/runs/43628081290",
+    "ci_status": "success",
+    "published_browser_checks": {
+      "status": "PASS - scoped, reported by product_ui",
+      "passed": [
+        "Two fresh independent guest profiles saved and reloaded",
+        "Same UTC weekly slot assigned both guests to same Python group",
+        "Real group Meet ready URL remained identical after reload",
+        "Spanish card has no group enrollment",
+        "Spanish request accepted by second guest; real ready URL stable after reload; join button enabled",
+        "QA availability switched off and save confirmed"
+      ],
+      "not_run": [
+        "Opening external Meet from this deployment",
+        "Starting the practice timer",
+        "Full quiz flow",
+        "Actual Python execution",
+        "Broad independent B acceptance"
+      ],
+      "transient": "Initial page load timed out; retry recovered; no mocked responses"
+    },
+    "evidence_url": "https://github.com/Aldik1111/learning-squads/issues/24#issuecomment-6882571450"
+  },
+  "artifact_validation": {
+    "pages": 9,
+    "language": "English",
+    "visual_review": "All nine rendered pages checked; detailed pages5/9 checked",
+    "pdf_links": "New immutable deployment and source branch embedded",
+    "application_qa": "Published scoped profiles/groups/Spanish request-accept/real Meet URL persistence PASS. External Meet/timer/full quiz/Python not rerun; independent B pending."
   }
 }

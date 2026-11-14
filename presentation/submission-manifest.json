@@ -1,13 +1,13 @@
 {
-  "stage": "Submission draft",
+  "stage": "Published release - acceptance pending",
   "date": "14.11.2026",
-  "deployment_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
-  "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
+  "deployment_sha": "0afb9b446a7004fdf49824aa3c4bf5454343fac7",
+  "live_url": "https://learning-squads-hvmrsg0mj-aldik1111.vercel.app",
   "source_url": "https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release",
-  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/0afb9b446a7004fdf49824aa3c4bf5454343fac7",
   "remaining": [
+    "Two-way video and 15-minute attendance",
     "Independent B acceptance of this release",
-    "Real Meet; full new-release learning flow",
     "Captain submission via emailed form link"
   ],
   "official_faq": {
@@ -90,26 +90,90 @@
     ],
     "scope": "historical d922e3c only; not rerun on new release"
   },
+  "product_model": {
+    "decision": "GROUPS-002 v1",
+    "python_ai": "Automatic numbered groups of up to four; one active group per course; shared availability; members-only chat, aggregate progress and calendar",
+    "spanish": "No course groups; one-to-one pairing with an available self-reported primary Spanish speaker",
+    "rescheduling": "Automatic rematching when availability becomes incompatible; personal learning progress retained",
+    "meet": "Server-created Calendar conferences; no manual URL entry; signed-in non-organizer admission verified, anonymous admission denied"
+  },
+  "local_revision": {
+    "status": "Local evidence retained separately from published scoped checks",
+    "evidence": [
+      "28/28 unit tests, SQL concurrency and build reported PASS",
+      "Cloud migrations 008 and 009 applied; RLS enabled on eight checked tables",
+      "Local Next.js app against local Supabase009: real group and Spanish Meet URLs stable after reload",
+      "Signed-in non-organizer joined without creator, camera/microphone off",
+      "Two anonymous browser attempts and retry denied; Google sign-in required in tested configuration"
+    ],
+    "google_real_account_verified": true,
+    "open_access": "Optional provider support defaults off; real OAuth setup completed. Admission test does not establish anonymous OPEN access or a change of default.",
+    "required_for_final_package": [],
+    "video_media_verified": false,
+    "fifteen_minute_attendance_verified": false
+  },
+  "deployment": {
+    "status": "Ready",
+    "verification": "Vercel UI checked by root",
+    "ci_url": "https://github.com/Aldik1111/learning-squads/actions/runs/43628081290",
+    "ci_status": "success",
+    "published_browser_checks": {
+      "status": "PASS - scoped, reported by product_ui",
+      "passed": [
+        "Two fresh independent guest profiles saved and reloaded",
+        "Same UTC weekly slot assigned both guests to same Python group",
+        "Real group Meet ready URL remained identical after reload",
+        "Spanish card has no group enrollment",
+        "Spanish request accepted by second guest; real ready URL stable after reload; join button enabled",
+        "QA availability switched off and save confirmed"
+      ],
+      "not_run": [
+        "Opening external Meet from this deployment",
+        "Starting the practice timer",
+        "Full quiz flow",
+        "Actual Python execution",
+        "Broad independent B acceptance"
+      ],
+      "transient": "Initial page load timed out; retry recovered; no mocked responses"
+    },
+    "evidence_url": "https://github.com/Aldik1111/learning-squads/issues/24#issuecomment-6882571450"
+  },
+  "previous_release": {
+    "deployment_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+    "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
+    "checks": [
+      "Profile save/reload",
+      "Nonblocking $19 demo confirmation and judge guide"
+    ],
+    "screenshot": "assets/published-plans-5ad4.png"
+  },
+  "artifact_validation": {
+    "pages": 9,
+    "language": "English",
+    "visual_review": "All nine rendered pages checked; detailed pages5/9 checked",
+    "pdf_links": "New immutable deployment and source branch embedded",
+    "application_qa": "Published scoped profiles/groups/Spanish request-accept/real Meet URL persistence PASS. External Meet/timer/full quiz/Python not rerun; independent B pending."
+  },
   "files": {
     "learning-squads-pitch.pdf": {
-      "bytes": 194738,
-      "sha256": "f4c8caa8de0eea21dff8fda0f8a183692bad0d7e35701f23221496e451985e29"
+      "bytes": 195006,
+      "sha256": "31fcde7aad7c474238cbdae33f515b94fc4b6a405e8e0b384169e9ac8f6b716f"
     },
     "speaker-notes.md": {
-      "bytes": 16916,
-      "sha256": "9852ecd27b6e26cea2aa65026872cd08adba2a65309e9cf4739d42c2e3141708"
+      "bytes": 16011,
+      "sha256": "65748c5f40fb8bc9ae901643dd198e8cbcd38f3ec4849606e4af6a7816228f89"
     },
     "SUBMISSION.md": {
-      "bytes": 10676,
-      "sha256": "fc783c600d741e236a1076517d42f78b57df24c0c3203c864b0a28c6f6ab16b6"
+      "bytes": 9820,
+      "sha256": "1ce3b8deb0ee870a8719b7802fb2d536a0ea4b9ce1761b15510d642ccf7ea4c3"
     },
     "submission-links.html": {
-      "bytes": 1823,
-      "sha256": "542c057324afce96d612bbb42e0b7587446569a70f134060c8d919c57dc921df"
+      "bytes": 1825,
+      "sha256": "05c7afed763639e367bd08588a8a9ec0282c9e06955567d66c539103a29e09b7"
     },
     "website.url": {
       "bytes": 80,
-      "sha256": "6e297ed1247c0680e44704fac4608ded35e5eb5e266c5ce66ece7462c1be0826"
+      "sha256": "769435068175b44f3cb026ecc732bc5fc16b9eb71186bcaf58ac7c6cb8663b21"
     },
     "source-branch.url": {
       "bytes": 99,

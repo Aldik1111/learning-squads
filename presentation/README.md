@@ -1,26 +1,28 @@
 # Learning Squads submission package (T20)
 
-**GROUPS-002 source revision in progress.** Editable slides, notes and status now describe the new locally implemented model. The PDF, ZIP and manifest are still the previous 5ad4 package; they have deliberately not been regenerated or relabelled as a new deployment. `release_alignment_pending=true` blocks ZIP generation until the final URL/SHA, scoped checks and reviewed PDF are aligned. The existing plans screenshot remains explicitly historical 5ad4 evidence.
+Nine English slides, five-minute Russian speaker notes plus two-minute Q&A, and a ZIP with seven files. Editable sources: `build_deck.py`, `status.json`, `speaker-notes.md`. `SUBMISSION.md` records submission requirements and evidence limits.
 
-New model: Python and AI receive automatically numbered groups of up to four, matched on shared weekly availability, with one active group per course and members-only chat, aggregate progress and calendar. Schedule changes can trigger rematching while retaining personal progress. Spanish has no course groups: available primary-Spanish speakers are paired one-to-one; language is self-reported. Server-created Meet and optional OPEN are local implementations, not verified published calls. OPEN is default off and needs separate organizer consent.
+## Published release
 
-Deliverables: `learning-squads-pitch.pdf` — **9 English slides**, 16:9 — and `learning-squads-submission.zip`. Editable sources: `build_deck.py`, `status.json`, the genuine plans screenshot in `assets/published-plans-5ad4.png`. Russian `speaker-notes.md` schedules five minutes plus two minutes of questions. `SUBMISSION.md` maps the official FAQ, materials and acceptance limits; `submission-links.html` opens the three destinations.
+Site: https://learning-squads-hvmrsg0mj-aldik1111.vercel.app
 
-## Current release and evidence
+Application branch: https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release
 
-Primary site: [release5ad4](https://learning-squads-1tdad607u-aldik1111.vercel.app). Source: [codex/hackathon-release](https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release), [exact deployment SHA](https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5). Main currently contains documentation; do not substitute it for the application branch.
+Exact code: https://github.com/Aldik1111/learning-squads/tree/0afb9b446a7004fdf49824aa3c4bf5454343fac7
 
-Root narrowly verified anonymous profile save/reload, /plans $19 demo confirmation and the visible judge guide around21:14 UTC+5 on2026-11-14. [CI43614225449](https://github.com/Aldik1111/learning-squads/actions/runs/43614225449) passed typecheck/lint/unit/content/SQL/build on5ad4. These are not full new-release browser acceptance.
+Root verified Vercel Ready and CI success: https://github.com/Aldik1111/learning-squads/actions/runs/43628081290 . Published scoped browser checks PASS: two fresh profiles save/reload; UTC weekly availability places both in one Python group; real group calendar URL survives reload; Spanish has no group enrollment and creates a ready partner call. Spanish request/accept passed with real ready URL stable after reload and join button enabled. QA availability was switched off and saved. External Meet, timer, full quiz/Python and broad B acceptance were not rerun on this deployment. Initial page load timed out, then recovered on retry; no mocked responses.
 
-Historical deployment d922e3c: [older preview retained for B](https://learning-squads-luuljvgfs-aldik1111.vercel.app). Profiles A/B, quiz4/4, actual Python6/6, persistence/reload/dashboard, squad join/invite/accept/read passed there at15:34–15:38 UTC. Python succeeded on its first attempt. These results are recorded separately in `status.json.historical_evidence` and are **not** relabelled as5ad4 results. Actual external Meet was not opened. Earlier local Next.js/cloud DB checks include natural ten-minute expiry; that is not claimed as a new-release browser run.
+## Model and evidence
 
-The latest B report in #18 concerns local a67913f and the obsolete project-2k6he alias (503 and two local runtime-download failures). It does not independently accept the new release. #18 was closed on explicit user instruction with incomplete criteria noted. Closure is not acceptance evidence. Real Meet, independent B acceptance, full current-release checks and captain submission remain outstanding; the deck retains a submission-draft footer.
+GROUPS-002: Python and AI have automatically numbered groups of up to four, one active group per course, matched on shared availability. Members-only chat, aggregate progress and calendar; incompatible schedule changes trigger rematching while retaining personal progress. Spanish has no course groups: one-to-one matching with an available self-reported primary Spanish speaker.
 
-## Build and package
+Local Next.js app against local Supabase009: real group/Spanish Meet URLs remained stable after reload. A signed-in non-organizer joined without the creator, camera/microphone off. Two anonymous contexts and a retry were denied: participants should sign in to Google. Two-way audio/video and fifteen-minute participation were not tested. Root reported 28/28 unit tests, SQL concurrency and build PASS, cloud008/009 applied and RLS on eight checked tables. These local checks are not relabelled as deployed browser checks.
 
-Before finalizing this revision, supply the new deployment URL, exact SHA and source branch; separate its observed checks from local and historical evidence in `status.json`. Update slides 4/5/9 and notes to those facts, build/render/review the PDF, then set `release_alignment_pending=false` and rebuild the ZIP. Do not remove real-Meet or independent-acceptance caveats without evidence.
+Historical 5ad4: profile save/reload, $19 demo and judge guide checked. Slide4 intentionally retains that historical plans screenshot, labelled with its SHA. Historical d922: quiz4/4, real Python6/6, persistence and two-guest flow passed. Full records are separated in status.json. Independent B acceptance and captain submission remain outstanding; issue closure does not establish acceptance.
 
-Use Python with ReportLab and Arial or DejaVu Sans (or `LEARNING_SQUADS_FONT_DIR`). No application dependencies are changed.
+## Build and validation
+
+Use Python with ReportLab and Arial/DejaVu Sans. No application dependencies are changed.
 
 ```sh
 python presentation/build_deck.py
@@ -29,15 +31,15 @@ pdfinfo presentation/learning-squads-pitch.pdf
 pdftoppm -r 72 -png presentation/learning-squads-pitch.pdf /tmp/learning-squads-slide
 ```
 
-The ZIP has seven entries: PDF, notes, SUBMISSION.md, HTML links, website.url, source-branch.url and a manifest. The manifest checks each included file's SHA256 and separates current deployment from historical QA. No application secrets, environment files or source-code copy are packaged. Rebuild the ZIP after every PDF/document change. Temporary renders stay outside Git.
+Update the URL/SHA and scoped evidence first. Build and visually review all nine pages, then clear `release_alignment_pending` and build the ZIP. Its manifest verifies file SHA256 values and separates deployment, local and historical evidence. Never package an old PDF as a newly verified release. Secrets, environment files, personal organizer details and private QA room URLs are excluded.
 
 ## Claim boundaries
 
-- The selected audience is working US adults aged25–45, not a validated market-size result. Acquisition, demand and retention are hypotheses; no interviews, traction or revenue are invented.
-- The owner approved a **$19/month demo hypothesis** on2026-11-14: no charges, all current MVP features free. The screen and confirmation are published/narrowly checked on5ad4. This is not an actual purchase or a feature gate; full strict-paywall compliance is not claimed.
-- Illustrative model: gross margin80%, monthly retention90% (churn10%), $400 acquisition /10 hypothetical paying users = CAC$40. LTV = $19 ×80% /10% = $152; LTV/CAC=3.8. These are scenario inputs, not measured economics.
-- $100m ARR requires `ceil(100000000/(12*19)) = 438597` paying users. This is arithmetic, not a forecast. The simplified LTV model assumes stable churn/economics and excludes expansion, discounting and fixed-cost allocation.
-- Workflow comparison is not a competitor audit. Language is self-reported; elapsed Meet-link time is not attendance proof; the guest profile may be shared.
+Audience: working US adults25–45; demand and retention are hypotheses. No invented interviews, users or revenue. The $19/month offer is an owner-approved demo with no charge and all MVP features free; strict paywall compliance is not claimed.
+
+Illustrative economics: gross margin80%, monthly retention90%/churn10%; $400 acquisition /10 hypothetical paying users gives CAC$40. LTV = $19 x80% /10% = $152; LTV/CAC=3.8. $100m ARR would require438597 payers at$19/month. These are assumptions and arithmetic, not observations or a forecast.
+
+Language is self-reported. Browser profiles can be shared. Time after opening Meet is not attendance proof. Actual admission checks do not imply verified two-way media or anonymous access.
 
 ## Official FAQ and owner decisions
 
@@ -52,8 +54,6 @@ Source: local **Business Cup 2.0 _ FAQ по кейсу.pdf**. Its exact Unicode 
 
 The owner also approved all three first beginner modules with no pass threshold or attempt limit. Source/limits are documented in SUBMISSION.md and status.json; this package does not alter business rules.
 
-## Validation
+## Artifact validation
 
-The following paragraph records the **previous 5ad4 artifact review**, not a review of the newly edited GROUPS-002 sources. The new PDF/ZIP render and final-link checks are pending deployment alignment.
-
-All three new public destinations returned HTTP200 in unauthenticated GET checks. PDF links target the new site and application release branch. ReportLab output has9 pages; extracted slide text contains no Cyrillic. All nine slides were rendered and visually reviewed, with full-size inspection of the new screenshot and status slides. The full original plans capture is retained; its layout crop does not fabricate UI. Older home/catalog images remain historical assets and are not used by the deck. ZIP integrity and every SHA256 were checked; its PDF matches the reviewed PDF. `git diff --check` passed. Package generation does not close #20 or submit to organizers.
+Final PDF: nine English pages rendered and visually reviewed, with detailed review of changed practice/status slides. Clickable links target the new immutable URL and source branch. ZIP integrity and file SHA256 values checked after generation. These artifact checks do not replace application acceptance or submit materials to organizers.

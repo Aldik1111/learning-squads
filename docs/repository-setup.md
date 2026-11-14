@@ -2,6 +2,12 @@
 
 Проверено 14.11.2026. Это состояние рабочей ветки и проверенного Preview, не слияние в main. Отдельный Vercel Production не требуется для сдачи по критерию #19.
 
+## Последний выпуск GROUPS-002
+
+Актуальный сайт — [release v0.4](https://learning-squads-hvmrsg0mj-aldik1111.vercel.app), SHA `0afb9b446a7004fdf49824aa3c4bf5454343fac7`, ветка `codex/hackathon-release`. Vercel Ready и [Application checks](https://github.com/Aldik1111/learning-squads/actions/runs/43628081290) подтверждены. В Supabase применены 008–009, проверены RLS восьми новых таблиц и cleanup RPC. Google Calendar/Meet подключены; пять Google Secret и две публичные Supabase-переменные ограничены Preview этой release-ветки. Протокол новых браузерных проверок и его границы — [demo.md](demo.md); детали облака — [cloud-setup.md](cloud-setup.md).
+
+Новый PR не создавался, main и его защита не менялись. Документ подготовлен в рабочей ветке; пункт #22 о его принятии через обычный PR ещё не закрыт. Ниже — историческая настройка и доказательства предыдущих выпусков, не текущий адрес сдачи.
+
 ## Репозиторий и команда
 
 - Публичный [Aldik1111/learning-squads](https://github.com/Aldik1111/learning-squads), default branch `main`.

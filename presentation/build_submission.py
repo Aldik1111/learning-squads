@@ -42,6 +42,9 @@ manifest = {
     "historical_evidence": status.get("historical_evidence"),
     "product_model": status.get("product_model"),
     "local_revision": status.get("local_revision"),
+    "deployment": status.get("deployment"),
+    "previous_release": status.get("previous_release"),
+    "artifact_validation": status.get("artifact_validation"),
     "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in payloads.items()},
 }
 manifest_data = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8")

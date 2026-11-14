@@ -156,7 +156,7 @@ finish()
 # 5: GROUPS-002 approved rules; source draft until release alignment
 frame(5,"PRACTICE TOGETHER")
 title("One shared schedule. Two ways to practise.")
-text("GROUPS-002 · implemented locally; deployment and live Meet checks pending",60,153,1160,20,CORAL,height=55)
+text("GROUPS-002 · release 0afb9b4: profiles, groups and call-link checks passed",60,153,1160,20,CORAL,height=55)
 box(60,238,740,327,MINT,10)
 text("Python + How to use AI",84,262,690,29,bold=True)
 text("An automatically numbered group, up to 4 people.<br/>One active group per course, matched by shared availability.",84,313,686,22,MUTED,height=94)
@@ -164,7 +164,7 @@ text("Members-only chat, progress and calendar.<br/>Change your schedule: rematc
 text("Spanish",854,264,366,29,bold=True)
 text("No course groups.<br/>One-to-one matching with an available speaker whose primary language is Spanish.",854,317,360,22,MUTED,height=170)
 text("15 minutes per module",854,510,360,23,bold=True,height=58)
-text("Server-created Meet links are in local implementation. Real admission is not verified.",60,595,1150,18,MUTED,height=30)
+text("Real Meet links tested. Sign in to Google: anonymous entry was denied in our checks.",60,595,1150,18,MUTED,height=30)
 text("Language is self-reported. Time since opening Meet is not proof of attendance.",60,632,1150,17,MUTED,height=30)
 finish()
 
