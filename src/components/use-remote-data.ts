@@ -9,8 +9,12 @@ export function useRemoteData<T>(load: () => Promise<T>) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const generation = useRef(0);
+  const activeRequests = useRef(0);
   const reload = useCallback(async (silent = false) => {
+    // Polling must not continually supersede a slower in-flight response.
+    if (silent && activeRequests.current > 0) return;
     const request = ++generation.current;
+    activeRequests.current += 1;
     if (!silent) { setLoading(true); setError(null); }
     try {
       const response = await load();
@@ -18,6 +22,7 @@ export function useRemoteData<T>(load: () => Promise<T>) {
     } catch (problem) {
       if (request === generation.current) setError(errorMessage(problem));
     } finally {
+      activeRequests.current -= 1;
       if (request === generation.current) setLoading(false);
     }
   }, [load]);

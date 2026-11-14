@@ -1,2 +1,2 @@
-import { SquadsPage } from "@/features/squads/ui/squads-page";
-export default function Page() { return <SquadsPage />; }
+import { MyGroups } from "@/features/groups/ui/my-groups";
+export default function Page() { return <MyGroups />; }

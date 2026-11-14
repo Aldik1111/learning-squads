@@ -137,6 +137,10 @@ def main():
     module_ids, question_ids, exercise_ids = [], [], []
     for course in courses:
         require(text(course["title"]) and course["modules"], "Missing course title/modules")
+        require(course.get("category") in {"programming", "languages", "ai"}, "Unknown course category")
+        require(course.get("collaborationMode") in {"group", "language-partner", "self-paced"}, "Unknown collaboration mode")
+        require(course["category"] != "languages" or course["collaborationMode"] == "language-partner",
+                "Language courses use conversation partners, not course groups")
         for entry in course["modules"]:
             path = referenced(ROOT, entry["directory"] + "/module.json")
             module, ids = check_module(path, entry["id"])

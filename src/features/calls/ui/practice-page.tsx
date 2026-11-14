@@ -26,7 +26,6 @@ export function PracticePage({ moduleId = "spanish-first-conversation" }: { modu
         </>}
       </aside>
     </div>
-    <div className="ls-panel" style={{marginTop:28}}><div className="ls-card-top"><div><h2>Already have a squad?</h2><p className="ls-muted" style={{margin:0}}>Two or more teammates can start a group call whenever they decide to practise.</p></div><Link className="ls-button ls-button-secondary" href="/teams">Go to your squads</Link></div></div>
     <div style={{marginTop:24}}><Link className="ls-text-link" href="/calls">Return to your conversations →</Link></div>
   </>;
 }

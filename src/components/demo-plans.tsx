@@ -26,7 +26,7 @@ export function DemoPlans() {
     <div className="ls-grid ls-plans-grid">
       <section className="ls-panel"><p className="ls-eyebrow">Available today</p><h2>Free MVP</h2>
         <p className="ls-price">$0</p><p className="ls-muted">Start without email, a password, or payment details.</p>
-        <ul className="ls-plan-features"><li>All three beginner modules: Python, How to use AI, and Spanish</li><li>Knowledge checks, Python practice, and saved progress</li><li>Squads, partner invitations, and unlimited calls</li></ul>
+        <ul className="ls-plan-features"><li>All three beginner modules: Python, How to use AI, and Spanish</li><li>Knowledge checks, Python practice, and saved progress</li><li>Course groups, private chat, and Spanish partner invitations</li></ul>
         <Link className="ls-button" href="/dashboard">Continue free →</Link>
       </section>
       <section className="ls-panel ls-plan-proposal"><p className="ls-eyebrow">Proposed subscription · demo only</p><h2>A plan to test</h2>

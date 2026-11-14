@@ -14,7 +14,7 @@ try {
   for(let attempt=0;attempt<40;attempt++) {try{docker(['exec',container,'pg_isready','-h','127.0.0.1','-U','postgres']);ready=true;break;}catch{await delay(250);}}
   if(!ready)throw new Error('Disposable PostgreSQL did not start');
   sql(readFileSync('tests/server/database-fixture.sql','utf8'));
-  for(const filename of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')).sort())sql(readFileSync(`supabase/migrations/${filename}`,'utf8'));
+  for(const filename of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')&&f<'202611140008').sort())sql(readFileSync(`supabase/migrations/${filename}`,'utf8'));
   sql(readFileSync('tests/server/database-integration.sql','utf8'));
   console.log('PostgreSQL migration, grading, access, idempotency and interval union checks PASS');
   sql(`insert into auth.users(id) select ('10000000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid from generate_series(1,5)n;
@@ -53,6 +53,18 @@ try {
   const expiryResult=await acceptance;
   if(!blockedBeforeExpiry||expiryResult.ok||!expiryResult.error.includes('INVITATION_EXPIRED'))throw new Error('A pre-deadline request waiting on a lock accepted after expiry');
   console.log('Expiry checked after row-lock acquisition, not transaction start PASS');
+  for(const filename of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')&&f>='202611140008').sort())sql(readFileSync(`supabase/migrations/${filename}`,'utf8'));
+  sql(readFileSync('tests/server/course-groups-integration.sql','utf8'));
+  console.log('Migration008 automatic groups, reassignment, privacy, language exception and DST PASS');
+  sql(`insert into auth.users(id) select ('30000000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid from generate_series(1,8)n;`);
+  const groupActor=(id,statement)=>run('docker',['exec',container,'psql','-h','127.0.0.1','-U','postgres','-v','ON_ERROR_STOP=1','-tA','-c',`begin;set local role authenticated;select set_config('request.jwt.claim.sub','30000000-0000-4000-8000-00000000000${id}',true);${statement};commit;`],{encoding:'utf8'});
+  for(let id=1;id<=8;id++) await groupActor(id,`select public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}')`);
+  await Promise.all(Array.from({length:8},(_,i)=>groupActor(i+1,`select public.ls_enroll_course('python',gen_random_uuid())`)));
+  if(sql("select count(*) from public.ls_course_groups;").trim()!=='2')throw new Error('Concurrent compatible enrollment did not fill two groups');
+  if(sql("select max(n) from (select count(*) n from public.ls_course_group_members where left_at is null group by group_id)x;").trim()!=='4')throw new Error('Automatic group capacity race failed');
+  await Promise.all([groupActor(1,`select public.ls_enroll_course('python','70000000-0000-4000-8000-000000000001')`),groupActor(1,`select public.ls_enroll_course('python','70000000-0000-4000-8000-000000000001')`)]);
+  if(sql("select count(*) from public.ls_course_group_members where left_at is null and user_id='30000000-0000-4000-8000-000000000001';").trim()!=='1')throw new Error('Same-user concurrent enrollment duplicated membership');
+  console.log('Eight concurrent enrollments: exactly two groups of4; same-user replay no duplicate PASS');
   console.log('This fixture does NOT verify Supabase GoTrue/PostgREST, browser sessions or deployment.');
 } finally {
   try{docker(['stop',container]);}catch{/* May not exist if startup failed. */}

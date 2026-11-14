@@ -1,12 +1,14 @@
 "use client";
 
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import styles from "./course-catalog.module.css";
 
 export type CourseCardView = {
   id: string;
   title: string;
   description: string;
+  categoryLabel?: string;
+  action?: ReactNode;
   modules: readonly { id: string; title: string; href: string }[];
 };
 
@@ -39,13 +41,14 @@ export function CourseCatalog({ state, courses, onRetry }: CourseCatalogProps) {
           {courses.map((course, index) => (
             <article key={course.id} className={styles.card}>
               <span className={styles.index} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <h2>{course.title}</h2>
+              {course.categoryLabel?<><h2 className={styles.category}>{course.categoryLabel}</h2><h3>{course.title}</h3></>:<h2>{course.title}</h2>}
               <p>{course.description}</p>
               {course.modules.length ? (
                 <ul className={styles.modules}>
                   {course.modules.map((module) => <li key={module.id}><a href={module.href}>{module.title}<span aria-hidden="true"> ↗</span></a></li>)}
                 </ul>
               ) : <p>Lessons are being prepared.</p>}
+              {course.action}
             </article>
           ))}
         </div>

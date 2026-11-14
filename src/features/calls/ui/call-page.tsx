@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Call } from "@/contracts";
 import { api } from "@/lib/api-client";
 import { ErrorState, LoadingState, PageHeading } from "@/components/states";
@@ -30,6 +30,7 @@ export function CallPage({ callId }: { callId: string }) {
   if (state.loading && !state.data) return <LoadingState>Opening your conversation…</LoadingState>;
   if (!state.data) return <><ErrorState message={state.error ?? "This conversation is not available."} onRetry={()=>void reload()}/><p className="ls-small ls-muted">If you were invited, accept the invitation before opening the conversation.</p><div className="ls-actions"><Link className="ls-text-link" href="/notifications">Check your invitations →</Link><Link className="ls-text-link" href="/calls">Back to your conversations</Link></div></>;
   const {call,userId}=state.data;
+  if(call.kind!=="language")return <><PageHeading eyebrow="Course groups" title="Your course conversations have a new home.">Open your current course group for its private chat, shared progress, and automatically prepared meetings.</PageHeading><Link className="ls-button" href="/teams">Open my groups →</Link></>;
   const organizer=call.createdBy===userId;
   const me=call.participants.find(participant=>participant.userId===userId);
   const canJoin=organizer || me?.status==="accepted";
@@ -51,14 +52,13 @@ export function CallPage({ callId }: { callId: string }) {
     });
   }
   return <>
-    <PageHeading eyebrow={call.kind==="language"?"Spanish practice":"Squad conversation"} title="Ready when you are.">Accept the invitation, open Meet, and start a conversation. The organizer supplies the meeting link.</PageHeading>
+    <PageHeading eyebrow="Spanish practice" title="Ready when you are.">Accept the invitation, then open the automatically prepared meeting link and start a conversation.</PageHeading>
     <div className="ls-actions" style={{marginBottom:24}}><Link className="ls-text-link" href="/calls">← Your conversations</Link><button className="ls-button ls-button-secondary ls-button-small" disabled={state.loading} onClick={()=>void reload()}>Refresh</button></div>
     {state.error && <ErrorState message={state.error}/>}{command.error && <ErrorState message={command.error}/>}
     <div className="ls-two-columns"><div>
       <section className="ls-panel"><h2>Your meeting space</h2>
         {me?.status==="pending" && me.invitationId && <div style={{marginBottom:24}}><p>You have been invited. Joining is your choice.</p><div className="ls-actions"><button className="ls-button" disabled={command.pending} onClick={()=>void command.run(`accept:${me.invitationId}`,async()=>{await api.acceptInvitation(me.invitationId!);await reload(true);})}>Accept invitation</button><button className="ls-button ls-button-secondary" disabled={command.pending} onClick={()=>void command.run(`decline:${me.invitationId}`,async()=>{await api.declineInvitation(me.invitationId!);await reload(true);})}>Decline</button></div></div>}
-        {meetUrl ? <><p className="ls-small ls-muted">Google Meet opens in a new tab. Its own access requirements may apply.</p><button className="ls-button" disabled={!canJoin || command.pending} onClick={openMeet}>{command.pending ? "Opening…" : "Open Google Meet ↗"}</button>{!canJoin && <p className="ls-small ls-muted" style={{marginTop:12}}>Accept an active invitation before opening the meeting.</p>}</> : <p className="ls-muted">{organizer ? "Create a meeting in Google Meet, then paste its link below." : "Waiting for the organizer to add a Meet link. This page refreshes automatically."}</p>}
-        {organizer && <><hr className="ls-divider"/><MeetLinkForm key={call.meetUrl ?? "empty"} call={call} onSaved={update}/></>}
+        {meetUrl ? <><p className="ls-small ls-muted">Google Meet opens in a new tab. Its own access requirements may apply.</p><button className="ls-button" disabled={!canJoin || command.pending} onClick={openMeet}>{command.pending ? "Opening…" : "Open Google Meet ↗"}</button>{!canJoin && <p className="ls-small ls-muted" style={{marginTop:12}}>Accept an active invitation before opening the meeting.</p>}</> : <><p className="ls-muted">{call.meetStatus==="unavailable"?"The meeting service could not prepare a link. Refresh to try again; you can keep learning in the meantime.":"Your meeting link is being prepared automatically. This page refreshes while it is open."}</p><button className="ls-button" disabled>Meeting link not ready</button></>}
       </section>
       <section className="ls-panel"><h2>People in this conversation</h2><ul className="ls-list">{call.participants.map(participant=><li key={participant.userId} className="ls-card-top"><div><strong>{participant.name || "Guest learner"}{participant.userId===userId ? " (you)" : ""}</strong><div className="ls-small ls-muted">{participant.status}</div></div>{organizer && participant.status==="pending" && participant.invitationId && <button className="ls-button ls-button-secondary ls-button-small" disabled={command.pending} onClick={()=>void command.run(`cancel:${participant.invitationId}`,async()=>{await api.cancelInvitation(participant.invitationId!);await reload(true);})}>Cancel invitation</button>}</li>)}</ul><p className="ls-small ls-muted" style={{margin:"20px 0 0"}}>Each person answers independently. Pending invitations expire after 10 minutes.</p></section>
     </div><aside className="ls-panel"><PracticeTimer start={call.myTransitionedAt} end={call.myPracticeEndedAt}/>
@@ -66,14 +66,4 @@ export function CallPage({ callId }: { callId: string }) {
       {call.moduleId && <><hr className="ls-divider"/><p className="ls-small ls-muted">Finished intervals contribute to this module’s practice total. The goal is at least 15 minutes across calls; the timer is not proof of attendance.</p><Link className="ls-text-link" href={`/learn/${encodeURIComponent(call.moduleId)}`}>Back to your module →</Link></>}
     </aside></div>
   </>;
-}
-
-function MeetLinkForm({call,onSaved}:{call:Call;onSaved:(call:Call)=>void}) {
-  const [url,setUrl]=useState(call.meetUrl ?? "");
-  const command=useCommand();
-  function submit(event:FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    void command.run(`link:${url.trim()}`,async()=>{if(!safeMeetUrl(url.trim()))throw new Error("Use a secure Google Meet link beginning with https://meet.google.com/.");onSaved(await api.setMeetLink(call.id,url.trim()));});
-  }
-  return <form className="ls-form" onSubmit={submit}><label className="ls-field">Meet link<input required type="url" placeholder="https://meet.google.com/abc-defg-hij" value={url} onChange={event=>setUrl(event.target.value)} disabled={command.pending}/></label>{command.error && <p className="ls-error" role="alert">{command.error}</p>}<div><button className="ls-button ls-button-secondary" disabled={command.pending}>{command.pending?"Saving…":"Save Meet link"}</button></div></form>;
 }

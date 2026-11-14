@@ -7,8 +7,9 @@ import { api } from "@/lib/api-client";
 
 const links = [
   { href: "/dashboard", label: "Learn" },
-  { href: "/teams", label: "Squads" },
-  { href: "/practice", label: "Practice" },
+  { href: "/teams", label: "My groups" },
+  { href: "/calendar", label: "Calendar" },
+  { href: "/practice", label: "Spanish practice" },
   { href: "/notifications", label: "Invitations" },
   { href: "/profile", label: "Your profile" },
   { href: "/plans", label: "Plans" },
@@ -33,7 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <header className="ls-site-header">
       <div className="ls-header-inner">
         <Link className="ls-brand" href="/" aria-label="Learning Squads home"><span className="ls-brand-mark" aria-hidden="true"><span /><span /><span /></span>Learning Squads</Link>
-        <nav aria-label="Main navigation">{links.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href || (link.href === "/dashboard" && pathname.startsWith("/learn/")) ? "page" : undefined}>{link.label}</Link>)}</nav>
+        <nav aria-label="Main navigation">{links.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href || (link.href === "/dashboard" && pathname.startsWith("/learn/")) || (link.href==="/teams"&&pathname.startsWith("/teams/")) ? "page" : undefined}>{link.label}</Link>)}</nav>
       </div>
     </header>
     <main id="main" tabIndex={-1} className="ls-main">{children}</main>

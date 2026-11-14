@@ -2,8 +2,8 @@
   "formatVersion": 1,
   "locale": "en",
   "courses": [
-    {"id": "python", "title": "Python", "modules": [{"id": "python-first-function", "directory": "python/first-function"}]},
-    {"id": "how-to-use-ai", "title": "How to use AI", "modules": [{"id": "ai-clear-requests", "directory": "ai/clear-requests"}]},
-    {"id": "spanish", "title": "Spanish", "modules": [{"id": "spanish-first-conversation", "directory": "spanish/first-conversation"}]}
+    {"id": "python", "title": "Python", "category": "programming", "collaborationMode": "group", "modules": [{"id": "python-first-function", "directory": "python/first-function"}]},
+    {"id": "how-to-use-ai", "title": "How to use AI", "category": "ai", "collaborationMode": "group", "modules": [{"id": "ai-clear-requests", "directory": "ai/clear-requests"}]},
+    {"id": "spanish", "title": "Spanish", "category": "languages", "collaborationMode": "language-partner", "modules": [{"id": "spanish-first-conversation", "directory": "spanish/first-conversation"}]}
   ]
 }

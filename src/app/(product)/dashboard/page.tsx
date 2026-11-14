@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getCourses, getProgress } from "@/lib/api-client";
 import type { Course, Progress } from "@/contracts";
 import { CourseCatalog } from "@/features/learning/ui/course-catalog";
+import { CourseEnrollment } from "@/features/groups/ui/course-enrollment";
 
 const descriptions: Record<string, string> = {
   python: "Write a useful function, then run it against real examples.",
@@ -35,6 +36,8 @@ export default function Dashboard() {
   return <>
     <CourseCatalog state={state} onRetry={loadCourses} courses={courses.map(course => ({
       id: course.id, title: course.title, description: descriptions[course.id],
+      categoryLabel: {programming:"Programming",languages:"Languages",ai:"AI"}[course.category],
+      action: course.collaborationMode==="group" ? <CourseEnrollment courseId={course.id}/> : course.collaborationMode==="language-partner" ? <div className="ls-course-enrollment"><p className="ls-small ls-muted">One-to-one practice with an available Spanish-speaking partner. No course group required.</p><Link className="ls-button ls-button-small" href="/practice">Practise Spanish →</Link></div> : undefined,
       modules: course.modules.map(module => ({ id: module.id, title: module.title, href: `/learn/${encodeURIComponent(module.id)}` })),
     }))} />
     <section className="ls-panel" style={{marginTop:40}} aria-labelledby="progress-title">

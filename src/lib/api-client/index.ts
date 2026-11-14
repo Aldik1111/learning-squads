@@ -1,5 +1,5 @@
 "use client";
-import type { ApiEnvelope, AppErrorCode, Call, Course, LearningModule, Notification, Profile, ProfileInput, Progress, PythonAttempt, PythonRunResult, QuizAttempt, Squad, Track, Level } from "@/contracts";
+import type { AvailabilitySchedule, StudyAvailability, CourseGroup, GroupMessage, GroupMemberProgress, GroupMeeting, ApiEnvelope, AppErrorCode, Call, Course, LearningModule, Notification, Profile, ProfileInput, Progress, PythonAttempt, PythonRunResult, QuizAttempt, Squad, Track, Level } from "@/contracts";
 import { ensureGuestSession } from "../auth/guest";
 import { browserSupabase } from "../supabase/browser";
 export { ensureGuestSession };
@@ -50,4 +50,14 @@ export const declineInvitation = (id: string) => request<void>(`invitations/${id
 export const cancelInvitation = (id: string) => request<void>(`invitations/${id}/cancelled`, "PUT");
 export const setMeetLink = (id: string, meetUrl: string) => request<Call>(`calls/${id}/meet`, "PUT", { meetUrl });
 export const recordMeetTransition = (id: string) => request<Call>(`calls/${id}/transition`, "POST");
-export const api = { ensureGuestSession, getProfile, updateProfile, getCourses, getModule, submitQuiz, submitPythonResult, getProgress, findSquads, createSquad, joinSquad, leaveSquad, setCallAvailability, heartbeat, requestLanguagePartner, createSquadCall, getMyCalls, finishPractice, getCall, getNotifications, markRead, acceptInvitation, declineInvitation, cancelInvitation, setMeetLink, recordMeetTransition };
+export const getStudyAvailability = () => request<StudyAvailability | null>("study-availability");
+export const updateStudyAvailability = (schedule: AvailabilitySchedule) => request<StudyAvailability>("study-availability", "PUT", schedule);
+export const enrollCourse = (courseId: Track, requestId: string) => request<CourseGroup>(`course-groups/enroll`, "POST", { courseId, requestId });
+export const getMyCourseGroups = () => request<CourseGroup[]>("course-groups");
+export const getCourseGroup = (id: string) => request<CourseGroup>(`course-groups/${id}`);
+export const getGroupMessages = (id: string) => request<GroupMessage[]>(`course-groups/${id}/messages`);
+export const sendGroupMessage = (id: string, body: string, requestId: string) => request<GroupMessage>(`course-groups/${id}/messages`, "POST", { body, requestId });
+export const getGroupProgress = (id: string) => request<GroupMemberProgress[]>(`course-groups/${id}/progress`);
+export const getGroupMeetings = (id: string) => request<GroupMeeting[]>(`course-groups/${id}/meetings`);
+export const createGroupMeeting = (id: string, requestId: string) => request<GroupMeeting>(`course-groups/${id}/meetings`, "POST", { requestId });
+export const api = { getStudyAvailability, updateStudyAvailability, enrollCourse, getMyCourseGroups, getCourseGroup, getGroupMessages, sendGroupMessage, getGroupProgress, getGroupMeetings, createGroupMeeting, ensureGuestSession, getProfile, updateProfile, getCourses, getModule, submitQuiz, submitPythonResult, getProgress, findSquads, createSquad, joinSquad, leaveSquad, setCallAvailability, heartbeat, requestLanguagePartner, createSquadCall, getMyCalls, finishPractice, getCall, getNotifications, markRead, acceptInvitation, declineInvitation, cancelInvitation, setMeetLink, recordMeetTransition };

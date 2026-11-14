@@ -5,10 +5,10 @@ const root = path.join(process.cwd(), "content");
 async function json<T>(filename: string): Promise<T> { return JSON.parse(await readFile(filename, "utf8")) as T; }
 type AuthoredModule = { id: string; contentVersion: number; title: string; level: string; objectives: string[]; lesson: string; quiz: LearningModule["quiz"]; exercise?: string; conversation?: {targetLanguage:string;minimumPracticeMinutes:number;guide:string} };
 async function entries() {
-  return (await json<{courses:{id:Track;title:string;modules:{id:string;directory:string}[]}[]}>(path.join(root,"catalog.json"))).courses;
+  return (await json<{courses:{id:Track;title:string;category:Course["category"];collaborationMode:Course["collaborationMode"];modules:{id:string;directory:string}[]}[]}>(path.join(root,"catalog.json"))).courses;
 }
 export async function courses(): Promise<Course[]> {
-  return Promise.all((await entries()).map(async c => ({id:c.id,title:c.title,modules:await Promise.all(c.modules.map(async entry => {
+  return Promise.all((await entries()).map(async c => ({id:c.id,title:c.title,category:c.category,collaborationMode:c.collaborationMode,modules:await Promise.all(c.modules.map(async entry => {
     const m=await json<AuthoredModule>(path.join(root,entry.directory,"module.json"));
     return {id:m.id,title:m.title,contentVersion:m.contentVersion};
   }))})));
