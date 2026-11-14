@@ -28,7 +28,7 @@ export function CallPage({ callId }: { callId: string }) {
   const command=useCommand();
   useEffect(()=>{const refresh=()=>{if(document.visibilityState==="visible")void reload(true);};const interval=window.setInterval(refresh,10_000);document.addEventListener("visibilitychange",refresh);return()=>{window.clearInterval(interval);document.removeEventListener("visibilitychange",refresh);};},[reload]);
   if (state.loading && !state.data) return <LoadingState>Opening your conversation…</LoadingState>;
-  if (!state.data) return <><ErrorState message={state.error ?? "This conversation is not available."} onRetry={()=>void reload()}/><Link className="ls-text-link" href="/calls">Back to your conversations</Link></>;
+  if (!state.data) return <><ErrorState message={state.error ?? "This conversation is not available."} onRetry={()=>void reload()}/><p className="ls-small ls-muted">If you were invited, accept the invitation before opening the conversation.</p><div className="ls-actions"><Link className="ls-text-link" href="/notifications">Check your invitations →</Link><Link className="ls-text-link" href="/calls">Back to your conversations</Link></div></>;
   const {call,userId}=state.data;
   const organizer=call.createdBy===userId;
   const me=call.participants.find(participant=>participant.userId===userId);

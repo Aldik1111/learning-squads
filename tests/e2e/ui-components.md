@@ -1,6 +1,6 @@
 # T08 component verification
 
-Status: isolated browser checks PASS on 2026-11-14. Application E2E is NOT RUN. These are repeatable scenarios, not installed Playwright tests or a production mock adapter.
+Status: isolated browser checks PASS on 2026-11-14. This file is the historical component-only protocol. Later real application checks are recorded in [product-flow.md](product-flow.md), [learning-flow.js](learning-flow.js), and [docs/demo.md](../../docs/demo.md). These are repeatable scenarios, not installed Playwright tests or a production mock adapter.
 
 Update, 2026-11-14: the sentence above records the original isolated-harness stage. Real local application browser checks have since passed for learning, restored results/Python, profiles and multi-user product flows. Current environment, evidence and remaining published/Meet acceptance are recorded in [docs/demo.md](../../docs/demo.md). The historical scenarios below remain component checks; they do not alone prove application or deployment acceptance.
 
@@ -19,6 +19,6 @@ Use the agreed React/Next.js tooling from B. Mount `CourseCatalog` and `Knowledg
 7. While a Python submission is pending, select the AI module, then release the old response. AI stays unanswered and has no Python result. The wrapper's module/version key isolates attempt state.
 8. At 390 px width, check the long AI questions and wrapping options; `document.documentElement.scrollWidth <= innerWidth`. At 1440 px inspect three catalog cards. No content overlaps; browser console has no errors or warnings.
 
-## Still required with the real application
+## Integration scope outside this component-only result
 
 Real guest/session creation, API errors and request idempotency, persisted attempt restoration after refresh, account changes, navigation URLs, lesson rendering, Python execution, integration with progress and deployed multi-user E2E. Do not infer any of these from component PASS results.
