@@ -1,0 +1,119 @@
+{
+  "stage": "Submission draft",
+  "date": "14.11.2026",
+  "deployment_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
+  "source_url": "https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release",
+  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "remaining": [
+    "Independent B acceptance of this release",
+    "Real Meet; full new-release learning flow",
+    "Captain submission via emailed form link"
+  ],
+  "official_faq": {
+    "filename": "Business Cup 2.0 _ FAQ по кейсу.pdf",
+    "sha256": "88b6c34507fa5ab1638c11e217014ea0d32ca2b286204f16752a24da1bae30ea",
+    "deadline": {
+      "question": "Q70",
+      "page": 15,
+      "date": "15 November",
+      "time": "12:00",
+      "timezone": null
+    },
+    "language": {
+      "question": "Q75–Q76",
+      "page": 16,
+      "deck": "English PDF",
+      "oral": "Kazakh, Russian or English"
+    },
+    "slides": {
+      "question": "Q81",
+      "page": 17,
+      "maximum_including_cover_appendices": 10
+    },
+    "submission": {
+      "question": "Q82",
+      "page": 17,
+      "submitter": "captain",
+      "destination": "submission link received by email",
+      "materials": [
+        "PDF deck",
+        "product URL",
+        "public GitHub URL"
+      ],
+      "submitted": false
+    },
+    "paywall": {
+      "question": "Q137",
+      "pages": [
+        26,
+        27
+      ],
+      "minimum": "paywall screen with a clear price",
+      "real_payment_required": false,
+      "implementation_status": "nonblocking $19 demo offer published and narrowly checked on 5ad4; strict paywall compliance not claimed"
+    }
+  },
+  "owner_confirmations": {
+    "date": "2026-11-14",
+    "source": "direct owner reply in Learning Squads chat",
+    "demo_offer": {
+      "monthly_usd": 19,
+      "hypothesis": true,
+      "real_charge": false,
+      "all_mvp_features_free": true,
+      "strict_paywall_compliance": "not claimed; no feature gate"
+    },
+    "content": {
+      "approved_first_modules": [
+        "Python beginner",
+        "How to use AI beginner",
+        "Spanish beginner"
+      ],
+      "attempt_limit": null,
+      "pass_threshold": null
+    },
+    "deadline": {
+      "date": "2026-11-15",
+      "time": "12:00",
+      "timezone": "UTC+05:00",
+      "basis": "owner confirmation, not a timezone stated in the FAQ"
+    }
+  },
+  "historical_evidence": {
+    "deployment_sha": "d922e3ce6cf1dd19bb680c646e19432ed30ce29e",
+    "live_url": "https://learning-squads-luuljvgfs-aldik1111.vercel.app",
+    "checks": [
+      "quiz4/4 save and reload",
+      "Python6/6 save and reload",
+      "two independent guests squad/invitation acceptance"
+    ],
+    "scope": "historical d922e3c only; not rerun on new release"
+  },
+  "files": {
+    "learning-squads-pitch.pdf": {
+      "bytes": 194738,
+      "sha256": "f4c8caa8de0eea21dff8fda0f8a183692bad0d7e35701f23221496e451985e29"
+    },
+    "speaker-notes.md": {
+      "bytes": 16916,
+      "sha256": "9852ecd27b6e26cea2aa65026872cd08adba2a65309e9cf4739d42c2e3141708"
+    },
+    "SUBMISSION.md": {
+      "bytes": 10676,
+      "sha256": "fc783c600d741e236a1076517d42f78b57df24c0c3203c864b0a28c6f6ab16b6"
+    },
+    "submission-links.html": {
+      "bytes": 1823,
+      "sha256": "542c057324afce96d612bbb42e0b7587446569a70f134060c8d919c57dc921df"
+    },
+    "website.url": {
+      "bytes": 80,
+      "sha256": "6e297ed1247c0680e44704fac4608ded35e5eb5e266c5ce66ece7462c1be0826"
+    },
+    "source-branch.url": {
+      "bytes": 99,
+      "sha256": "05e2a4430689b2e450ee8c762eb09304bc4abd2d244f959f9c51f90bd5da32dd"
+    }
+  }
+}

@@ -97,37 +97,37 @@ def finish():
 # 1: promise and scope
 frame(1, "SKILLS · WEB MVP", dark=True)
 text("Learning<br/>Squads", 60, 117, 780, 78, PAPER, bold=True, height=205, leading=80)
-text("От короткого урока<br/>к совместной практике", 65, 327, 890, 35, MINT, height=105)
+text("From a short lesson<br/>to practice with others", 65, 327, 890, 35, MINT, height=105)
 circle(1060, 236, 106, GOLD)
 circle(1161, 378, 66, MINT)
 circle(994, 420, 36, CORAL)
-text("Материал", 988, 211, 180, 25, INK, bold=True)
-text("Практика", 1099, 363, 150, 20, INK, bold=True)
+text("Learn", 1019, 211, 180, 25, INK, bold=True)
+text("Practise", 1124, 363, 150, 20, INK, bold=True)
 line(64, 514, 1210, 514, "#4B6A59", 1)
-for x, name, caption in [(64,"Python","Написать и запустить код"),(464,"How to use AI","Сформулировать и проверить"),(888,"Spanish","Начать разговор")]:
+for x, name, caption in [(64,"Python","Write and run code"),(464,"How to use AI","Ask clearly. Check the answer."),(888,"Spanish","Start a conversation")]:
     text(name, x, 548, 350, 24, PAPER, bold=True)
     text(caption, x, 588, 340, 18, MINT)
 finish()
 
-# 2: specific target learner, clearly a hypothesis
-frame(2, "ПОЛЬЗОВАТЕЛЬ И ПРОБЛЕМА")
-title("Знать материал - ещё не значит практиковаться")
-text("Наша стартовая аудитория: работающие взрослые США, 25-45 лет.",60,153,1130,23,MUTED)
+# 2: chosen audience and unvalidated problem hypothesis
+frame(2, "USER AND PROBLEM")
+title("Knowing the lesson is not the same as practising")
+text("Our initial audience: working adults in the US, aged 25–45.",60,153,1130,23,MUTED)
 text("20", 60, 267, 400, 132, INK, bold=True, leading=140)
-text("минут после работы", 67, 420, 400, 29, bold=True)
-text("Пример ситуации, а не измеренная<br/>длительность обучения.", 67, 473, 390, 19, MUTED)
+text("minutes after work", 67, 420, 400, 29, bold=True)
+text("An illustrative situation,<br/>not measured learning time.", 67, 473, 390, 19, MUTED)
 line(506, 254, 506, 572, LINE, 2)
-for y, number, heading, description in [(260,"01","Хочет освоить навык","Материалов достаточно, но непонятен следующий шаг."),(374,"02","Доходит до упражнения","Нужны понятная проверка и объяснение ошибки."),(488,"03","Откладывает разговор","Найти готового к практике человека приходится отдельно.")]:
+for y, number, heading, description in [(260,"01","Wants to learn a skill","Plenty of material, but the next step is unclear."),(374,"02","Reaches the exercise","Needs a clear check and an explanation of mistakes."),(488,"03","Puts off the conversation","Finding someone ready to practise is a separate task.")]:
     text(number,555,y,60,21,CORAL,bold=True)
     text(heading,625,y-2,575,26,bold=True)
     text(description,625,y+40,550,20,MUTED,height=70)
-text("Гипотеза для интервью: соединение этих шагов поможет чаще доходить до практики.",60,616,1150,20,INK,bold=True)
+text("Interview hypothesis: connecting these steps helps people get to practice more often.",60,616,1150,20,INK,bold=True)
 finish()
 
 # 3: product loop
-frame(3,"РЕШЕНИЕ")
-title("Урок, проверка и люди - в одном пути")
-steps=[("01","Изучить","Короткий материал и примеры.<br/>Можно начать одному."),("02","Проверить","Тест с объяснениями.<br/>Для Python - запуск кода."),("03","Практиковаться","Найти собеседника или команду.<br/>Перейти в Google Meet.")]
+frame(3,"SOLUTION")
+title("A lesson, a check and people in one journey")
+steps=[("01","Learn","A short lesson and examples.<br/>Start on your own."),("02","Check","A quiz with explanations.<br/>For Python: run real code."),("03","Practise","Find a partner or a squad.<br/>Open a Google Meet link.")]
 for i,(n,h,b) in enumerate(steps):
     x=60+i*400
     circle(x+34,282,34,[MINT,GOLD,MINT][i]);text(n,x+15,267,50,22,bold=True)
@@ -135,106 +135,109 @@ for i,(n,h,b) in enumerate(steps):
     text(b,x,403,345,23,MUTED,height=105)
     if i<2: arrow(x+109,282,x+342)
 box(60,558,1160,72,INK,10)
-text("Без формы регистрации: гостевой профиль создаётся автоматически.",86,580,1110,23,PAPER,bold=True)
+text("No signup form: a guest profile is created automatically.",86,580,1110,23,PAPER,bold=True)
 finish()
 
-# 4: actual UI, no synthetic screenshot
-frame(4,"ПРОДУКТ")
-title("Три направления. Один понятный старт.")
-image = ImageReader(str(ROOT / "assets" / "catalog-local.png"))
-iw, ih = image.getSize(); scale = min(1160/iw, 440/ih)
-dw, dh = iw*scale, ih*scale
-c.drawImage(image, 60+(1160-dw)/2, H-190-dh, width=dw, height=dh, mask="auto")
+# 4: actual new-release plans screen, full original capture retained
+frame(4,"PRODUCT")
+title("A free MVP. A clear $19/month demo.")
+image = ImageReader(str(ROOT / "assets" / "published-plans-5ad4.png"))
+iw, ih = image.getSize(); crop_x, crop_y, crop_w, crop_h = 380, 250, 1140, 640
+scale = min(1160/crop_w, 440/crop_h); dw, dh = crop_w*scale, crop_h*scale
+image_x = 60 + (1160-dw)/2
+c.saveState()
+clip = c.beginPath(); clip.rect(image_x, H-190-dh, dw, dh)
+c.clipPath(clip, stroke=0, fill=0)
+c.drawImage(image, image_x-crop_x*scale, H-190+crop_y*scale-ih*scale, width=iw*scale, height=ih*scale, mask="auto")
+c.restoreState()
 text(STATUS["snapshot_note"],60,635,1160,15,MUTED,height=35)
 finish()
 
 # 5: social practice rules
-frame(5,"СОВМЕСТНАЯ ПРАКТИКА")
-title("Собеседник доступен сейчас - можно начать")
-for x,heading,body in [(60,"Готовность","Основной язык +<br/>включённый режим общения"),(463,"Приглашение","Случайный подходящий<br/>пользователь или сокомандники"),(867,"Созвон","Настоящая Meet-ссылка<br/>от организатора")]:
+frame(5,"PRACTICE TOGETHER")
+title("Find someone who is ready to practise")
+for x,heading,body in [(60,"Availability","Primary language +<br/>conversation availability enabled"),(463,"Invitation","A random suitable partner<br/>or selected squad members"),(867,"Call","A real Meet link<br/>provided by the organizer")]:
     text(heading,x,263,330,29,bold=True)
     text(body,x,318,330,22,MUTED,height=90)
 arrow(365,287,423);arrow(769,287,827)
 line(60,445,1220,445)
-for x,metric,body in [(60,"4","человека максимум<br/>в одной команде"),(463,"Без лимита","1:1 и групповые созвоны<br/>по договорённости"),(867,"15 минут","суммарная языковая<br/>практика на модуль")]:
+for x,metric,body in [(60,"4","people maximum<br/>in one squad"),(463,"Unlimited","1:1 and group calls<br/>when people agree"),(867,"15 minutes","accumulated language<br/>practice per module")]:
     text(metric,x,477,340,37,bold=True)
     text(body,x,536,340,20,MUTED,height=70)
-text("Язык указан самим пользователем. Время с перехода в Meet не доказывает присутствие.",60,632,1150,17,MUTED,height=30)
+text("Language is self-reported. Time since opening Meet is not proof of attendance.",60,632,1150,17,MUTED,height=30)
 finish()
 
-# 6: comparison of workflows, not unsupported competitor claims
-frame(6,"ОТЛИЧИЕ")
-title("Сокращаем путь между уроком и разговором")
-text("Сравнение способов организации обучения, а не аудит конкурентов.",60,153,1160,21,MUTED)
-rows=[("Самостоятельно","Материал → собственная проверка → поиск практики"),("Собрать вручную","Курс + чат + участники + ссылка на встречу"),("Learning Squads","Материал → обратная связь → доступные люди")]
+# 6: workflows, not claims about named competitors
+frame(6,"WHAT IS DIFFERENT")
+title("Fewer steps between a lesson and a conversation")
+text("A comparison of learning workflows, not an audit of competitors.",60,153,1160,21,MUTED)
+rows=[("Self-study","Material → self-check → find practice"),("Assemble it yourself","Course + chat + people + meeting link"),("Learning Squads","Material → feedback → available people")]
 for i,(label,content) in enumerate(rows):
     y=258+i*115
     if i==2:box(60,y-20,1160,96,MINT,0)
     text(label,82,y,320,26,bold=True)
     text(content,420,y+3,755,23,INK if i==2 else MUTED,height=65)
     if i<2:line(80,y+75,1200,y+75)
-text("Проверяемая гипотеза",60,601,340,19,CORAL,bold=True)
-text("Меньше ручных согласований - больше завершённых практик.",403,599,805,22,bold=True,height=60)
+text("Hypothesis to test",60,601,340,19,CORAL,bold=True)
+text("Less coordination could mean more completed practice.",403,599,805,22,bold=True,height=60)
 finish()
 
-# 7: measurement plan, not fake traction
-frame(7,"ЦЕННОСТЬ И УДЕРЖАНИЕ")
-title("Возврат ради следующей практики")
-text("Гипотеза: обратная связь и договорённость с людьми создают причину вернуться.",60,153,1160,23,MUTED,height=65)
-text("Первый модуль",60,272,480,31,bold=True)
+# 7: measurement plan, not invented traction
+frame(7,"VALUE AND RETENTION")
+title("Come back for the next practice")
+text("Hypothesis: feedback and a plan with others create a reason to return.",60,153,1160,23,MUTED,height=65)
+text("First module",60,272,480,31,bold=True)
 arrow(60,328,440)
-text("Понятный результат",60,357,480,31,bold=True)
+text("Clear feedback",60,357,480,31,bold=True)
 arrow(60,414,440)
-text("Следующая практика",60,442,490,31,bold=True)
+text("Next practice",60,442,490,31,bold=True)
 line(578,260,578,578)
-text("Что измерим в пилоте",635,262,575,27,bold=True)
-metrics=[("Активация","Доля новичков, отправивших первый тест."),("Практика","Доля приглашений, принятых собеседником."),("Возврат D7","Учебное действие на седьмой день после старта.")]
+text("What we will measure in a pilot",635,262,575,27,bold=True)
+metrics=[("Activation","Share of new guests who submit their first quiz."),("Practice","Share of invitations accepted by a partner."),("Day 7 return","A learning action on the seventh day after starting.")]
 for i,(h,b) in enumerate(metrics):
     y=319+i*89;text(h,635,y,560,21,CORAL,bold=True);text(b,635,y+31,550,19,MUTED,height=60)
-text("Первый канал - тематические сообщества и приглашения друзей. Это план пилота; метрик спроса и удержания пока нет.",60,616,1160,19,MUTED,height=50)
+text("First channels: interest communities and friend invitations. This is a pilot plan; demand and retention are not measured yet.",60,616,1160,19,MUTED,height=50)
 finish()
 
-# 8: transparent business arithmetic
-frame(8,"БИЗНЕС-ГИПОТЕЗА")
-title("Подписка обсуждается. Экономику ещё проверяем.")
-text("В MVP нет оплаты и утверждённой цены.",60,153,1160,23,MUTED)
-text("Что можно проверять",60,256,460,28,bold=True)
-text("Готовность платить за расширенную практику, новые модули и возможности команд.",60,308,453,24,MUTED,height=120)
-text("До выбора модели: интервью,<br/>тест предложения, удержание<br/>и реальные затраты поддержки.",60,441,460,22,MUTED,height=110)
-text("$100 млн ARR: арифметика масштаба",585,248,625,26,bold=True)
-text("ARR = 12 × p × N",585,293,620,25,INK,bold=True)
-text("p / месяц",590,351,200,18,MUTED,bold=True);text("Нужно платящих N",862,351,340,18,MUTED,bold=True)
-for i,p in enumerate([10,20,30]):
-    y=394+i*54
-    line(585,y-10,1215,y-10)
-    text(f"${p}",590,y,200,26,bold=True)
-    text(f"{math.ceil(100_000_000/(12*p)):,}".replace(","," "),862,y,340,26,bold=True)
-text("Иллюстративные цены. Не прогноз и не оценка рынка.",585,568,625,17,MUTED)
+# 8: owner-approved demo price; explicit illustrative economics, not traction
+frame(8,"BUSINESS HYPOTHESIS")
+title("$19/month. A hypothesis to test.")
+text("Demo price only. No charge. All current MVP features remain free.",60,153,1160,23,MUTED)
+text("Illustrative pilot inputs",60,248,475,28,bold=True)
+for y,label,value in [(304,"Gross margin","80% assumed"),(366,"Monthly retention","90% assumed"),(428,"Acquisition scenario","$400 / 10 hypothetical payers")]:
+    text(label,60,y,475,22,bold=True)
+    text(value,60,y+29,475,21,MUTED,height=53)
+text("Test willingness to pay; measure real costs,<br/>conversion and retention before charging.",60,522,475,20,MUTED,height=65)
+text("Illustrative unit economics",585,248,625,28,bold=True)
+for y,label,value in [(308,"CAC","$400 / 10 = $40"),(375,"LTV","$19 × 80% / 10% churn = $152"),(442,"LTV / CAC","3.8× in this scenario")]:
+    text(label,585,y,150,23,bold=True)
+    text(value,755,y,455,23,MUTED,height=60)
+text("No measured revenue, paying users, CAC or LTV.<br/>This is a model to validate, not achieved economics.",585,522,625,19,MUTED,height=63)
 box(60,610,1160,51,INK,0)
-text("Упрощённо: LTV ≈ p × валовая маржа / месячный отток. Требование: LTV > CAC.",80,625,1120,19,PAPER,bold=True,height=35)
+text("$100m ARR scenario: 100,000,000 / (12 × $19) → 438,597 paying users. Not a forecast.",80,625,1120,19,PAPER,bold=True,height=35)
 finish()
 
-# 9: readiness/evidence, refresh only after verified deployment
-frame(9,"ПРОВЕРКА ПЕРЕД СДАЧЕЙ",dark=True)
-text("Показать работающий путь.<br/>Подтвердить его проверками.",60,91,1160,43,PAPER,bold=True,height=125)
-text("Подтверждено проверками",60,266,560,27,MINT,bold=True)
+# 9: evidence and remaining requirements
+frame(9,"SUBMISSION READINESS",dark=True)
+text("Show the working journey.<br/>Support it with evidence.",60,91,1160,43,PAPER,bold=True,height=125)
+text("Verified checks",60,266,560,27,MINT,bold=True)
 for i,item in enumerate(STATUS["verified"]):
     text(f"{i+1:02d}",60,322+i*64,50,20,GOLD,bold=True)
     text(item,121,320+i*64,490,22,PAPER,height=55)
-text("До финальной сдачи",681,266,540,27,MINT,bold=True)
+text("Still outstanding",681,266,540,27,MINT,bold=True)
 for i,item in enumerate(STATUS["pending"]):
     text(f"{i+1:02d}",681,322+i*64,50,20,GOLD,bold=True)
     text(item,742,320+i*64,470,22,PAPER,height=55)
 line(60,546,1220,546,"#4B6A59",1)
-text("Код и проверяемый статус",60,571,530,24,PAPER,bold=True)
-text("github.com/Aldik1111/learning-squads",60,613,760,21,MINT)
-c.linkURL(STATUS["repository"],(60,H-646,800,H-610),relative=0)
+text("Source code and evidence",60,571,530,24,PAPER,bold=True)
+text("GitHub · codex/hackathon-release",60,613,760,21,MINT)
+c.linkURL(STATUS["source_url"],(60,H-646,800,H-610),relative=0)
 if STATUS["live_url"]:
-    text("Публичный сайт →",835,571,375,24,PAPER,bold=True)
+    text("Public website →",835,571,375,24,PAPER,bold=True)
     text(STATUS["live_url"].removeprefix("https://"),835,612,375,16,MINT,height=55)
     c.linkURL(STATUS["live_url"],(835,H-665,1210,H-570),relative=0)
 else:
-    text("Публичный URL<br/>ещё не подтверждён",835,582,375,21,GOLD,height=70)
+    text("Public URL<br/>not verified yet",835,582,375,21,GOLD,height=70)
 finish()
 c.save()
 print(OUTPUT)

@@ -1,10 +1,102 @@
 {
   "date": "14.11.2026",
-  "stage": "Демонстрационный черновик",
+  "stage": "Submission draft",
   "repository": "https://github.com/Aldik1111/learning-squads",
-  "live_url": "https://learning-squads-luuljvgfs-aldik1111.vercel.app",
-  "evidence_sha": "d922e3ce6cf1dd19bb680c646e19432ed30ce29e",
-  "verified": ["Публичный сайт: без формы регистрации, два профиля — PASS", "Тест 4/4 и Python 6/6: сохранение и восстановление — PASS", "Два гостя: команда, приглашение и принятие — PASS"],
-  "pending": ["Настоящая встреча Google Meet", "Независимая приёмка разработчиком B", "Финальная сдача и часовой пояс дедлайна"],
-  "snapshot_note": "Реальный локальный каталог, 14.11.2026. Снимок не подтверждает сохранение прогресса."
+  "source_url": "https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release",
+  "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
+  "evidence_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
+  "verified": [
+    "New release 5ad4: guest profile save and reload — PASS",
+    "New release: $19 demo confirmation and judge guide — PASS",
+    "Earlier d922: quiz, Python and two-guest flow — PASS"
+  ],
+  "pending": [
+    "Independent B acceptance of this release",
+    "Real Meet; full new-release learning flow",
+    "Captain submission via emailed form link"
+  ],
+  "snapshot_note": "Live plans page, 14 Nov 2026 · release 5ad4. Demo selection: no payment and no access gate.",
+  "deck_language": "en",
+  "speaker_notes_language": "ru",
+  "official_faq": {
+    "filename": "Business Cup 2.0 _ FAQ по кейсу.pdf",
+    "sha256": "88b6c34507fa5ab1638c11e217014ea0d32ca2b286204f16752a24da1bae30ea",
+    "deadline": {
+      "question": "Q70",
+      "page": 15,
+      "date": "15 November",
+      "time": "12:00",
+      "timezone": null
+    },
+    "language": {
+      "question": "Q75–Q76",
+      "page": 16,
+      "deck": "English PDF",
+      "oral": "Kazakh, Russian or English"
+    },
+    "slides": {
+      "question": "Q81",
+      "page": 17,
+      "maximum_including_cover_appendices": 10
+    },
+    "submission": {
+      "question": "Q82",
+      "page": 17,
+      "submitter": "captain",
+      "destination": "submission link received by email",
+      "materials": [
+        "PDF deck",
+        "product URL",
+        "public GitHub URL"
+      ],
+      "submitted": false
+    },
+    "paywall": {
+      "question": "Q137",
+      "pages": [
+        26,
+        27
+      ],
+      "minimum": "paywall screen with a clear price",
+      "real_payment_required": false,
+      "implementation_status": "nonblocking $19 demo offer published and narrowly checked on 5ad4; strict paywall compliance not claimed"
+    }
+  },
+  "owner_confirmations": {
+    "date": "2026-11-14",
+    "source": "direct owner reply in Learning Squads chat",
+    "demo_offer": {
+      "monthly_usd": 19,
+      "hypothesis": true,
+      "real_charge": false,
+      "all_mvp_features_free": true,
+      "strict_paywall_compliance": "not claimed; no feature gate"
+    },
+    "content": {
+      "approved_first_modules": [
+        "Python beginner",
+        "How to use AI beginner",
+        "Spanish beginner"
+      ],
+      "attempt_limit": null,
+      "pass_threshold": null
+    },
+    "deadline": {
+      "date": "2026-11-15",
+      "time": "12:00",
+      "timezone": "UTC+05:00",
+      "basis": "owner confirmation, not a timezone stated in the FAQ"
+    }
+  },
+  "historical_evidence": {
+    "deployment_sha": "d922e3ce6cf1dd19bb680c646e19432ed30ce29e",
+    "live_url": "https://learning-squads-luuljvgfs-aldik1111.vercel.app",
+    "checks": [
+      "quiz4/4 save and reload",
+      "Python6/6 save and reload",
+      "two independent guests squad/invitation acceptance"
+    ],
+    "scope": "historical d922e3c only; not rerun on new release"
+  }
 }
