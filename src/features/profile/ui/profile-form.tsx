@@ -31,8 +31,8 @@ function ProfileEditor({ profile, starting }: { profile: Profile; starting: bool
     const payload = { ...values, name: values.name.trim(), primaryLanguage: values.primaryLanguage.trim().toLowerCase(), knownLanguages, timezone:values.timezone.trim() };
     void command.run(JSON.stringify(payload), async () => { await api.updateProfile(payload); setSaved(true); });
   }
-  return <div className="ls-two-columns">
-    <section className="ls-panel"><form className="ls-form" onSubmit={submit}>
+  return <><section className="ls-panel ls-profile-overview"><span className="ls-profile-avatar" aria-hidden="true">{values.name.trim().slice(0,2).toUpperCase() || "G"}</span><div><h2>{values.name.trim() || "Guest learner"}</h2><p className="ls-muted ls-small">Your learning profile belongs to this browser.</p><div className="ls-tags"><span className="ls-tag">Guest profile</span><span className="ls-tag">{values.level}</span></div></div></section><div className="ls-two-columns">
+    <section className="ls-panel"><h2>Profile settings</h2><form className="ls-form" onSubmit={submit}>
       <label className="ls-field">What should we call you?<input name="name" required maxLength={80} autoComplete="nickname" value={values.name} onChange={event=>change("name",event.target.value)} disabled={command.pending}/></label>
       <div className="ls-form-grid">
         <label className="ls-field">Your learning direction<select value={values.track} onChange={event=>change("track",event.target.value as ProfileInput["track"])} disabled={command.pending}><option value="python">Python</option><option value="how-to-use-ai">How to use AI</option><option value="spanish">Spanish</option></select></label>
@@ -50,5 +50,5 @@ function ProfileEditor({ profile, starting }: { profile: Profile; starting: bool
       <div><button className="ls-button" disabled={command.pending} type="submit">{command.pending ? "Saving…" : "Save profile"}</button></div>
     </form></section>
     <aside className="ls-panel"><p className="ls-eyebrow">Yours, in this browser</p><h2>A simple start</h2><p className="ls-muted">No email or password needed. Your learning is saved to a guest profile in this browser.</p><p className="ls-muted">Anyone using this browser profile shares its progress and invitations. A different browser starts a different profile.</p><p className="ls-muted">Clearing browser data can remove access to this profile. Account recovery is not available yet.</p><hr className="ls-divider"/><Link className="ls-text-link" href="/dashboard">Explore lessons now →</Link></aside>
-  </div>;
+  </div></>;
 }

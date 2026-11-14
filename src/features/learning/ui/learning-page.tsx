@@ -62,23 +62,47 @@ export function LearningPage({ moduleId }: { moduleId: string }) {
   const practice = progress?.practice?.find(item=>item.moduleId===module.id);
 
   return <div className={styles.page}>
-    <nav aria-label="Lesson navigation"><Link className="ls-text-link" href="/dashboard">← All learning paths</Link></nav>
-    <header className="ls-page-heading"><p className="ls-eyebrow">{module.level} · Lesson and practice</p><h1>{module.title}</h1><ul>{module.objectives.map(item=><li key={item}>{item}</li>)}</ul></header>
-    <article className={`${styles.material} ls-panel`} aria-label="Learning material"><Markdown remarkPlugins={[remarkGfm]} components={{h1:props=><h2>{props.children}</h2>}} skipHtml>{module.lessonMarkdown}</Markdown></article>
+    <nav className={styles.breadcrumb} aria-label="Lesson navigation"><Link href="/dashboard">← All learning paths</Link><span className={styles.level}>{module.level}</span></nav>
+    <header className={styles.hero}><p className={styles.eyebrow}>{module.exercise ? "Programming" : module.conversation ? "Languages" : "AI"} · Lesson and practice</p><h1>{module.title}</h1>
+      <div className={styles.objectives}><h2>What you will practise</h2><ul>{module.objectives.map(item=><li key={item}><span aria-hidden="true">◇</span>{item}</li>)}</ul></div>
+    </header>
+    <div className={styles.layout}>
+    <aside className={styles.sidebar} aria-label="Lesson sections and saved progress">
+      <nav className={styles.sectionNav} aria-label="In this lesson"><h2>In this lesson</h2>
+        <a href="#lesson-content"><span aria-hidden="true">01</span> Read the lesson</a>
+        {module.exercise && <a href="#python-practice"><span aria-hidden="true">02</span> Python sandbox</a>}
+        {module.conversation && <a href="#conversation-practice"><span aria-hidden="true">02</span> Speaking practice</a>}
+        <a href="#knowledge-check"><span aria-hidden="true">{module.exercise || module.conversation ? "03" : "02"}</span> Knowledge check <small>{module.quiz.length} questions</small></a>
+      </nav>
+      <section className={styles.progressCard} aria-labelledby="saved-lesson-progress"><h2 id="saved-lesson-progress">Your practice record</h2>
+        {!progressLoaded ? <p>Loading saved results…</p> : progressError ? <p>Saved results are temporarily unavailable.</p> : <>
+          <p>{latest ? <><strong>{latest.items.filter(item=>item.correct).length}/{latest.items.length}</strong> on your latest knowledge check</> : "No saved knowledge check yet. Take your time with the lesson."}</p>
+          {pythonSaved && <p><strong>{pythonSaved.passed}/{pythonSaved.total}</strong> Python examples passed</p>}
+          {module.conversation && <p><strong>{Math.floor((practice?.seconds ?? 0)/60)} min</strong> recorded conversation practice</p>}
+        </>}
+        <p className={styles.recordNote}>Practice records help you pick up where you left off. They are not a course certificate.</p>
+      </section>
+      <Link className={styles.backLink} href="/dashboard">Explore another course →</Link>
+    </aside>
+    <div className={styles.content}>
+    <article id="lesson-content" className={`${styles.material} ${styles.panel}`} aria-label="Learning material"><Markdown remarkPlugins={[remarkGfm]} components={{h1:props=><h2>{props.children}</h2>}} skipHtml>{module.lessonMarkdown}</Markdown></article>
+    <div className={styles.nextStep}><div><strong>Ready to try it?</strong><p>{module.exercise ? "Put the lesson to work in the Python sandbox." : module.conversation ? "Use the conversation guide, then find a practice partner." : "Check your understanding and review every explanation."}</p></div><a href={module.exercise ? "#python-practice" : module.conversation ? "#conversation-practice" : "#knowledge-check"}>Continue to practice <span aria-hidden="true">→</span></a></div>
     {progressError && <p className="ls-state" role="status">Saved progress is temporarily unavailable. You can still study and run Python. Submitting a check will retry the connection.</p>}
-    {module.exercise && <section className={styles.section}>
+    {module.exercise && <section id="python-practice" className={styles.section}>
       <PythonExercise exercise={module.exercise} onResult={savePython} />
       {pythonSaved && <p className="ls-success">Saved Python self-check: {pythonSaved.passed}/{pythonSaved.total} examples passed on {new Date(pythonSaved.submittedAt).toLocaleString()}. This is a practice record.</p>}
     </section>}
-    <section className={styles.section} aria-label="Knowledge check and saved result">
-      {latest && <p className="ls-success">Saved result: {latest.items.filter(item=>item.correct).length}/{latest.items.length} correct · {new Date(latest.submittedAt).toLocaleString()}.</p>}
-      {progressLoaded ? <KnowledgeCheck quiz={{moduleId:module.id,contentVersion:module.contentVersion,title:"Check what you learned",questions:module.quiz}} initialAttempt={restored ? {id:restored.id,answers:restored.answers,feedback:restored} : undefined} onSubmit={checkAnswers} /> : <p role="status">Restoring your saved answers…</p>}
-    </section>
-    {module.conversation && <section className={`${styles.material} ls-panel`} aria-label="Conversation practice">
+    {module.conversation && <section id="conversation-practice" className={`${styles.material} ${styles.panel} ${styles.section}`} aria-label="Conversation practice">
       <Markdown remarkPlugins={[remarkGfm]} components={{h1:props=><h2>{props.children}</h2>}} skipHtml>{module.conversation.guideMarkdown}</Markdown>
       <p><strong>Recorded practice: {Math.floor((practice?.seconds ?? 0) / 60)} / {module.conversation.minimumPracticeMinutes} minutes.</strong></p>
       <p>Time is added after you choose “Finish this practice” in a module-linked call. Overlapping intervals count once. This is not verified attendance.</p>
       <Link className="ls-button" href={`/practice?module=${encodeURIComponent(module.id)}`}>Find a Spanish-speaking partner</Link>
     </section>}
+    <section id="knowledge-check" className={styles.section} aria-label="Knowledge check and saved result">
+      {latest && <p className="ls-success">Saved result: {latest.items.filter(item=>item.correct).length}/{latest.items.length} correct · {new Date(latest.submittedAt).toLocaleString()}.</p>}
+      {progressLoaded ? <KnowledgeCheck quiz={{moduleId:module.id,contentVersion:module.contentVersion,title:"Check what you learned",questions:module.quiz}} initialAttempt={restored ? {id:restored.id,answers:restored.answers,feedback:restored} : undefined} onSubmit={checkAnswers} /> : <p role="status">Restoring your saved answers…</p>}
+    </section>
+    </div>
+    </div>
   </div>;
 }

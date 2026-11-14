@@ -95,20 +95,24 @@ function QuizAttempt({ quiz, onSubmit, initialAttempt }: KnowledgeCheckProps) {
   return (
     <section className={styles.panel} aria-labelledby={`${id}-title`}>
       <header className={styles.header}>
+        <div>
         <p className={styles.eyebrow}>Put it into practice</p>
         <h2 id={`${id}-title`}>{quiz.title}</h2>
         <p>Choose one answer for each question. Review the explanations after you submit.</p>
+        </div>
+        <span className={styles.questionCount}>{feedback ? `${feedback.items.filter(item=>item.correct).length}/${quiz.questions.length} correct` : `${quiz.questions.length} questions`}</span>
       </header>
+      {!feedback && <progress className={styles.answerProgress} value={answered} max={quiz.questions.length} aria-label="Questions answered"/>}
       <form onSubmit={submit} aria-busy={pending}>
         <div className={styles.questions}>
           {quiz.questions.map((question, questionIndex) => {
             const item = feedback?.items.find((entry) => entry.questionId === question.id);
             return (
-              <fieldset key={question.id} disabled={pending || Boolean(feedback)} className={styles.question}>
+              <fieldset key={question.id} disabled={pending || Boolean(feedback)} className={styles.question} data-feedback={item ? item.correct ? "correct" : "review" : undefined}>
                 <legend><span className={styles.number}>{questionIndex + 1}</span> {question.prompt}</legend>
                 <div className={styles.options}>
                   {question.options.map((option, optionIndex) => (
-                    <label key={option.id} className={styles.option}>
+                    <label key={option.id} className={styles.option} data-correct={item?.correctOptionId === option.id || undefined} data-review={item && answers[question.id] === option.id && !item.correct || undefined}>
                       <input
                         ref={questionIndex === 0 && optionIndex === 0 ? firstOption : undefined}
                         type="radio"
@@ -122,6 +126,7 @@ function QuizAttempt({ quiz, onSubmit, initialAttempt }: KnowledgeCheckProps) {
                         required
                       />
                       <span>{option.text}</span>
+                      {item?.correctOptionId === option.id && <span className={styles.optionMark} aria-label="Correct answer">✓</span>}
                     </label>
                   ))}
                 </div>
