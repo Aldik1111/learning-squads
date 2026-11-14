@@ -2,6 +2,7 @@
 import type { AvailabilitySchedule, StudyAvailability, CourseGroup, GroupMessage, GroupMemberProgress, GroupMeeting, ApiEnvelope, AppErrorCode, Call, Course, LearningModule, Notification, Profile, ProfileInput, Progress, PythonAttempt, PythonRunResult, QuizAttempt, Squad, Track, Level } from "@/contracts";
 import { ensureGuestSession } from "../auth/guest";
 import { browserSupabase } from "../supabase/browser";
+import type { TaskBoardItem, TaskResult, TaskResultInput } from "@/contracts";
 export { ensureGuestSession };
 export class ApiError extends Error {
   constructor(public code: AppErrorCode, message: string) { super(message); this.name = "ApiError"; }
@@ -60,4 +61,7 @@ export const sendGroupMessage = (id: string, body: string, requestId: string) =>
 export const getGroupProgress = (id: string) => request<GroupMemberProgress[]>(`course-groups/${id}/progress`);
 export const getGroupMeetings = (id: string) => request<GroupMeeting[]>(`course-groups/${id}/meetings`);
 export const createGroupMeeting = (id: string, requestId: string) => request<GroupMeeting>(`course-groups/${id}/meetings`, "POST", { requestId });
-export const api = { getStudyAvailability, updateStudyAvailability, enrollCourse, getMyCourseGroups, getCourseGroup, getGroupMessages, sendGroupMessage, getGroupProgress, getGroupMeetings, createGroupMeeting, ensureGuestSession, getProfile, updateProfile, getCourses, getModule, submitQuiz, submitPythonResult, getProgress, findSquads, createSquad, joinSquad, leaveSquad, setCallAvailability, heartbeat, requestLanguagePartner, createSquadCall, getMyCalls, finishPractice, getCall, getNotifications, markRead, acceptInvitation, declineInvitation, cancelInvitation, setMeetLink, recordMeetTransition };
+export const getTaskBoard = (courseId?: Track) => request<TaskBoardItem[]>(`tasks${courseId ? `?courseId=${encodeURIComponent(courseId)}` : ""}`);
+export const updateTaskResult = (taskId: string, taskVersion: number, input: TaskResultInput, requestId: string) => request<TaskResult>(`tasks/${encodeURIComponent(taskId)}`, "PUT", { taskVersion, ...input, requestId });
+export const getGroupTaskResults = (groupId: string) => request<TaskBoardItem[]>(`course-groups/${groupId}/tasks`);
+export const api = { getTaskBoard, updateTaskResult, getGroupTaskResults, getStudyAvailability, updateStudyAvailability, enrollCourse, getMyCourseGroups, getCourseGroup, getGroupMessages, sendGroupMessage, getGroupProgress, getGroupMeetings, createGroupMeeting, ensureGuestSession, getProfile, updateProfile, getCourses, getModule, submitQuiz, submitPythonResult, getProgress, findSquads, createSquad, joinSquad, leaveSquad, setCallAvailability, heartbeat, requestLanguagePartner, createSquadCall, getMyCalls, finishPractice, getCall, getNotifications, markRead, acceptInvitation, declineInvitation, cancelInvitation, setMeetLink, recordMeetTransition };

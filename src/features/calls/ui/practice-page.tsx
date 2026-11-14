@@ -8,15 +8,17 @@ import { ErrorState, LoadingState, PageHeading } from "@/components/states";
 import { useRemoteData } from "@/components/use-remote-data";
 import { useCommand } from "@/components/use-command";
 
-export function PracticePage({ moduleId = "spanish-first-conversation" }: { moduleId?: string }) {
+export function PracticePage({ moduleId, language, moduleTitle, choices }: { moduleId: string; language:string; moduleTitle:string; choices:{id:string;label:string}[] }) {
   const router = useRouter();
+  const languageName=language==="fr"?"French":language==="es"?"Spanish":"Language";
   const profile = useRemoteData(useCallback(()=>api.getProfile(),[]));
   const command = useCommand();
   return <>
-    <PageHeading eyebrow="Put a voice to it" title="A conversation starts with hello.">Practise Spanish with someone who lists it as their primary language and is available now.</PageHeading>
+    <PageHeading eyebrow="Put a voice to it" title="A conversation starts with hello.">Practise {languageName} with someone who lists it as their primary language and is available now.</PageHeading>
+    <label className="ls-field" style={{maxWidth:720,marginBottom:28}}>Practice module<select value={moduleId} disabled={command.pending} onChange={event=>router.push(`/practice?module=${encodeURIComponent(event.target.value)}`)}>{choices.map(choice=><option key={choice.id} value={choice.id}>{choice.label}</option>)}</select></label>
     <div className="ls-two-columns">
-      <section className="ls-panel"><p className="ls-eyebrow">Spanish conversation</p><h2>Find a practice partner</h2><p className="ls-muted">We will send an invitation to a randomly selected available person. They can choose to accept or decline.</p><p className="ls-muted">Aim for at least 15 minutes of practice per module. You can practise across multiple calls. There is no one-call-per-course limit.</p>
-        <div className="ls-actions"><button className="ls-button" disabled={command.pending || profile.loading || Boolean(profile.error)} onClick={()=>void command.run(`partner:es:${moduleId}`,async requestId=>{const call=await api.requestLanguagePartner("es",requestId,moduleId);router.push(`/calls/${call.id}`);})}>{command.pending ? "Sending invitation…" : "Find a Spanish partner"}</button><Link className="ls-text-link" href={`/learn/${encodeURIComponent(moduleId)}`}>Read the lesson first</Link></div>
+      <section className="ls-panel"><p className="ls-eyebrow">{languageName} conversation</p><h2>{moduleTitle}</h2><p className="ls-muted">We will send an invitation to a randomly selected available person. They can choose to accept or decline.</p><p className="ls-muted">Aim for at least 15 minutes of practice per module. You can practise across multiple calls. There is no one-call-per-course limit.</p>
+        <div className="ls-actions"><button className="ls-button" disabled={command.pending || profile.loading || Boolean(profile.error)} onClick={()=>void command.run(`partner:${language}:${moduleId}`,async requestId=>{const call=await api.requestLanguagePartner(language,requestId,moduleId);router.push(`/calls/${call.id}`);})}>{command.pending ? "Sending invitation…" : `Find a ${languageName} partner`}</button><Link className="ls-text-link" href={`/learn/${encodeURIComponent(moduleId)}`}>Read the lesson first</Link></div>
         {command.error && <ErrorState message={command.error}/>}<hr className="ls-divider"/><p className="ls-small ls-muted">Language preferences are self-reported, not proof of native-speaker or teaching qualifications. No one available? You can keep learning and try again later.</p>
       </section>
       <aside className="ls-panel"><p className="ls-eyebrow">Make yourself available</p><h2>Open to a conversation?</h2>

@@ -16,7 +16,7 @@ const toMinutes=(time:string)=>{const [hours,minutes]=time.split(":").map(Number
 
 export function StudySchedule({courseId}:{courseId?:Track}) {
   const state=useRemoteData(useCallback(async()=>({schedule:await api.getStudyAvailability()}),[]));
-  return <><PageHeading eyebrow="Make time to learn" title="When can you study together?">Save your weekly availability before joining a Python or AI course group. Spanish conversation partners use their own availability switch.</PageHeading>
+  return <><PageHeading eyebrow="Make time to learn" title="When can you study together?">Save your weekly availability before joining a Python or AI course group. Language conversation partners use their own availability switch.</PageHeading>
     {state.loading&&!state.data?<LoadingState>Loading your schedule…</LoadingState>:state.error?<ErrorState message={state.error} onRetry={()=>void state.reload()}/>:state.data&&<ScheduleEditor initial={state.data.schedule} courseId={courseId}/>}
     <p style={{marginTop:24}}><Link className="ls-text-link" href="/dashboard">Keep learning without a group →</Link></p>
   </>;

@@ -5,13 +5,13 @@ async (page) => {
   const assert = (value, message) => { if (!value) throw new Error(message); };
   await page.getByRole('heading', { name: 'Python', exact: true }).waitFor();
   const cards = page.getByRole('main').getByRole('article');
-  assert(await cards.count() === 3, 'All three actual courses are visible');
+  assert(await cards.count() === 6, 'All six actual courses are visible');
   for (const [category, title] of [['Programming', 'Python'], ['AI', 'How to use AI'], ['Languages', 'Spanish']]) {
     const filter = page.getByRole('button', { name: category, exact: true });
     await filter.click();
     await page.getByRole('heading', { name: title, exact: true }).waitFor();
     assert(await filter.getAttribute('aria-pressed') === 'true', 'Active filter is announced');
-    assert(await cards.count() === 1, 'Filter shows exactly its course');
+    assert(await cards.count() === 2, 'Filter shows both courses in its category');
   }
   await page.getByRole('button', { name: 'All courses', exact: true }).click();
   await page.getByRole('link', { name: /Write your first useful function/ }).first().click();

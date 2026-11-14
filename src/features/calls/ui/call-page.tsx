@@ -52,7 +52,7 @@ export function CallPage({ callId }: { callId: string }) {
     });
   }
   return <>
-    <PageHeading eyebrow="Spanish practice" title="Ready when you are.">Accept the invitation, then open the automatically prepared meeting link and start a conversation.</PageHeading>
+    <PageHeading eyebrow={`${call.targetLanguage==="fr"?"French":call.targetLanguage==="es"?"Spanish":"Language"} practice`} title="Ready when you are.">Accept the invitation, then open the automatically prepared meeting link and start a conversation.</PageHeading>
     <div className="ls-actions" style={{marginBottom:24}}><Link className="ls-text-link" href="/calls">← Your conversations</Link><button className="ls-button ls-button-secondary ls-button-small" disabled={state.loading} onClick={()=>void reload()}>Refresh</button></div>
     {state.error && <ErrorState message={state.error}/>}{command.error && <ErrorState message={command.error}/>}
     <div className="ls-two-columns"><div>

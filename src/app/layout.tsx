@@ -8,7 +8,7 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap", variabl
 
 export const metadata: Metadata = {
   title: { default: "Learning Squads", template: "%s · Learning Squads" },
-  description: "Short lessons, useful practice, and people to learn with. Explore Python, AI, and Spanish without a signup form.",
+  description: "Short lessons, useful practice, and people to learn with. Explore Python, AI, Spanish, and French without a signup form.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -1,0 +1,105 @@
+begin;
+insert into auth.users(id) select ('40000000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid from generate_series(1,4)n;
+set local role authenticated;
+do $$
+declare a uuid:='40000000-0000-4000-8000-000000000001';b uuid:='40000000-0000-4000-8000-000000000002';c uuid:='40000000-0000-4000-8000-000000000003';g uuid;g2 uuid;r jsonb;payload jsonb;bad jsonb;request_id uuid:=gen_random_uuid();task text:='python-clean-labels-task';call jsonb;attempt jsonb;answers jsonb;
+begin
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ if jsonb_array_length(public.ls_get_task_board())<>18 then raise exception 'expected18 tasks';end if;
+ if jsonb_array_length(public.ls_get_task_board('python-automation'))<>3 then raise exception 'course task filter failed';end if;
+ if public.ls_get_task_board('python-automation')->0->'result'->>'revision'<>'0' then raise exception 'unsaved revision notzero';end if;
+ perform public.ls_update_profile('{"name":"Board A","track":"python-automation","level":"beginner","primaryLanguage":"en","knownLanguages":[],"timezone":"UTC","availableForCalls":false}');
+ perform public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}');
+ g:=(public.ls_enroll_course('python-automation',gen_random_uuid())->>'id')::uuid;
+ perform public.ls_enroll_course('ai-for-work',gen_random_uuid());
+ if jsonb_array_length(public.ls_get_my_course_groups())<>2 then raise exception 'multiple newcourses not supported';end if;
+ payload:='{"status":"done","summary":"Cleaned and checked the labels.","link":"https://example.com/result","shareWithGroup":false,"shareGroupId":null,"expectedRevision":0}';
+ r:=public.ls_update_task_result(task,1,payload,request_id);
+ if r->>'revision'<>'1' or r->>'sharedGroupId' is not null then raise exception 'private result save failed';end if;
+ perform public.ls_update_task_result('python-group-records-task',1,payload,gen_random_uuid());
+ if public.ls_update_task_result(task,1,payload,request_id)<>r then raise exception 'task replay changedresult';end if;
+ begin perform public.ls_update_task_result(task,1,payload||'{"summary":"changed"}',request_id);raise exception 'requestID payload conflict accepted';exception when raise_exception then if sqlerrm<>'CONFLICT' then raise;end if;end;
+ begin perform public.ls_update_task_result(task,1,payload,gen_random_uuid());raise exception 'stale update accepted';exception when raise_exception then if sqlerrm<>'CONFLICT' then raise;end if;end;
+ perform set_config('request.jwt.claim.sub',b::text,true);
+ perform public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}');
+ if (public.ls_enroll_course('python-automation',gen_random_uuid())->>'id')::uuid<>g then raise exception 'newcourse matching failed';end if;
+ if jsonb_array_length(public.ls_get_group_task_results(g))<>0 then raise exception 'private result leaked';end if;
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ payload:=payload||jsonb_build_object('shareWithGroup',true,'shareGroupId',g,'expectedRevision',1);request_id:=gen_random_uuid();
+ r:=public.ls_update_task_result(task,1,payload,request_id);
+ if (r->>'sharedGroupId')::uuid<>g then raise exception 'explicit group share failed';end if;
+ perform set_config('request.jwt.claim.sub',b::text,true);
+ if jsonb_array_length(public.ls_get_group_task_results(g))<>1 then raise exception 'current peer sharedread failed';end if;
+ if jsonb_array_length(public.ls_get_group_progress(g)->0->'modules')<>3 then raise exception 'group progress not3modules';end if;
+ perform set_config('request.jwt.claim.sub',c::text,true);
+ perform public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":3,"startMinute":540,"endMinute":660}]}');
+ g2:=(public.ls_enroll_course('python-automation',gen_random_uuid())->>'id')::uuid;
+ begin perform public.ls_get_group_task_results(g);raise exception 'outsider read accepted';exception when raise_exception then if sqlerrm<>'FORBIDDEN' then raise;end if;end;
+ begin perform * from public.ls_task_results;raise exception 'direct table read accepted';exception when insufficient_privilege then null;end;
+ begin perform public.ls_task_result_json(null,a);raise exception 'helper exposes owner result';exception when insufficient_privilege then null;end;
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ perform public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":3,"startMinute":540,"endMinute":660}]}');
+ r:=public.ls_update_task_result(task,1,payload,request_id);
+ if r->>'revision'<>'3' or r->>'sharedGroupId' is not null or r->>'summary'<>'Cleaned and checked the labels.' then raise exception 'reassignment did not clearshare/preserveown/bumprevision';end if;
+ if jsonb_array_length(public.ls_get_group_task_results(g2))<>0 then raise exception 'newgroup autoshares';end if;
+ begin perform public.ls_get_group_task_results(g);raise exception 'oldgroup access survived';exception when raise_exception then if sqlerrm<>'FORBIDDEN' then raise;end if;end;
+ begin perform public.ls_update_task_result(task,1,payload||'{"expectedRevision":2}',gen_random_uuid());raise exception 'pre-reassignment editor overwrote';exception when raise_exception then if sqlerrm<>'CONFLICT' then raise;end if;end;
+ perform set_config('request.jwt.claim.sub',b::text,true);
+ if jsonb_array_length(public.ls_get_group_task_results(g))<>0 then raise exception 'oldpeer retains departed result';end if;
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ begin perform public.ls_update_task_result('python-build-report-task',1,payload||'{"expectedRevision":0}',gen_random_uuid());raise exception 'stale unsaved share silently targeted newgroup';exception when raise_exception then if sqlerrm<>'CONFLICT' then raise;end if;end;
+ begin perform public.ls_update_task_result('python-group-records-task',1,payload||'{"expectedRevision":1}',gen_random_uuid());raise exception 'stale private share silently targeted newgroup';exception when raise_exception then if sqlerrm<>'CONFLICT' then raise;end if;end;
+ payload:=payload||jsonb_build_object('shareGroupId',g2);
+ r:=public.ls_update_task_result(task,1,payload||'{"expectedRevision":3}',gen_random_uuid());
+ if (r->>'sharedGroupId')::uuid<>g2 then raise exception 'newgroup explicit share failed';end if;
+ perform set_config('request.jwt.claim.sub',c::text,true);
+ if jsonb_array_length(public.ls_get_group_task_results(g2))<>1 then raise exception 'newpeer explicitshare unreadable';end if;
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ -- Each invalid field is rejected through direct RPC, not merely by HTTP.
+ for bad in select value from jsonb_array_elements('[{"status":"completed"},{"summary":""},{"summary":" \n\t "},{"link":"javascript:alert(1)"},{"link":"https://user:password@example.com"},{"link":"https://example.com\\@attacker.test"},{"link":false},{"shareWithGroup":null},{"expectedRevision":-1}]') loop
+  begin perform public.ls_update_task_result(task,1,payload||'{"expectedRevision":4}'||bad,gen_random_uuid());raise exception 'invalid taskinput accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ end loop;
+ begin perform public.ls_update_task_result(task,1,(payload-'link')||'{"expectedRevision":4}',gen_random_uuid());raise exception 'missing link accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ begin perform public.ls_update_task_result(task,1,payload||jsonb_build_object('summary',repeat('x',4001),'expectedRevision',4),gen_random_uuid());raise exception 'oversize summary accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ begin perform public.ls_update_task_result('french-first-conversation-task',1,payload||'{"expectedRevision":0}',gen_random_uuid());raise exception 'language group share accepted';exception when raise_exception then if sqlerrm<>'FORBIDDEN' then raise;end if;end;
+ r:=public.ls_update_task_result('french-first-conversation-task',1,payload||'{"expectedRevision":0,"shareWithGroup":false,"shareGroupId":null,"summary":"Bonjour"}',gen_random_uuid());
+ if r->>'status'<>'done' then raise exception 'short meaningful summary rejected';end if;
+ r:=public.ls_update_task_result(task,1,payload||jsonb_build_object('expectedRevision',4,'shareWithGroup',false,'shareGroupId',null,'summary','<script>alert(1)</script> ''; drop table ls_profiles; --'),gen_random_uuid());
+ if r->>'summary'<>'<script>alert(1)</script> ''; drop table ls_profiles; --' or r->>'sharedGroupId' is not null then raise exception 'literal summary or unshare failed';end if;
+ perform public.ls_update_task_result(task,1,payload||'{"expectedRevision":5}',gen_random_uuid());
+ perform public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}');
+ if jsonb_array_length(public.ls_get_group_task_results(g))<>0 then raise exception 'returning oldgroup resurrected old sharing';end if;
+ -- French matching validates the authored module-language pair.
+ perform set_config('request.jwt.claim.sub',b::text,true);
+ perform public.ls_update_profile('{"name":"French partner","track":"french","level":"beginner","primaryLanguage":"fr","knownLanguages":["fr"],"timezone":"UTC","availableForCalls":true}');
+ perform set_config('request.jwt.claim.sub',a::text,true);
+ begin perform public.ls_create_call('language','es',gen_random_uuid(),'french-daily-plans');raise exception 'wrong module language accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ begin perform public.ls_create_call('language','fr',gen_random_uuid(),'python-clean-labels');raise exception 'programming module language accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ call:=public.ls_create_call('language','fr',gen_random_uuid(),'french-daily-plans');
+ if call->>'targetLanguage'<>'fr' or call->>'moduleId'<>'french-daily-plans' then raise exception 'French call metadata missing';end if;
+ perform public.ls_record_transition((call->>'id')::uuid);perform public.ls_finish_practice((call->>'id')::uuid);
+ if not exists(select from jsonb_array_elements(public.ls_get_progress()->'practice') p where p->>'moduleId'='french-daily-plans' and p->>'minimumPracticeMinutes'='15') then raise exception 'French module practice not recorded';end if;
+ raise notice 'Private board, current peer sharing, reassignment revoke, revision/idempotency, field guards, French calls PASS';
+end $$;
+reset role;
+do $$ declare m record;q jsonb;result jsonb;e record;begin
+ perform set_config('request.jwt.claim.sub','40000000-0000-4000-8000-000000000001',true);
+ for m in select cm.module_id,cm.content_version,cv.quiz from public.ls_course_modules cm join public.ls_content_versions cv using(module_id,content_version) loop
+  select jsonb_object_agg(item->>'id',item->>'correctOptionId') into q from jsonb_array_elements(m.quiz) item;
+  result:=public.ls_submit_quiz(m.module_id,m.content_version,q,gen_random_uuid());
+  if exists(select from jsonb_array_elements(result->'items') item where (item->>'correct')::boolean is not true) then raise exception 'expanded grading failed %',m.module_id;end if;
+ end loop;
+ for e in select * from public.ls_python_exercise_versions loop
+  result:=public.ls_submit_python(e.exercise_id,e.exercise_version,jsonb_array_length(e.case_ids),jsonb_array_length(e.case_ids),gen_random_uuid(),'passed');
+  if result->>'exerciseId'<>e.exercise_id then raise exception 'expanded Python result failed';end if;
+  begin perform public.ls_submit_python(e.exercise_id,e.exercise_version,0,jsonb_array_length(e.case_ids)+1,gen_random_uuid(),'failed');raise exception 'wrong case total accepted';exception when raise_exception then if sqlerrm<>'INVALID_INPUT' then raise;end if;end;
+ end loop;
+ if not exists(select from public.ls_content_versions where module_id='spanish-first-conversation' and content_version=1) then raise exception 'historical Spanish version lost';end if;
+ raise notice 'All18 authored module quizzes and6 Python self-check versions validated; historical versions preserved';
+end $$;
+set local role anon;
+do $$ begin
+ begin perform public.ls_get_task_board();raise exception 'anonymous role board readable';exception when insufficient_privilege then null;end;
+ begin perform public.ls_update_task_result(null,null,null,null);raise exception 'anonymous role board writable';exception when insufficient_privilege then null;end;
+end $$;
+rollback;

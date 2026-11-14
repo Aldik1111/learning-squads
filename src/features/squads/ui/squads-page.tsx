@@ -8,7 +8,7 @@ import { EmptyState, ErrorState, LoadingState, PageHeading } from "@/components/
 import { useRemoteData } from "@/components/use-remote-data";
 import { useCommand } from "@/components/use-command";
 
-const trackLabels: Record<Track,string> = { python:"Python", "how-to-use-ai":"How to use AI", spanish:"Spanish" };
+const trackLabels: Record<Track,string> = { python:"Python", "how-to-use-ai":"How to use AI", spanish:"Spanish", "python-automation":"Python Automation", "ai-for-work":"AI for Work", french:"French" };
 
 export function SquadsPage() {
   const [track, setTrack] = useState<Track | "">("");

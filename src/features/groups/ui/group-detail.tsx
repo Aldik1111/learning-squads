@@ -7,6 +7,7 @@ import { useRemoteData } from "@/components/use-remote-data";
 import { useCommand } from "@/components/use-command";
 import { EmptyState, ErrorState, LoadingState, PageHeading } from "@/components/states";
 import { courseLessons, courseNames, formatWindow, MeetingCard, useVisibleRefresh } from "./group-shared";
+import { GroupTaskResults } from "@/features/tasks/ui/group-task-results";
 
 export function GroupDetail({groupId}:{groupId:string}) {
   const state=useRemoteData(useCallback(async()=>{
@@ -22,7 +23,7 @@ export function GroupDetail({groupId}:{groupId:string}) {
     <div style={{marginTop:24}}><PageHeading eyebrow={courseNames[group.courseId]} title={`Group ${group.number}`}>A private course group with up to four learners who share at least 15 minutes of weekly availability.</PageHeading></div>
     <div className="ls-actions" style={{marginBottom:24}}><Link className="ls-button" href={`/learn/${courseLessons[group.courseId]}`}>Continue the lesson →</Link><Link className="ls-text-link" href="/schedule">Edit my availability</Link><span className="ls-tag">{group.members.length} / 4 members</span></div>
     {group.status==="waiting"&&<div className="ls-state" role="status"><h2>Waiting for another learner</h2><p>Your group is ready for someone with a compatible schedule. Materials and checks are available now; you do not need to wait.</p></div>}
-    <div className="ls-two-columns"><div><GroupChat key={groupId} groupId={groupId} userId={userId} timezone={timezone}/><MemberProgress groupId={groupId} moduleNames={Object.fromEntries(modules.map(module=>[module.id,module.title]))}/></div>
+    <div className="ls-two-columns"><div><GroupChat key={groupId} groupId={groupId} userId={userId} timezone={timezone}/><GroupTaskResults key={`tasks:${groupId}`} groupId={groupId} courseId={group.courseId}/><MemberProgress groupId={groupId} moduleNames={Object.fromEntries(modules.map(module=>[module.id,module.title]))}/></div>
       <aside><section className="ls-panel"><h2>Your teammates</h2><ul className="ls-list">{group.members.map(member=><li key={member.userId}>{member.name||"Guest learner"}{member.userId===userId?" (you)":""}</li>)}</ul><hr className="ls-divider"/><h2>Shared availability</h2><p className="ls-small ls-muted">Times shown in {timezone}. These windows work for every current member.</p>{group.commonWindows.length?<ul className="ls-list">{group.commonWindows.slice(0,5).map(window=><li className="ls-small" key={window.startsAt}><time dateTime={window.startsAt}>{formatWindow(window.startsAt,window.endsAt,timezone)}</time></li>)}</ul>:<p className="ls-muted">No shared window is available to display yet.</p>}</section>
       <GroupMeetings groupId={groupId} timezone={timezone} waiting={group.status==="waiting"}/></aside>
     </div>

@@ -8,12 +8,6 @@ import { CourseCatalog } from "@/features/learning/ui/course-catalog";
 import { CourseEnrollment } from "@/features/groups/ui/course-enrollment";
 import styles from "@/features/learning/ui/dashboard.module.css";
 
-const descriptions: Record<string, string> = {
-  python: "Write a useful function, then run it against real examples.",
-  "how-to-use-ai": "Make clearer requests and learn to check unsupported claims.",
-  spanish: "Start a conversation and practise with another person.",
-};
-
 export default function Dashboard() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [state, setState] = useState<"loading" | "error" | "ready">("loading");
@@ -42,10 +36,10 @@ export default function Dashboard() {
     </dl> : undefined} courses={courses.map(course => {
       const latest = progress?.quizAttempts.find(attempt => course.modules.some(module => module.id === attempt.moduleId && module.contentVersion === attempt.contentVersion));
       return {
-      id: course.id, title: course.title, description: descriptions[course.id],
+      id: course.id, title: course.title, description: course.description ?? "Learn with practical lessons and checks.",
       progress: latest ? { correct: latest.items.filter(item=>item.correct).length, total: latest.items.length } : undefined,
       categoryLabel: {programming:"Programming",languages:"Languages",ai:"AI"}[course.category],
-      action: course.collaborationMode==="group" ? <CourseEnrollment courseId={course.id}/> : course.collaborationMode==="language-partner" ? <div className="ls-course-enrollment"><p className="ls-small ls-muted">One-to-one practice with an available Spanish-speaking partner. No course group required.</p><Link className="ls-button ls-button-small" href="/practice">Practise Spanish →</Link></div> : undefined,
+      action: <><Link className="ls-text-link" href={`/tasks?course=${encodeURIComponent(course.id)}`}>Open task board →</Link>{course.collaborationMode==="group" ? <CourseEnrollment courseId={course.id}/> : course.collaborationMode==="language-partner" ? <div className="ls-course-enrollment"><p className="ls-small ls-muted">One-to-one practice with an available {course.title}-speaking partner. No course group required.</p><Link className="ls-button ls-button-small" href={`/practice?module=${encodeURIComponent(course.modules[0]?.id ?? "")}`}>Practise {course.title} →</Link></div> : null}</>,
       modules: course.modules.map(module => ({ id: module.id, title: module.title, href: `/learn/${encodeURIComponent(module.id)}` })),
     };})} />
     <section className={styles.practice} aria-labelledby="progress-title">

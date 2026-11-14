@@ -28,6 +28,16 @@ async function handle(request:Request,context:{params:Promise<{path:string[]}>})
       ensure:ensureGoogleMeeting,
       cancel:cancelGoogleMeeting,
     });
+    if(name==="tasks"&&method==="GET")return await rpc("ls_get_task_board",{course_id_value:new URL(request.url).searchParams.get("courseId")});
+    if(path[0]==="tasks"&&path.length===2&&method==="PUT"){
+      const b=await body(request);
+      if(b.link!==null){
+        if(typeof b.link!=="string"||b.link.length>2048)throw new HttpError("INVALID_INPUT","Use an HTTPS link or leave it empty.");
+        let link:URL;try{link=new URL(b.link);}catch{throw new HttpError("INVALID_INPUT","Use a valid HTTPS link.");}
+        if(link.protocol!=="https:"||link.username||link.password)throw new HttpError("INVALID_INPUT","Use an HTTPS link without login details.");
+      }
+      return await rpc("ls_update_task_result",{task_id_value:requiredText(path[1]),version_value:b.taskVersion,input:{status:b.status,summary:b.summary,link:b.link,shareWithGroup:b.shareWithGroup,shareGroupId:b.shareGroupId,expectedRevision:b.expectedRevision},request_id_value:uuid(b.requestId)});
+    }
     if(name==="study-availability"&&method==="GET")return await rpc("ls_get_study_availability");
     if(name==="study-availability"&&method==="PUT"){
       const result=await rpcData<StudyAvailability & {_cancelledMeetings:{id:string;groupId:string}[]}>("ls_update_study_availability",{input:await body(request)});
@@ -43,6 +53,7 @@ async function handle(request:Request,context:{params:Promise<{path:string[]}>})
       if(path.length===3&&path[2]==="messages"&&method==="GET")return await rpc("ls_get_group_messages",args);
       if(path.length===3&&path[2]==="messages"&&method==="POST"){const b=await body(request);if(typeof b.body!=="string")throw new HttpError("INVALID_INPUT","Write a message.");return await rpc("ls_send_group_message",{...args,body_value:b.body,request_id_value:uuid(b.requestId)});}
       if(path.length===3&&path[2]==="progress"&&method==="GET")return await rpc("ls_get_group_progress",args);
+      if(path.length===3&&path[2]==="tasks"&&method==="GET")return await rpc("ls_get_group_task_results",args);
       if(path.length===3&&path[2]==="meetings"&&method==="GET")return reply(await groupMeetings(id));
       if(path.length===3&&path[2]==="meetings"&&method==="POST"){const b=await body(request);const row=await rpcData<GroupMeeting>("ls_create_group_meeting",{...args,request_id_value:uuid(b.requestId)});const meetings=await groupMeetings(id);return reply(meetings.find(m=>m.id===row.id)??row);}
     }
@@ -56,10 +67,12 @@ async function handle(request:Request,context:{params:Promise<{path:string[]}>})
     if(name==="attempts/quiz"&&method==="POST") {const b=await body(request);return await rpc("ls_submit_quiz",{module_id_value:requiredText(b.moduleId),version_value:b.contentVersion,answers_value:b.answers,request_id_value:uuid(b.requestId)});}
     if(name==="attempts/python"&&method==="POST") {
       const b=await body(request); const result=b.result as {exerciseId?:unknown;exerciseVersion?:unknown;cases?:unknown;status?:unknown};
-      const caseIds=new Set(["empty","single-done","single-pending","all-pending","all-done","mixed"]);
-      if(!result||!Array.isArray(result.cases)||result.cases.length>6||result.cases.some(c=>!c||typeof c.passed!=="boolean"||!caseIds.has(c.id))||new Set(result.cases.map(c=>c.id)).size!==result.cases.length)throw new HttpError("INVALID_INPUT","Check the self-check result and try again.");
-      if(["passed","failed"].includes(String(result.status))&&result.cases.length!==6)throw new HttpError("INVALID_INPUT","A completed self-check requires all six cases.");
-      return await rpc("ls_submit_python",{exercise_id_value:requiredText(result.exerciseId),version_value:result.exerciseVersion,passed_value:result.cases.filter(c=>c.passed).length,total_value:6,status_value:requiredText(result.status),request_id_value:uuid(b.requestId)});
+      if(!result)throw new HttpError("INVALID_INPUT","Check the self-check result and try again.");
+      const exercise=await rpcData<{caseIds:string[]}>("ls_get_python_exercise_spec",{exercise_id_value:requiredText(result.exerciseId),version_value:result.exerciseVersion});
+      const caseIds=new Set(exercise.caseIds);
+      if(!Array.isArray(result.cases)||result.cases.length>caseIds.size||result.cases.some(c=>!c||typeof c.passed!=="boolean"||!caseIds.has(c.id))||new Set(result.cases.map(c=>c.id)).size!==result.cases.length)throw new HttpError("INVALID_INPUT","Check the self-check result and try again.");
+      if(["passed","failed"].includes(String(result.status))&&result.cases.length!==caseIds.size)throw new HttpError("INVALID_INPUT","A completed self-check requires all exercise cases.");
+      return await rpc("ls_submit_python",{exercise_id_value:requiredText(result.exerciseId),version_value:result.exerciseVersion,passed_value:result.cases.filter(c=>c.passed).length,total_value:caseIds.size,status_value:requiredText(result.status),request_id_value:uuid(b.requestId)});
     }
     if(name==="calls"&&method==="GET")return reply((await rpcData<Call[]>("ls_get_my_calls")).filter(c=>c.kind==="language").map(c=>({...c,meetUrl:null,meetStatus:"pending"})));
     if(name==="calls/language"&&method==="POST") {const b=await body(request);return reply(await enrichCall(await rpcData<Call>("ls_create_call",{kind_value:"language",target_value:requiredText(b.language),request_id_value:uuid(b.requestId),module_id_value:b.moduleId??null,recipient_ids_value:b.recipientIds??null})));}

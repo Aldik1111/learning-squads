@@ -8,6 +8,7 @@ import { AppIcon } from "./app-icon";
 
 const links = [
   { href: "/dashboard", label: "Learn", icon: "book" },
+  { href: "/tasks", label: "Tasks", icon: "tasks" },
   { href: "/teams", label: "My groups", icon: "users" },
   { href: "/calendar", label: "Calendar", icon: "calendar" },
   { href: "/practice", label: "Practice", icon: "chat" },

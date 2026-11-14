@@ -48,3 +48,26 @@
 .page a:focus-visible { outline:3px solid #487eab; outline-offset:4px; }
 @media(max-width:900px) { .layout { grid-template-columns:1fr; } .sidebar { position:static; display:grid; grid-template-columns:1fr 1fr; gap:14px; } .sectionNav,.progressCard { margin:0; } .backLink { grid-column:1/-1; } }
 @media(max-width:560px) { .sidebar { grid-template-columns:1fr; } .nextStep { align-items:flex-start; flex-direction:column; } .nextStep a { width:100%; justify-content:center; } .material p,.material li { font-size:.9rem; } }
+.courseNav { background:#fff; border:1px solid #d8e1db; border-radius:18px; padding:20px; margin:0 0 16px; }
+.courseNav h2 { font-size:.84rem; line-height:1.4; margin:0 0 14px; }
+.courseNav ol { list-style:none; padding:0; margin:0; }
+.courseNav li + li { margin-top:6px; }
+.courseNav a { display:flex; gap:10px; padding:11px 10px; border-radius:10px; text-decoration:none; color:#536660; font-size:.77rem; line-height:1.55; }
+.courseNav a span { flex-shrink:0; color:#809383; font-size:.65rem; font-variant-numeric:tabular-nums; padding-top:2px; }
+.courseNav a[aria-current="page"] { color:#174f38; font-weight:700; background:#eaf3e7; }
+.courseNav a:hover { background:#f0f5eb; }
+.courseNav p,.courseNotice { font-size:.72rem; color:#637969; line-height:1.7; margin:16px 0 0; }
+.courseNotice { margin:0 0 16px; }
+.taskPanel { background:#f5f8ef; }
+.taskPanel h2 { font-size:1.45rem; letter-spacing:-.025em; margin:8px 0 16px; }
+.taskPanel > p:not(.eyebrow),.taskPanel li { color:#536660; font-size:.9rem; line-height:1.75; }
+.taskPanel ul { padding-left:20px; margin:20px 0 24px; }
+.taskPanel p.taskNote { font-size:.78rem; margin:18px 0 0; }
+.moduleNavigation { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0; }
+.moduleNavigation a { padding:20px; border:1px solid #d8e1db; border-radius:16px; background:#fff; text-decoration:none; color:#183c36; }
+.moduleNavigation a:hover { border-color:#85ad93; }
+.moduleNavigation small { display:block; color:#637969; font-size:.72rem; margin-bottom:9px; }
+.moduleNavigation strong { font-size:.9rem; line-height:1.5; }
+@media(min-width:901px) { .sidebar { max-height:calc(100dvh - 120px); overflow-y:auto; scrollbar-width:thin; } }
+@media(max-width:900px) { .courseNav { margin:0; } }
+@media(max-width:560px) { .moduleNavigation { grid-template-columns:1fr; } }

@@ -56,6 +56,8 @@ try {
   for(const filename of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')&&f>='202611140008').sort())sql(readFileSync(`supabase/migrations/${filename}`,'utf8'));
   sql(readFileSync('tests/server/course-groups-integration.sql','utf8'));
   console.log('Migration008 automatic groups, reassignment, privacy, language exception and DST PASS');
+  sql(readFileSync('tests/server/task-board-integration.sql','utf8'));
+  console.log('Expanded courses, private task board, explicit sharing/reassignment, revision and language matching PASS');
   sql(`insert into auth.users(id) select ('30000000-0000-4000-8000-'||lpad(n::text,12,'0'))::uuid from generate_series(1,8)n;`);
   const groupActor=(id,statement)=>run('docker',['exec',container,'psql','-h','127.0.0.1','-U','postgres','-v','ON_ERROR_STOP=1','-tA','-c',`begin;set local role authenticated;select set_config('request.jwt.claim.sub','30000000-0000-4000-8000-00000000000${id}',true);${statement};commit;`],{encoding:'utf8'});
   for(let id=1;id<=8;id++) await groupActor(id,`select public.ls_update_study_availability('{"timezone":"UTC","windows":[{"weekday":1,"startMinute":540,"endMinute":660}]}')`);
@@ -65,6 +67,16 @@ try {
   await Promise.all([groupActor(1,`select public.ls_enroll_course('python','70000000-0000-4000-8000-000000000001')`),groupActor(1,`select public.ls_enroll_course('python','70000000-0000-4000-8000-000000000001')`)]);
   if(sql("select count(*) from public.ls_course_group_members where left_at is null and user_id='30000000-0000-4000-8000-000000000001';").trim()!=='1')throw new Error('Same-user concurrent enrollment duplicated membership');
   console.log('Eight concurrent enrollments: exactly two groups of4; same-user replay no duplicate PASS');
+  await Promise.all(Array.from({length:8},(_,i)=>groupActor(i+1,`select public.ls_enroll_course('python-automation',gen_random_uuid())`)));
+  if(sql("select count(*) from public.ls_course_groups where course_id='python-automation';").trim()!=='2')throw new Error('New course concurrent enrollment did not create exactly two groups');
+  if(sql("select max(n) from (select count(*) n from public.ls_course_group_members where course_id='python-automation' and left_at is null group by group_id)x;").trim()!=='4')throw new Error('New course exceeded four members');
+  const taskWrite=(requestId,summary)=>groupActor(1,`select public.ls_update_task_result('python-clean-labels-task',1,'{"status":"done","summary":"${summary}","link":null,"shareWithGroup":false,"shareGroupId":null,"expectedRevision":0}','${requestId}')`);
+  const edits=await Promise.allSettled([taskWrite('80000000-0000-4000-8000-000000000001','First editor'),taskWrite('80000000-0000-4000-8000-000000000002','Second editor')]);
+  if(edits.filter(r=>r.status==='fulfilled').length!==1||edits.filter(r=>r.status==='rejected'&&String(r.reason.stderr).includes('CONFLICT')).length!==1)throw new Error('Concurrent task editors overwrote each other');
+  const winner=edits[0].status==='fulfilled'?1:2;
+  await taskWrite(`80000000-0000-4000-8000-00000000000${winner}`,winner===1?'First editor':'Second editor');
+  if(sql("select revision from public.ls_task_results where user_id='30000000-0000-4000-8000-000000000001' and task_id='python-clean-labels-task';").trim()!=='1')throw new Error('Task replay increments revision');
+  console.log('New-course capacity race and concurrent task edit/replay PASS');
   console.log('This fixture does NOT verify Supabase GoTrue/PostgREST, browser sessions or deployment.');
 } finally {
   try{docker(['stop',container]);}catch{/* May not exist if startup failed. */}

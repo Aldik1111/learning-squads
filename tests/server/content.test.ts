@@ -3,9 +3,14 @@ import assert from "node:assert/strict";
 import {courses,learningModule} from "../../src/features/learning/server/content";
 import {HttpError,uuid} from "../../src/lib/api-server";
 test("public lesson serialization excludes keys and reference implementation",async()=>{
-  const catalog=await courses();assert.equal(catalog.length,3);
+  const catalog=await courses();assert.equal(catalog.length,6);
+  assert.ok(catalog.every(course=>course.modules.length===3));
   for(const course of catalog) for(const entry of course.modules){
     const lesson=await learningModule(entry.id);assert.ok(lesson);
+    assert.equal(lesson.courseId,course.id);assert.equal(lesson.task?.moduleId,entry.id);
+    assert.equal(lesson.task?.contentVersion,entry.contentVersion);
+    assert.equal(lesson.task?.courseId,course.id);assert.equal(lesson.task?.version,1);
+    assert.ok(lesson.task?.acceptanceCriteria.length);
     const serialized=JSON.stringify(lesson);
     for(const secret of ['correctOptionId','answerKey','referenceFile','reference.py'])assert.ok(!serialized.includes(secret),`${entry.id} exposed ${secret}`);
     assert.equal(lesson.quiz.length,4);assert.ok(lesson.lessonMarkdown.length>100);

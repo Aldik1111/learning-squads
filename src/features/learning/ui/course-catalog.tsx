@@ -21,9 +21,9 @@ export type CourseCatalogProps = {
   summary?: ReactNode;
 };
 
-function CourseIcon({ courseId }: { courseId: string }) {
+function CourseIcon({ category }: { category?: string }) {
   return <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    {courseId === "python" ? <><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3m6 0h4"/></> : courseId === "spanish" ? <><path d="M20 11a8 8 0 0 1-8 8H5l-3 3v-11a9 9 0 0 1 18 0Z"/><path d="M7 9h8m-8 4h5"/></> : <><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></>}
+    {category === "Programming" ? <><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3m6 0h4"/></> : category === "Languages" ? <><path d="M20 11a8 8 0 0 1-8 8H5l-3 3v-11a9 9 0 0 1 18 0Z"/><path d="M7 9h8m-8 4h5"/></> : <><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></>}
   </svg>;
 }
 
@@ -61,7 +61,7 @@ export function CourseCatalog({ state, courses, onRetry, summary }: CourseCatalo
           {visibleCourses.map(course => (
             <article key={course.id} className={styles.card}>
               <div className={styles.cardTop}>
-                <span className={`${styles.icon} ${course.id === "spanish" ? styles.languageIcon : course.id === "how-to-use-ai" ? styles.aiIcon : ""}`}><CourseIcon courseId={course.id}/></span>
+                <span className={`${styles.icon} ${course.categoryLabel === "Languages" ? styles.languageIcon : course.categoryLabel === "AI" ? styles.aiIcon : ""}`}><CourseIcon category={course.categoryLabel}/></span>
                 {course.categoryLabel && <span className={styles.category}>{course.categoryLabel}</span>}
               </div>
               <h2>{course.title}</h2>

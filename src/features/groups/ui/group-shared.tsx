@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import type { GroupMeeting, Track } from "@/contracts";
 
-export const courseNames: Record<Track,string> = { python:"Python", "how-to-use-ai":"How to use AI", spanish:"Spanish" };
-export const courseLessons: Record<Track,string> = { python:"python-first-function", "how-to-use-ai":"ai-clear-requests", spanish:"spanish-first-conversation" };
+export const courseNames: Record<Track,string> = { python:"Python", "how-to-use-ai":"How to use AI", spanish:"Spanish", "python-automation":"Python Automation", "ai-for-work":"AI for Work", french:"French" };
+export const courseLessons: Record<Track,string> = { python:"python-first-function", "how-to-use-ai":"ai-clear-requests", spanish:"spanish-first-conversation", "python-automation":"python-clean-labels", "ai-for-work":"ai-work-email", french:"french-first-conversation" };
 
 export function useVisibleRefresh(reload: (silent?:boolean)=>Promise<void>) {
   useEffect(()=>{

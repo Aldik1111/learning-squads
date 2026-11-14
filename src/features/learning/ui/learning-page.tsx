@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { LearningModule, Progress, PythonRunResult, QuizAttempt } from "@/contracts";
-import { getModule, getProgress, submitPythonResult, submitQuiz } from "@/lib/api-client";
+import type { Course, LearningModule, Progress, PythonRunResult, QuizAttempt } from "@/contracts";
+import { getCourses, getModule, getProgress, submitPythonResult, submitQuiz } from "@/lib/api-client";
 import { KnowledgeCheck, type QuizAnswers } from "@/features/quizzes/ui/knowledge-check";
 import { PythonExercise } from "@/features/python-runner/python-exercise";
 import styles from "./learning-page.module.css";
@@ -18,11 +18,14 @@ export function LearningPage({ moduleId }: { moduleId: string }) {
   const [progressLoaded, setProgressLoaded] = useState(false);
   const [progressError, setProgressError] = useState(false);
   const [initialAttempt, setInitialAttempt] = useState<QuizAttempt | undefined>();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [courseListError, setCourseListError] = useState(false);
   const quizRequest = useRef<{ fingerprint: string; id: string } | null>(null);
   const pythonRequest = useRef<{ result: PythonRunResult; id: string } | null>(null);
 
   useEffect(() => {
     let active = true;
+    void getCourses().then(value=>{if(active){setCourses(value);setCourseListError(false);}}).catch(()=>{if(active)setCourseListError(true);});
     void getModule(moduleId).then(value => { if (active) setModule(value); }).catch(() => { if (active) setLoadError(true); });
     void getProgress().then(value => {
       if (!active) return;
@@ -60,19 +63,27 @@ export function LearningPage({ moduleId }: { moduleId: string }) {
   const latest = progress?.quizAttempts.find(attempt=>attempt.moduleId===module.id && attempt.contentVersion===module.contentVersion);
   const pythonSaved = progress?.pythonAttempts.find(attempt=>attempt.exerciseId===module.exercise?.id && attempt.exerciseVersion===module.exercise?.exerciseVersion);
   const practice = progress?.practice?.find(item=>item.moduleId===module.id);
+  const course = courses.find(item=>item.id===module.courseId);
+  const moduleIndex = course?.modules.findIndex(item=>item.id===module.id) ?? -1;
+  const previous = moduleIndex>0 ? course?.modules[moduleIndex-1] : undefined;
+  const next = moduleIndex>=0 ? course?.modules[moduleIndex+1] : undefined;
+  const languageName = module.conversation?.targetLanguage==="fr" ? "French" : "Spanish";
 
   return <div className={styles.page}>
-    <nav className={styles.breadcrumb} aria-label="Lesson navigation"><Link href="/dashboard">← All learning paths</Link><span className={styles.level}>{module.level}</span></nav>
+    <nav className={styles.breadcrumb} aria-label="Lesson navigation"><Link href="/dashboard">← All learning paths</Link><span className={styles.level}>{course&&moduleIndex>=0?`Module ${moduleIndex+1} of ${course.modules.length} · `:""}{module.level}</span></nav>
     <header className={styles.hero}><p className={styles.eyebrow}>{module.exercise ? "Programming" : module.conversation ? "Languages" : "AI"} · Lesson and practice</p><h1>{module.title}</h1>
       <div className={styles.objectives}><h2>What you will practise</h2><ul>{module.objectives.map(item=><li key={item}><span aria-hidden="true">◇</span>{item}</li>)}</ul></div>
     </header>
     <div className={styles.layout}>
     <aside className={styles.sidebar} aria-label="Lesson sections and saved progress">
+      {course && <nav className={styles.courseNav} aria-label="Course modules"><h2>{course.title}</h2><ol>{course.modules.map((item,index)=><li key={item.id}><Link href={`/learn/${encodeURIComponent(item.id)}`} aria-current={item.id===module.id?"page":undefined}><span>{String(index+1).padStart(2,"0")}</span>{item.title}</Link></li>)}</ol><p>All modules are open. Follow the order or choose what you need.</p></nav>}
+      {courseListError && <p className={styles.courseNotice}>The course list is unavailable. <Link href="/dashboard">Return to all courses</Link> to try again; this lesson stays open.</p>}
       <nav className={styles.sectionNav} aria-label="In this lesson"><h2>In this lesson</h2>
         <a href="#lesson-content"><span aria-hidden="true">01</span> Read the lesson</a>
         {module.exercise && <a href="#python-practice"><span aria-hidden="true">02</span> Python sandbox</a>}
         {module.conversation && <a href="#conversation-practice"><span aria-hidden="true">02</span> Speaking practice</a>}
         <a href="#knowledge-check"><span aria-hidden="true">{module.exercise || module.conversation ? "03" : "02"}</span> Knowledge check <small>{module.quiz.length} questions</small></a>
+        {module.task && <a href="#module-task"><span aria-hidden="true">{module.exercise||module.conversation?"04":"03"}</span> Your practical task</a>}
       </nav>
       <section className={styles.progressCard} aria-labelledby="saved-lesson-progress"><h2 id="saved-lesson-progress">Your practice record</h2>
         {!progressLoaded ? <p>Loading saved results…</p> : progressError ? <p>Saved results are temporarily unavailable.</p> : <>
@@ -96,12 +107,17 @@ export function LearningPage({ moduleId }: { moduleId: string }) {
       <Markdown remarkPlugins={[remarkGfm]} components={{h1:props=><h2>{props.children}</h2>}} skipHtml>{module.conversation.guideMarkdown}</Markdown>
       <p><strong>Recorded practice: {Math.floor((practice?.seconds ?? 0) / 60)} / {module.conversation.minimumPracticeMinutes} minutes.</strong></p>
       <p>Time is added after you choose “Finish this practice” in a module-linked call. Overlapping intervals count once. This is not verified attendance.</p>
-      <Link className="ls-button" href={`/practice?module=${encodeURIComponent(module.id)}`}>Find a Spanish-speaking partner</Link>
+      <Link className="ls-button" href={`/practice?module=${encodeURIComponent(module.id)}`}>Find a {languageName}-speaking partner</Link>
     </section>}
     <section id="knowledge-check" className={styles.section} aria-label="Knowledge check and saved result">
       {latest && <p className="ls-success">Saved result: {latest.items.filter(item=>item.correct).length}/{latest.items.length} correct · {new Date(latest.submittedAt).toLocaleString()}.</p>}
       {progressLoaded ? <KnowledgeCheck quiz={{moduleId:module.id,contentVersion:module.contentVersion,title:"Check what you learned",questions:module.quiz}} initialAttempt={restored ? {id:restored.id,answers:restored.answers,feedback:restored} : undefined} onSubmit={checkAnswers} /> : <p role="status">Restoring your saved answers…</p>}
     </section>
+    {module.task && <section id="module-task" className={`${styles.panel} ${styles.section} ${styles.taskPanel}`} aria-labelledby="module-task-title"><p className={styles.eyebrow}>Make it your own</p><h2 id="module-task-title">{module.task.title}</h2><p>{module.task.description}</p><ul>{module.task.acceptanceCriteria.map(criterion=><li key={criterion}>{criterion}</li>)}</ul><Link className="ls-button" href={`/tasks?course=${encodeURIComponent(module.courseId)}&task=${encodeURIComponent(module.task.id)}`}>Open this task on my board →</Link><p className={styles.taskNote}>Save your own result and choose its status. Private by default; “Done” is not a quiz grade or certificate.</p></section>}
+    {course && <nav className={styles.moduleNavigation} aria-label="Previous and next modules">
+      {previous ? <Link href={`/learn/${encodeURIComponent(previous.id)}`}><small>← Previous module</small><strong>{previous.title}</strong></Link> : <Link href="/dashboard"><small>All learning paths</small><strong>Explore the course catalog</strong></Link>}
+      {next ? <Link href={`/learn/${encodeURIComponent(next.id)}`}><small>Next module →</small><strong>{next.title}</strong></Link> : <Link href={`/tasks?course=${encodeURIComponent(module.courseId)}`}><small>Keep practising →</small><strong>Open your course task board</strong></Link>}
+    </nav>}
     </div>
     </div>
   </div>;
