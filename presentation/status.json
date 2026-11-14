@@ -1,19 +1,19 @@
 {
   "date": "14.11.2026",
-  "stage": "Submission draft",
+  "stage": "GROUPS-002 source draft",
   "repository": "https://github.com/Aldik1111/learning-squads",
   "source_url": "https://github.com/Aldik1111/learning-squads/tree/codex/hackathon-release",
   "deployed_source_url": "https://github.com/Aldik1111/learning-squads/tree/5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
   "live_url": "https://learning-squads-1tdad607u-aldik1111.vercel.app",
   "evidence_sha": "5ad4ca97ac50678d61104cf0937875b3ccf94cf5",
   "verified": [
-    "New release 5ad4: guest profile save and reload — PASS",
-    "New release: $19 demo confirmation and judge guide — PASS",
-    "Earlier d922: quiz, Python and two-guest flow — PASS"
+    "Local groups tests + Meet mocks: PASS",
+    "Published 5ad4: profile and $19 demo: PASS",
+    "Earlier d922: quiz, Python, two guests: PASS"
   ],
   "pending": [
-    "Independent B acceptance of this release",
-    "Real Meet; full new-release learning flow",
+    "Publish GROUPS-002; verify live flows",
+    "Real Meet admission; independent B check",
     "Captain submission via emailed form link"
   ],
   "snapshot_note": "Live plans page, 14 Nov 2026 · release 5ad4. Demo selection: no payment and no access gate.",
@@ -98,5 +98,29 @@
       "two independent guests squad/invitation acceptance"
     ],
     "scope": "historical d922e3c only; not rerun on new release"
+  },
+  "release_alignment_pending": true,
+  "product_model": {
+    "decision": "GROUPS-002 v1",
+    "python_ai": "Automatic numbered groups of up to four; one active group per course; shared availability; members-only chat, aggregate progress and calendar",
+    "spanish": "No course groups; one-to-one pairing with an available self-reported primary Spanish speaker",
+    "rescheduling": "Automatic rematching when availability becomes incompatible; personal learning progress retained",
+    "meet": "Server-created Calendar conferences; no manual URL entry; real access/admission not verified"
+  },
+  "local_revision": {
+    "status": "Implemented locally; not published at the recorded live_url",
+    "evidence": [
+      "Local groups/database checks reported passing by root/backend",
+      "14 mocked provider and local OAuth callback tests passed",
+      "TypeScript and targeted ESLint passed"
+    ],
+    "google_real_account_verified": false,
+    "open_access": "Optional implementation, default off; separate explicit consent required; no access change claimed",
+    "required_for_final_package": [
+      "New deployed URL and exact SHA",
+      "Matching source branch and scoped verification results",
+      "Updated screenshot or explicitly historical label",
+      "Rebuild nine-slide PDF; render and visually check; rebuild ZIP"
+    ]
   }
 }

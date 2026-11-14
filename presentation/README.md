@@ -1,5 +1,9 @@
 # Learning Squads submission package (T20)
 
+**GROUPS-002 source revision in progress.** Editable slides, notes and status now describe the new locally implemented model. The PDF, ZIP and manifest are still the previous 5ad4 package; they have deliberately not been regenerated or relabelled as a new deployment. `release_alignment_pending=true` blocks ZIP generation until the final URL/SHA, scoped checks and reviewed PDF are aligned. The existing plans screenshot remains explicitly historical 5ad4 evidence.
+
+New model: Python and AI receive automatically numbered groups of up to four, matched on shared weekly availability, with one active group per course and members-only chat, aggregate progress and calendar. Schedule changes can trigger rematching while retaining personal progress. Spanish has no course groups: available primary-Spanish speakers are paired one-to-one; language is self-reported. Server-created Meet and optional OPEN are local implementations, not verified published calls. OPEN is default off and needs separate organizer consent.
+
 Deliverables: `learning-squads-pitch.pdf` — **9 English slides**, 16:9 — and `learning-squads-submission.zip`. Editable sources: `build_deck.py`, `status.json`, the genuine plans screenshot in `assets/published-plans-5ad4.png`. Russian `speaker-notes.md` schedules five minutes plus two minutes of questions. `SUBMISSION.md` maps the official FAQ, materials and acceptance limits; `submission-links.html` opens the three destinations.
 
 ## Current release and evidence
@@ -13,6 +17,8 @@ Historical deployment d922e3c: [older preview retained for B](https://learning-s
 The latest B report in #18 concerns local a67913f and the obsolete project-2k6he alias (503 and two local runtime-download failures). It does not independently accept the new release. #18 was closed on explicit user instruction with incomplete criteria noted. Closure is not acceptance evidence. Real Meet, independent B acceptance, full current-release checks and captain submission remain outstanding; the deck retains a submission-draft footer.
 
 ## Build and package
+
+Before finalizing this revision, supply the new deployment URL, exact SHA and source branch; separate its observed checks from local and historical evidence in `status.json`. Update slides 4/5/9 and notes to those facts, build/render/review the PDF, then set `release_alignment_pending=false` and rebuild the ZIP. Do not remove real-Meet or independent-acceptance caveats without evidence.
 
 Use Python with ReportLab and Arial or DejaVu Sans (or `LEARNING_SQUADS_FONT_DIR`). No application dependencies are changed.
 
@@ -47,5 +53,7 @@ Source: local **Business Cup 2.0 _ FAQ по кейсу.pdf**. Its exact Unicode 
 The owner also approved all three first beginner modules with no pass threshold or attempt limit. Source/limits are documented in SUBMISSION.md and status.json; this package does not alter business rules.
 
 ## Validation
+
+The following paragraph records the **previous 5ad4 artifact review**, not a review of the newly edited GROUPS-002 sources. The new PDF/ZIP render and final-link checks are pending deployment alignment.
 
 All three new public destinations returned HTTP200 in unauthenticated GET checks. PDF links target the new site and application release branch. ReportLab output has9 pages; extracted slide text contains no Cyrillic. All nine slides were rendered and visually reviewed, with full-size inspection of the new screenshot and status slides. The full original plans capture is retained; its layout crop does not fabricate UI. Older home/catalog images remain historical assets and are not used by the deck. ZIP integrity and every SHA256 were checked; its PDF matches the reviewed PDF. `git diff --check` passed. Package generation does not close #20 or submit to organizers.

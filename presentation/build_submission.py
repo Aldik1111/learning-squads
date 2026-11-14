@@ -7,6 +7,8 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 root = Path(__file__).resolve().parent
 status = json.loads((root / "status.json").read_text(encoding="utf-8"))
+if status.get("release_alignment_pending"):
+    raise SystemExit("GROUPS-002 sources await deployment URL/SHA and reviewed PDF. Do not package the previous PDF as the new release.")
 links = {
     "Рабочий сайт": status["live_url"],
     "Исходники рабочей ветки": status["source_url"],
@@ -23,7 +25,7 @@ page = f'''<!doctype html>
 <h1>Learning Squads</h1><p>Сайт, открытый код и английская презентация. Проверенный preview и готовность новой версии различаются; актуальные ограничения указаны в SUBMISSION.md. Дедлайн по подтверждению владельца: 15 ноября, 12:00 UTC+5.</p>
 <ul>{items}</ul><small>Проверенный deployment: {html.escape(status["evidence_sha"])}</small>
 <p>Ветка сдачи — codex/hackathon-release. Не подменять её текущим main с документацией. Открытие этого файла ничего не отправляет организаторам.</p></html>'''
-(root / "submission-links.html").write_text(page, encoding="utf-8")
+(root / "submission-links.html").write_text(page + "\n", encoding="utf-8")
 payloads = {name: (root / name).read_bytes() for name in (
     "learning-squads-pitch.pdf", "speaker-notes.md", "SUBMISSION.md", "submission-links.html"
 )}
@@ -38,6 +40,8 @@ manifest = {
     "official_faq": status.get("official_faq"),
     "owner_confirmations": status.get("owner_confirmations"),
     "historical_evidence": status.get("historical_evidence"),
+    "product_model": status.get("product_model"),
+    "local_revision": status.get("local_revision"),
     "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in payloads.items()},
 }
 manifest_data = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8")

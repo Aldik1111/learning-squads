@@ -127,7 +127,7 @@ finish()
 # 3: product loop
 frame(3,"SOLUTION")
 title("A lesson, a check and people in one journey")
-steps=[("01","Learn","A short lesson and examples.<br/>Start on your own."),("02","Check","A quiz with explanations.<br/>For Python: run real code."),("03","Practise","Find a partner or a squad.<br/>Open a Google Meet link.")]
+steps=[("01","Learn","A short lesson and examples.<br/>Start on your own."),("02","Check","A quiz with explanations.<br/>For Python: run real code."),("03","Practise","Python / AI: an assigned group.<br/>Spanish: one-to-one practice.")]
 for i,(n,h,b) in enumerate(steps):
     x=60+i*400
     circle(x+34,282,34,[MINT,GOLD,MINT][i]);text(n,x+15,267,50,22,bold=True)
@@ -153,17 +153,18 @@ c.restoreState()
 text(STATUS["snapshot_note"],60,635,1160,15,MUTED,height=35)
 finish()
 
-# 5: social practice rules
+# 5: GROUPS-002 approved rules; source draft until release alignment
 frame(5,"PRACTICE TOGETHER")
-title("Find someone who is ready to practise")
-for x,heading,body in [(60,"Availability","Primary language +<br/>conversation availability enabled"),(463,"Invitation","A random suitable partner<br/>or selected squad members"),(867,"Call","A real Meet link<br/>provided by the organizer")]:
-    text(heading,x,263,330,29,bold=True)
-    text(body,x,318,330,22,MUTED,height=90)
-arrow(365,287,423);arrow(769,287,827)
-line(60,445,1220,445)
-for x,metric,body in [(60,"4","people maximum<br/>in one squad"),(463,"Unlimited","1:1 and group calls<br/>when people agree"),(867,"15 minutes","accumulated language<br/>practice per module")]:
-    text(metric,x,477,340,37,bold=True)
-    text(body,x,536,340,20,MUTED,height=70)
+title("One shared schedule. Two ways to practise.")
+text("GROUPS-002 · implemented locally; deployment and live Meet checks pending",60,153,1160,20,CORAL,height=55)
+box(60,238,740,327,MINT,10)
+text("Python + How to use AI",84,262,690,29,bold=True)
+text("An automatically numbered group, up to 4 people.<br/>One active group per course, matched by shared availability.",84,313,686,22,MUTED,height=94)
+text("Members-only chat, progress and calendar.<br/>Change your schedule: rematch without losing personal progress.",84,415,686,22,INK,height=100)
+text("Spanish",854,264,366,29,bold=True)
+text("No course groups.<br/>One-to-one matching with an available speaker whose primary language is Spanish.",854,317,360,22,MUTED,height=170)
+text("15 minutes per module",854,510,360,23,bold=True,height=58)
+text("Server-created Meet links are in local implementation. Real admission is not verified.",60,595,1150,18,MUTED,height=30)
 text("Language is self-reported. Time since opening Meet is not proof of attendance.",60,632,1150,17,MUTED,height=30)
 finish()
 
@@ -171,7 +172,7 @@ finish()
 frame(6,"WHAT IS DIFFERENT")
 title("Fewer steps between a lesson and a conversation")
 text("A comparison of learning workflows, not an audit of competitors.",60,153,1160,21,MUTED)
-rows=[("Self-study","Material → self-check → find practice"),("Assemble it yourself","Course + chat + people + meeting link"),("Learning Squads","Material → feedback → available people")]
+rows=[("Self-study","Material → self-check → find practice"),("Assemble it yourself","Course + chat + people + meeting link"),("Learning Squads","Feedback → matched group or language partner")]
 for i,(label,content) in enumerate(rows):
     y=258+i*115
     if i==2:box(60,y-20,1160,96,MINT,0)
