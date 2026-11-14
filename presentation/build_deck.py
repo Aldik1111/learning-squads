@@ -230,8 +230,9 @@ text("Код и проверяемый статус",60,571,530,24,PAPER,bold=Tr
 text("github.com/Aldik1111/learning-squads",60,613,760,21,MINT)
 c.linkURL(STATUS["repository"],(60,H-646,800,H-610),relative=0)
 if STATUS["live_url"]:
-    text(STATUS["live_url"],835,582,375,17,MINT,height=65)
-    c.linkURL(STATUS["live_url"],(835,H-650,1210,H-580),relative=0)
+    text("Публичный сайт →",835,571,375,24,PAPER,bold=True)
+    text(STATUS["live_url"].removeprefix("https://"),835,612,375,16,MINT,height=55)
+    c.linkURL(STATUS["live_url"],(835,H-665,1210,H-570),relative=0)
 else:
     text("Публичный URL<br/>ещё не подтверждён",835,582,375,21,GOLD,height=70)
 finish()
