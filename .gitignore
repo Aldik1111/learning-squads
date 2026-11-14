@@ -1,0 +1,25 @@
+# Dependencies and builds
+node_modules/
+.next/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+# Local secrets and service state
+.env
+.env.*
+!.env.example
+.vercel/
+supabase/.temp/
+supabase/.branches/
+*.pem
+*.key
+*.p12
+# Local artifacts
+.DS_Store
+Thumbs.db
+*.log
+__pycache__/
+.venv/

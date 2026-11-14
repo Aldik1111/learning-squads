@@ -1,0 +1,32 @@
+name: Задача разработки
+description: Задача A/B с файлами, зависимостями и приёмкой
+title: "[A/B] "
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Цель и ответственный
+      description: Что получает пользователь; A или B и GitHub-логин.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Зависимости и контракты
+      description: Ссылки на Issues/PR; открытые решения.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Затрагиваемые файлы
+      description: Сверьте docs/ownership.md.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Критерии готовности и проверка
+      description: Конкретные сценарии и ожидаемый результат.
+    validations:
+      required: true

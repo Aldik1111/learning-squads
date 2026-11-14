@@ -1,0 +1,36 @@
+# A = UI/content; B = server/infrastructure.
+# B becomes eligible after accepting the Write invitation.
+# One peer approval is required; mandatory code-owner approval stays off
+# so an author is never required to approve their own change.
+* @Aldik1111 @bigstep832
+/src/app/(public)/ @Aldik1111
+/src/app/(product)/ @Aldik1111
+/src/app/layout.tsx @Aldik1111
+/src/app/globals.css @Aldik1111
+/src/components/ @Aldik1111
+/src/features/*/ui/ @Aldik1111
+/content/ @Aldik1111
+/tests/e2e/ @Aldik1111
+/docs/mvp.md @Aldik1111
+/docs/demo.md @Aldik1111
+/presentation/ @Aldik1111
+/src/app/api/ @bigstep832
+/src/features/*/server/ @bigstep832
+/src/features/python-runner/ @bigstep832
+/src/contracts/ @bigstep832
+/src/lib/ @bigstep832
+/supabase/ @bigstep832
+/tests/server/ @bigstep832
+/tests/runner/ @bigstep832
+/tests/fixtures/ @bigstep832
+/scripts/ @bigstep832
+/.github/ @bigstep832
+/package.json @bigstep832
+/package-lock.json @bigstep832
+/next.config.* @bigstep832
+/tsconfig.json @bigstep832
+/.env.example @bigstep832
+/README.md @bigstep832
+/docs/contracts.md @bigstep832
+/docs/decisions.md @bigstep832
+/docs/ownership.md @bigstep832

@@ -1,2 +1,35 @@
-# learning-squads
-Learning Squads: peer learning, Python practice and language conversations. Hackathon MVP.
+# Learning Squads
+
+MVP хакатона: материалы, проверка знаний и совместная практика для работающих взрослых США 25–45 лет. B2C, веб-приложение.
+
+**Состояние на 14.11.2026: подготовлен репозиторий и очередь разработки. Приложение, база Supabase и сайт ещё не реализованы и не развёрнуты.** Зелёный Repository hygiene проверяет организацию репозитория, а не готовность продукта.
+
+## Команда
+- A — [@Aldik1111](https://github.com/Aldik1111): интерфейс, материалы, E2E, презентация.
+- B — [@bigstep832](https://github.com/bigstep832): каркас, API, БД, сессии, Python runner, CI, деплой.
+- B должен принять [приглашение](https://github.com/Aldik1111/learning-squads/invitations), чтобы пушить ветки и делать approve.
+
+## Начало работы
+1. Прочитайте [AGENTS.md](AGENTS.md), [MVP](docs/mvp.md), [владение файлами](docs/ownership.md).
+2. Откройте [план](docs/plan.md), [очередь Issues](https://github.com/Aldik1111/learning-squads/issues) и [открытые решения](docs/decisions.md).
+3. Клонируйте репозиторий в отдельную папку:
+   `git clone https://github.com/Aldik1111/learning-squads.git`
+4. B начинает T01/T02: каркас и контракты. A начинает материалы и сценарии; страницы подключает после слияния каркаса.
+5. Для каждого изменения — ветка от свежего main, Draft PR, проверка вторым разработчиком, squash merge.
+6. Первый PR с приложением добавляет действительные команды установки, запуска и тестирования. Сейчас команды `npm run dev` здесь ещё нет.
+
+## Стек
+TypeScript, Next.js App Router, React, Tailwind CSS, shadcn/ui; Supabase PostgreSQL и Anonymous Sign-In; Pyodide/Web Worker; Google Meet; Vercel. GitHub — публичный исходный код.
+
+## Документы
+- [Порядок совместной работы](CONTRIBUTING.md)
+- [Контракты: стартовое соглашение, не готовый API](docs/contracts.md)
+- [Разработчик A](docs/developer-a.md)
+- [Разработчик B](docs/developer-b.md)
+- [Сценарий приёмки и демонстрации](docs/demo.md)
+- [Состояние настройки репозитория](docs/repository-setup.md)
+
+## Границы
+Нет обязательной регистрации, платежей, бронирования фиксированных слотов, AI API или автоматизации Meet. Гость хранится в браузерном профиле; одним аккаунтом могут пользоваться несколько людей. Монетизация и ряд правил остаются открытыми.
+
+Для сдачи: рабочий URL без обязательного входа, публичный GitHub, PDF до 10 слайдов. Дедлайн на слайде: 15 ноября, 12:00, часовой пояс не указан. [Источник задания](https://www.canva.com/design/DAHa0haVbpw/6GF64XaZTkomHXIUkrxSjw/watch).
