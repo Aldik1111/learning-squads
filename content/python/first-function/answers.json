@@ -1,0 +1,6 @@
+{
+  "python-return": {"correctOptionId": "b", "explanation": "return sends the value to the caller and ends this call. print displays a value but does not replace returning it."},
+  "python-mixed": {"correctOptionId": "c", "explanation": "Two entries are True. Count completed habits, not every entry in the list."},
+  "python-empty": {"correctOptionId": "a", "explanation": "With no entries, the loop has nothing to count. The starting count of zero is also the result."},
+  "python-return-position": {"correctOptionId": "b", "explanation": "return ends the function immediately. Place it after the loop so all entries can contribute to the result."}
+}

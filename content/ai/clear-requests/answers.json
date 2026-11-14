@@ -1,0 +1,6 @@
+{
+  "ai-request": {"correctOptionId": "b", "explanation": "This request supplies a task, context, tone, length and a boundary against inventing details. Clear instructions help you evaluate the result; they do not guarantee correctness."},
+  "ai-unsupported": {"correctOptionId": "c", "explanation": "The supplied notes do not establish a time. A plausible addition is still unsupported; verify it before sending the reminder."},
+  "ai-sensitive": {"correctOptionId": "a", "explanation": "An invented or redacted example can preserve the writing problem without exposing unnecessary personal data or credentials."},
+  "ai-source": {"correctOptionId": "b", "explanation": "A citation is a lead to check. Confirm the source exists, says what is claimed, and fits the date and context of your question."}
+}

@@ -1,0 +1,6 @@
+{
+  "spanish-name": {"correctOptionId": "a", "explanation": "Me llamo introduces your name. ¿Cómo te llamas? asks the other person's name; Hasta luego is a farewell."},
+  "spanish-question": {"correctOptionId": "c", "explanation": "¿Cómo te llamas? asks 'What is your name?' in an informal conversation. Gracias means 'Thank you'."},
+  "spanish-repeat": {"correctOptionId": "b", "explanation": "¿Puedes repetir, por favor? means 'Can you repeat, please?' It lets you keep participating when you miss a phrase."},
+  "spanish-origin": {"correctOptionId": "a", "explanation": "¿De dónde eres? asks where you are from. Soy de Canadá answers 'I am from Canada'. You can use a fictional place for practice."}
+}

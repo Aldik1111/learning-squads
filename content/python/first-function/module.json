@@ -1,0 +1,16 @@
+{
+  "id": "python-first-function",
+  "contentVersion": 1,
+  "title": "Write your first useful function",
+  "level": "beginner",
+  "objectives": ["Read a function with a loop and a condition", "Return a computed result", "Check empty and mixed inputs"],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "exercise": "exercise.json",
+  "quiz": [
+    {"id": "python-return", "prompt": "What does return total do inside a function?", "options": [{"id": "a", "text": "Only displays total in the console"}, {"id": "b", "text": "Gives total back to the caller and ends this function call"}, {"id": "c", "text": "Repeats the loop"}]},
+    {"id": "python-mixed", "prompt": "What should count_completed([True, False, True]) return?", "options": [{"id": "a", "text": "3"}, {"id": "b", "text": "True"}, {"id": "c", "text": "2"}]},
+    {"id": "python-empty", "prompt": "No habits have been entered: count_completed([]). What is the expected count?", "options": [{"id": "a", "text": "0"}, {"id": "b", "text": "1"}, {"id": "c", "text": "The text 'empty'"}]},
+    {"id": "python-return-position", "prompt": "Why should the result be returned after the loop in this exercise?", "options": [{"id": "a", "text": "A return inside the loop always creates a syntax error"}, {"id": "b", "text": "Returning on the first iteration would skip the remaining items"}, {"id": "c", "text": "Python cannot return numbers inside a loop"}]}
+  ]
+}

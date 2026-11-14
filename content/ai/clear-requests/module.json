@@ -1,0 +1,15 @@
+{
+  "id": "ai-clear-requests",
+  "contentVersion": 1,
+  "title": "Ask clearly and check the result",
+  "level": "beginner",
+  "objectives": ["Write a request with context, task and output format", "Separate a supplied fact from an unsupported claim", "Improve a draft without sharing private information"],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {"id": "ai-request", "prompt": "Which request gives an assistant the clearest task?", "options": [{"id": "a", "text": "Write something great."}, {"id": "b", "text": "Using the three supplied agenda items, draft a friendly meeting reminder under 80 words. Do not invent a time or location."}, {"id": "c", "text": "Be clever about meetings."}]},
+    {"id": "ai-unsupported", "prompt": "Your notes say Tuesday, but the generated reminder adds 10:00. What should you do?", "options": [{"id": "a", "text": "Assume the assistant looked up the calendar"}, {"id": "b", "text": "Accept it because the wording sounds confident"}, {"id": "c", "text": "Remove or flag the time and verify it with the organizer"}]},
+    {"id": "ai-sensitive", "prompt": "You want help improving a customer reply. What is the best starting input for this exercise?", "options": [{"id": "a", "text": "An invented or redacted example containing only the details needed for the task"}, {"id": "b", "text": "A complete customer database"}, {"id": "c", "text": "Your account password so the assistant can read everything"}]},
+    {"id": "ai-source", "prompt": "An answer includes a source link. Does that alone verify its claim?", "options": [{"id": "a", "text": "Yes, any link is enough"}, {"id": "b", "text": "No; open the original source and check that it supports the claim and is relevant"}, {"id": "c", "text": "Yes, if the answer is long"}]}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "python-count-completed",
+  "exerciseVersion": 1,
+  "title": "Count completed habits",
+  "entrypoint": "count_completed",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "One positional argument: a list of booleans. Other input types are outside this exercise's contract.",
+  "outputDescription": "An integer equal to the number of True values. Leave the input list unchanged.",
+  "preserveInput": true,
+  "cases": [
+    {"id": "empty", "label": "No habits", "args": [[]], "expected": 0},
+    {"id": "single-done", "label": "One completed habit", "args": [[true]], "expected": 1},
+    {"id": "single-pending", "label": "One unfinished habit", "args": [[false]], "expected": 0},
+    {"id": "all-pending", "label": "No completed habits", "args": [[false, false, false]], "expected": 0},
+    {"id": "all-done", "label": "All habits completed", "args": [[true, true, true, true]], "expected": 4},
+    {"id": "mixed", "label": "Mixed habits", "args": [[true, false, true, false, true]], "expected": 3}
+  ]
+}

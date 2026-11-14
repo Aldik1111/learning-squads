@@ -1,0 +1,16 @@
+{
+  "id": "spanish-first-conversation",
+  "contentVersion": 1,
+  "title": "Start a conversation in Spanish",
+  "level": "beginner",
+  "objectives": ["Greet someone and introduce yourself", "Ask for repetition when you need it", "Use a short conversation guide with a Spanish-speaking partner"],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "conversation": {"targetLanguage": "es", "minimumPracticeMinutes": 15, "guide": "conversation.md"},
+  "quiz": [
+    {"id": "spanish-name", "prompt": "Which phrase means 'My name is Sam'?", "options": [{"id": "a", "text": "Me llamo Sam."}, {"id": "b", "text": "¿Cómo te llamas?"}, {"id": "c", "text": "Hasta luego."}]},
+    {"id": "spanish-question", "prompt": "How do you ask someone's name informally?", "options": [{"id": "a", "text": "Gracias."}, {"id": "b", "text": "Soy de Canadá."}, {"id": "c", "text": "¿Cómo te llamas?"}]},
+    {"id": "spanish-repeat", "prompt": "You did not catch what your partner said. Which phrase asks them to repeat it?", "options": [{"id": "a", "text": "Hola."}, {"id": "b", "text": "¿Puedes repetir, por favor?"}, {"id": "c", "text": "Me gusta cocinar."}]},
+    {"id": "spanish-origin", "prompt": "Someone asks '¿De dónde eres?' Which answer fits?", "options": [{"id": "a", "text": "Soy de Canadá."}, {"id": "b", "text": "Más despacio, por favor."}, {"id": "c", "text": "Hasta luego."}]}
+  ]
+}
