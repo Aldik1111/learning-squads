@@ -39,3 +39,7 @@ A second QA finding was an upstream auth network/DNS/timeout being misreported a
 `npm run typecheck` now runs `next typegen && tsc --noEmit`, so generated route declarations exist on a fresh checkout before TypeScript. No environment file or browser was changed by the backend agent during this follow-up. Root owns cloud application and final commit/SHA recording.
 
 Final rerun after both guest-session fixes: typecheck PASS; lint PASS (0 errors, 0 warnings); unit7/7 PASS; production build PASS; git diff --check PASS. All7-migration DB suite and content validation also PASS. No commits created by this agent.
+
+## CI fixture startup follow-up
+
+Actions run43607838250 on271270d failed before migrations: the socket readiness probe saw the PostgreSQL image's temporary initdb server, which stopped before the first fixture connection. The runner now waits for TCP127.0.0.1 and uses that same TCP endpoint for every psql call; the image's initialization server is socket-only. No business logic, migrations or existing database was changed. A fresh disposable-container seven-migration/concurrency suite passed after this tooling fix. The new CI result must be recorded separately after publishing the fix.
