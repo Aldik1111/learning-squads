@@ -1,8 +1,17 @@
 # Приёмка и демонстрация
 
+## Публичный выпуск CONTENT-002 / TASKS-001 — 15.11.2026, #26
+
+[Работающий сайт](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app) — обновляемый branch alias, SHA **f868643293033fd3a613ef5efb21d92a9ee3d1db**, Vercel deployment **6qSZLrQAUR8ZGxa1zwpCb3mNLRRn**. [Release CI](https://github.com/Aldik1111/learning-squads/actions/runs/43646175941) PASS. Облачные010–011 применены в выделенном Supabase одной проверенной транзакцией; итог6/18/18 + RLS true, старые попытки/встречи сохранены. Подробности — [журнал облака](cloud-setup.md).
+
+Новые независимые гостевые браузерные контексты, настоящие API/Supabase без подмены ответов. Подтверждено публично: доступ без Vercel-авторизации, 6 карточек курсов / 18 ссылок на уроки / 18 заданий, личный Done-результат сохраняется и восстанавливается после reload с Only you, новый french-daily-plans quiz оценивается сервером4/4 и восстанавливает4ответа после reload. Два новых гостя получили группу ровно из этих двух участников: UI Share → Save показал имя и результат сокоманднику; Unshare → Save → Refresh убрал запись. Посторонний профиль до вступления получил HTTP403 на group task results. Desktop1440 и mobile390 просмотрены: горизонтального переполнения нет. Консоль:0ошибок, только CSS preload warnings. Время прогона15.11.2026 03:06–03:10 Asia/Qyzylorda (14.11 22:06–22:10 UTC). Снимки сохранены вне Git: published-task-board-desktop-f868643.png и published-task-board-mobile-f868643.png в локальной QA-папке.
+
+Локальные Python6/6, конфликты редакторов и SQL-гонки ниже не выдаются за повтор публичной приёмки. Внешние комнаты Meet и таймер в этом прогоне не открываются. Независимая приёмка B остаётся отдельной.
+
+
 ## Расширение CONTENT-002 / TASKS-001 — 15.11.2026, #26
 
-CI [Application checks #43642752199](https://github.com/Aldik1111/learning-squads/actions/runs/43642752199) — PASS. Исходники: `24bdccf59eca3e0fa592408100cd06f9318437af` (`codex/a-learning-modules`), content commit `0753772`. Это пока **локально проверяемая версия**, не обновление опубликованного сайта. Прежние доказательства ниже не считаются проверкой новых функций.
+CI [Application checks #43642752199](https://github.com/Aldik1111/learning-squads/actions/runs/43642752199) — PASS. Исходники: `24bdccf59eca3e0fa592408100cd06f9318437af` (`codex/a-learning-modules`), content commit `0753772`. Ниже — первоначальные **локальные проверки кода**; последующая публичная проверка выпуска описана отдельно выше. Прежние доказательства ниже не считаются проверкой новых функций.
 
 | Проверка | Факт |
 |---|---|
@@ -12,7 +21,7 @@ CI [Application checks #43642752199](https://github.com/Aldik1111/learning-squad
 | Изолированная SQL001–011 | PASS: grading всех 18 модулей, 6 Python metadata versions, private/current-group results, отмена публикации после выхода и возврата, stale-editor sharing race, revision/idempotency. 8 конкурентных вступлений нового курса → 2 группы по 4; 2 редактора → 1 запись + 1 конфликт. |
 | Локальный HTTP | PASS: реальные anonymous sessions, 6/18 каталог, 18 заданий, private save/replay/conflict, запрет unsafe links, dynamic Python case validation; несовместимые language/module отклонены до Google. |
 | French Meet | PASS: два новых локальных гостя, подбор fr для french-daily-plans, принятие приглашения, одна настоящая ready Google-ссылка у обоих. Таймеры не запускались; посещение и связь не проверялись. |
-| Cloud SQL-пакет | PASS в одноразовой БД: 001–009 → 010–011, транзакционный rollback при искусственной ошибке, сохранность старых попыток/встреч, итог 6/18/18 и RLS, закрытые прямые grants, отказ при повторе. В рабочее облако ещё не применён. |
+| Cloud SQL-пакет | PASS в одноразовой БД: 001–009 → 010–011, транзакционный rollback при искусственной ошибке, сохранность старых попыток/встреч, итог 6/18/18 и RLS, закрытые прямые grants, отказ при повторе. На момент этой локальной проверки в облако ещё не применялся; последующий облачный результат описан выше. |
 | Browser UI | На локальном `next start` (4191) PASS: проверка описания Done и HTTPS, private save/reload, конфликт двух вкладок сохраняет черновик и блокирует перезапись, явный reload получает новую версию, доска/диалог на 390px без горизонтального overflow, Escape. Прогон `tests/e2e/task-board-flow.js`. Остальные браузерные сценарии ниже дополняются отдельно. `next dev` непрерывно перезагружался, незавершённый dev-прогон не засчитан. |
 
 Дополнительные UI-проверки на той же локальной production-сборке — PASS:
@@ -22,10 +31,10 @@ CI [Application checks #43642752199](https://github.com/Aldik1111/learning-squad
 - French lesson → task deep link открывает нужное задание без возможности группового sharing.
 - Два независимых синтетических профиля: включение sharing в UI и Save показывает результат и имя у сокомандника; отключение и Refresh у сокомандника убирает запись. Reassignment и stale-group races дополнительно проверены SQL, а не новым браузерным прогоном.
 
-Облачные 010–011 и release deploy ожидают восстановления доступа Chrome/Supabase. Адрес ветки сдачи пока соответствует прежнему `bea9c82`. Независимая приёмка B, двусторонняя видеосвязь и 15 минут разговора этим прогоном не подтверждаются.
+Первоначальный блокер доступа Chrome/Supabase снят: миграции применены через инкогнито, release-ветка выпущена на f868643; облачный протокол приведён выше. Независимая приёмка B, двусторонняя видеосвязь и 15 минут разговора этим прогоном не подтверждаются.
 
 
-## Текущий UI-001 release — 15.11.2026, 00:37–00:39 Asia/Qyzylorda
+## Исторический UI-001 release — 15.11.2026, 00:37–00:39 Asia/Qyzylorda
 
 Проверен [обновляемый адрес ветки сдачи](https://learning-squads-git-codex-hackathon-release-aldik1111.vercel.app), SHA `bea9c82bd264e5cfe34f10ad28cb8e32ff69fccb`. Vercel status для этого SHA: success, deployment `EDRU8hJrjSnrzXBsKWrm3piSHdsb`; [CI 43632996212](https://github.com/Aldik1111/learning-squads/actions/runs/43632996212) — success (typecheck/lint/unit/content/SQL/build). Адрес является branch alias, а не immutable deployment URL; при следующем выпуске его содержимое может измениться.
 
