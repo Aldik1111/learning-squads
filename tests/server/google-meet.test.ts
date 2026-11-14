@@ -232,3 +232,29 @@ test("opt-in OPEN fails closed for denied, mismatched or unchanged settings", as
     if (["get-denied", "wrong-uri", "bad-name", "timeout"].includes(scenario)) assert.equal(patches, 0);
   }
 });
+
+
+test("PostgreSQL fractional timestamps match Calendar whole-second event precision", async () => {
+  const fractional = { ...input, startsAt: "2026-11-15T10:00:00.070447+00:00", endsAt: "2026-11-15T10:15:00.070Z" };
+  const canonical = { ...fractional, startsAt: "2026-11-15T10:00:00.000Z", endsAt: "2026-11-15T10:15:00.000Z" };
+  for (const alreadyExists of [true, false]) {
+    let exists = alreadyExists, inserts = 0;
+    const provider = createGoogleMeetingProvider({ config: () => config, now, fetch: mockedFetch((target, init) => {
+      if (target.hostname === "oauth2.googleapis.com") return token();
+      if (init.method === "GET") return exists ? json(event(canonical)) : json({}, 404);
+      inserts++;
+      const body = JSON.parse(String(init.body));
+      assert.equal(body.start.dateTime, canonical.startsAt);
+      assert.equal(body.end.dateTime, canonical.endsAt);
+      exists = true;
+      return json(event(canonical));
+    }) });
+    assert.deepEqual(await provider.ensureGoogleMeeting(fractional), { status: "ready", meetUrl: url });
+    assert.deepEqual(await provider.ensureGoogleMeeting(fractional), { status: "ready", meetUrl: url });
+    assert.equal(inserts, alreadyExists ? 0 : 1);
+  }
+  const wrongTime = { ...canonical, startsAt: "2026-11-15T10:00:01Z" };
+  const provider = createGoogleMeetingProvider({ config: () => config, now, fetch: mockedFetch(target => target.hostname === "oauth2.googleapis.com" ? token() : json(event(wrongTime))) });
+  assert.deepEqual(await provider.ensureGoogleMeeting(fractional), unavailable);
+  assert.equal(fractional.startsAt, "2026-11-15T10:00:00.070447+00:00");
+});

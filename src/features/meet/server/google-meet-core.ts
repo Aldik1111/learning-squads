@@ -130,8 +130,10 @@ export function createGoogleMeetingProvider(dependencies: Dependencies) {
   async function ensureGoogleMeeting(input: GoogleMeetingInput): Promise<GoogleMeetingResult> {
     // Validate even when called outside the HTTP adapter; never interpolate arbitrary paths.
     if (!input || !uuid.test(input.id) || !uuid.test(input.groupId) || !timestamp.test(input.startsAt) || !timestamp.test(input.endsAt)) return unavailable();
-    const start = Date.parse(input.startsAt), end = Date.parse(input.endsAt);
+    // Calendar drops fractional seconds; normalize once for writes, comparisons and deduplication.
+    const start = Math.floor(Date.parse(input.startsAt) / 1000) * 1000, end = Math.floor(Date.parse(input.endsAt) / 1000) * 1000;
     if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return unavailable();
+    input = { ...input, startsAt: new Date(start).toISOString(), endsAt: new Date(end).toISOString() };
     let config: GoogleCalendarConfig | null;
     try { config = dependencies.config(); } catch { return unavailable(); }
     if (!config?.clientId || !config.clientSecret || !config.refreshToken) return unavailable();

@@ -26,6 +26,6 @@ export function MeetingCard({meeting,timezone}:{meeting:GroupMeeting;timezone:st
   try {const parsed=new URL(meeting.meetUrl ?? "");if(parsed.protocol==="https:"&&parsed.hostname==="meet.google.com"&&!parsed.username&&!parsed.password)url=parsed.href;}catch{}
   return <article className="ls-meeting-card">
     <p><strong><time dateTime={meeting.startsAt}>{formatWindow(meeting.startsAt,meeting.endsAt,timezone)}</time></strong></p>
-    {meeting.status==="ready"&&url ? <a className="ls-button ls-button-small" href={url} target="_blank" rel="noopener noreferrer">Open Google Meet ↗</a> : <p className="ls-small ls-muted">{meeting.status==="cancelled"?"This meeting was cancelled.":meeting.status==="unavailable"?"The meeting service could not prepare a link. Your lessons and chat are still available.":"Preparing the meeting link. This page refreshes automatically."}</p>}
+    {meeting.status==="ready"&&url ? <><a className="ls-button ls-button-small" href={url} target="_blank" rel="noopener noreferrer">Open Google Meet ↗</a><p className="ls-small ls-muted">Use a signed-in Google account to join. Guest access here does not sign you into Google.</p></> : <p className="ls-small ls-muted">{meeting.status==="cancelled"?"This meeting was cancelled.":meeting.status==="unavailable"?"The meeting service could not prepare a link. Your lessons and chat are still available.":"Preparing the meeting link. This page refreshes automatically."}</p>}
   </article>;
 }
