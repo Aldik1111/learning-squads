@@ -1,0 +1,91 @@
+{
+  "id": "python-normalize-labels",
+  "exerciseVersion": 1,
+  "title": "Clean a messy label batch",
+  "entrypoint": "clean_labels",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "One positional argument: a list of strings.",
+  "outputDescription": "A new list of stripped, lowercased, nonempty labels in original order, preserving duplicates. Do not modify the input.",
+  "preserveInput": true,
+  "cases": [
+    {
+      "id": "case-1",
+      "label": "Empty",
+      "args": [
+        []
+      ],
+      "expected": []
+    },
+    {
+      "id": "case-2",
+      "label": "Only blanks",
+      "args": [
+        [
+          "",
+          " ",
+          "\t\n"
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "id": "case-3",
+      "label": "Trim and case",
+      "args": [
+        [
+          " Study ",
+          "READ"
+        ]
+      ],
+      "expected": [
+        "study",
+        "read"
+      ]
+    },
+    {
+      "id": "case-4",
+      "label": "Keep duplicates",
+      "args": [
+        [
+          "A",
+          " a ",
+          "B",
+          "A"
+        ]
+      ],
+      "expected": [
+        "a",
+        "a",
+        "b",
+        "a"
+      ]
+    },
+    {
+      "id": "case-5",
+      "label": "Internal space",
+      "args": [
+        [
+          " Deep Work "
+        ]
+      ],
+      "expected": [
+        "deep work"
+      ]
+    },
+    {
+      "id": "case-6",
+      "label": "Already clean",
+      "args": [
+        [
+          "read",
+          "plan"
+        ]
+      ],
+      "expected": [
+        "read",
+        "plan"
+      ]
+    }
+  ]
+}

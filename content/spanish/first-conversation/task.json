@@ -1,0 +1,11 @@
+{
+  "id": "spanish-first-conversation-task",
+  "version": 1,
+  "title": "Prepare a Spanish introduction",
+  "description": "Write a short fictional introduction and reflect on one phrase you practiced or want to improve.",
+  "acceptanceCriteria": [
+    "Include a greeting, a fictional name, and a question for the other speaker.",
+    "Include a request to repeat or slow down.",
+    "Add your own reflection without exposing another person’s details or a private meeting URL."
+  ]
+}

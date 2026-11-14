@@ -1,0 +1,88 @@
+{
+  "id": "python-dictionary-summary",
+  "contentVersion": 1,
+  "title": "Summarize named scores",
+  "level": "beginner",
+  "objectives": [
+    "Read dictionary values",
+    "Accumulate a count and total",
+    "Return a predictable dictionary for empty input"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "python-dictionary-summary-q1",
+      "prompt": "What does iterating over scores directly visit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Its keys"
+        },
+        {
+          "id": "b",
+          "text": "Only its integers"
+        },
+        {
+          "id": "c",
+          "text": "Pairs automatically"
+        }
+      ]
+    },
+    {
+      "id": "python-dictionary-summary-q2",
+      "prompt": "What summarizes {\"Ari\": 0}?",
+      "options": [
+        {
+          "id": "a",
+          "text": "{\"count\": 0, \"total\": 0}"
+        },
+        {
+          "id": "b",
+          "text": "{\"count\": 1, \"total\": 0}"
+        },
+        {
+          "id": "c",
+          "text": "{\"count\": 1, \"total\": 1}"
+        }
+      ]
+    },
+    {
+      "id": "python-dictionary-summary-q3",
+      "prompt": "Which operation counts entries?",
+      "options": [
+        {
+          "id": "a",
+          "text": "sum(scores.values())"
+        },
+        {
+          "id": "b",
+          "text": "scores.clear()"
+        },
+        {
+          "id": "c",
+          "text": "len(scores)"
+        }
+      ]
+    },
+    {
+      "id": "python-dictionary-summary-q4",
+      "prompt": "What must the empty case return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "None"
+        },
+        {
+          "id": "b",
+          "text": "{\"count\": 0, \"total\": 0}"
+        },
+        {
+          "id": "c",
+          "text": "{}"
+        }
+      ]
+    }
+  ],
+  "exercise": "exercise.json"
+}

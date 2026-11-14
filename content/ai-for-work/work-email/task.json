@@ -1,0 +1,11 @@
+{
+  "id": "ai-work-email-task",
+  "version": 1,
+  "title": "Review a feedback-request email",
+  "description": "Prepare a prompt and a fictional email asking Morgan for slide feedback; document your review before sending would occur.",
+  "acceptanceCriteria": [
+    "Include a subject, one clear request, and Friday as a proposal.",
+    "Show two fact checks and one revision that avoids an invented commitment.",
+    "Use fictional information and label the message as a draft."
+  ]
+}

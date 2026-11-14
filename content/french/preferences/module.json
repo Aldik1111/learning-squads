@@ -1,0 +1,92 @@
+{
+  "id": "french-preferences",
+  "contentVersion": 1,
+  "title": "Choose an activity in French",
+  "level": "beginner",
+  "objectives": [
+    "Express a like and a preference",
+    "Ask a polite either-or question",
+    "Respond to a different preference constructively"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "french-preferences-q1",
+      "prompt": "Which expresses a preference for walking?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Je préfère marcher"
+        },
+        {
+          "id": "b",
+          "text": "Je m’appelle marcher"
+        },
+        {
+          "id": "c",
+          "text": "À quelle heure ?"
+        }
+      ]
+    },
+    {
+      "id": "french-preferences-q2",
+      "prompt": "Which is the written negative pattern taught here?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Je pas aime courir"
+        },
+        {
+          "id": "b",
+          "text": "Je n’aime pas courir"
+        },
+        {
+          "id": "c",
+          "text": "Je n’aime courir pas"
+        }
+      ]
+    },
+    {
+      "id": "french-preferences-q3",
+      "prompt": "What does ou do in lire ou marcher?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Marks yesterday"
+        },
+        {
+          "id": "b",
+          "text": "Means and"
+        },
+        {
+          "id": "c",
+          "text": "Offers the alternative \"or\""
+        }
+      ]
+    },
+    {
+      "id": "french-preferences-q4",
+      "prompt": "If your preferences differ, what supports conversation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ignore the answer"
+        },
+        {
+          "id": "b",
+          "text": "Offer another activity and listen"
+        },
+        {
+          "id": "c",
+          "text": "Claim the other person is wrong"
+        }
+      ]
+    }
+  ],
+  "conversation": {
+    "targetLanguage": "fr",
+    "minimumPracticeMinutes": 15,
+    "guide": "conversation.md"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ai-work-review-workflow-task",
+  "version": 1,
+  "title": "Create a two-case review record",
+  "description": "Review normal and missing-data announcements with explicit checks, then correct one deliberately unsupported detail.",
+  "acceptanceCriteria": [
+    "Include both supplied briefs and a four-check review table.",
+    "Show the unsupported detail, its correction, and a recheck.",
+    "State when a human must request clarification and who decides whether to publish."
+  ]
+}

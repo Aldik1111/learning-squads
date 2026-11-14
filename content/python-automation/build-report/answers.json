@@ -1,0 +1,18 @@
+{
+  "python-build-report-q1": {
+    "correctOptionId": "b",
+    "explanation": "Sorting makes output order independent of dictionary insertion order."
+  },
+  "python-build-report-q2": {
+    "correctOptionId": "a",
+    "explanation": "Zero totals are retained and formatted as integers."
+  },
+  "python-build-report-q3": {
+    "correctOptionId": "b",
+    "explanation": "The caller needs a returned list, not only console output."
+  },
+  "python-build-report-q4": {
+    "correctOptionId": "c",
+    "explanation": "sorted creates a new list; the input dictionary remains intact."
+  }
+}

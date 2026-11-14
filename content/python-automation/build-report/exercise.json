@@ -1,0 +1,89 @@
+{
+  "id": "python-report-lines",
+  "exerciseVersion": 1,
+  "title": "Publish a reproducible report summary",
+  "entrypoint": "report_lines",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "One positional argument: a dictionary of nonempty lowercase ASCII category names to non-negative integer totals.",
+  "outputDescription": "A list of strings formatted exactly as category: total, sorted by category using Python sorted. Preserve input; retain zero totals.",
+  "preserveInput": true,
+  "cases": [
+    {
+      "id": "case-1",
+      "label": "Empty",
+      "args": [
+        {}
+      ],
+      "expected": []
+    },
+    {
+      "id": "case-2",
+      "label": "Single",
+      "args": [
+        {
+          "read": 7
+        }
+      ],
+      "expected": [
+        "read: 7"
+      ]
+    },
+    {
+      "id": "case-3",
+      "label": "Reverse order",
+      "args": [
+        {
+          "walk": 5,
+          "read": 7
+        }
+      ],
+      "expected": [
+        "read: 7",
+        "walk: 5"
+      ]
+    },
+    {
+      "id": "case-4",
+      "label": "Zero",
+      "args": [
+        {
+          "rest": 0
+        }
+      ],
+      "expected": [
+        "rest: 0"
+      ]
+    },
+    {
+      "id": "case-5",
+      "label": "Prefix order",
+      "args": [
+        {
+          "ab": 12,
+          "a": 2,
+          "b": 1
+        }
+      ],
+      "expected": [
+        "a: 2",
+        "ab: 12",
+        "b: 1"
+      ]
+    },
+    {
+      "id": "case-6",
+      "label": "Multiple digits",
+      "args": [
+        {
+          "z": 120,
+          "a": 10
+        }
+      ],
+      "expected": [
+        "a: 10",
+        "z: 120"
+      ]
+    }
+  ]
+}

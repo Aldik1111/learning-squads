@@ -1,0 +1,11 @@
+{
+  "id": "python-build-report-task",
+  "version": 1,
+  "title": "Publish a reproducible report summary",
+  "description": "Build the report function and describe why the same totals produce the same output order.",
+  "acceptanceCriteria": [
+    "Show the exact list of lines for an input entered in reverse alphabetical order.",
+    "Include a zero total and an empty-input result.",
+    "Explain return versus print and confirm you preserved the input."
+  ]
+}

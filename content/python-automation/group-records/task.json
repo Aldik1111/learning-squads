@@ -1,0 +1,11 @@
+{
+  "id": "python-group-records-task",
+  "version": 1,
+  "title": "Build a category total",
+  "description": "Aggregate a small fictional activity log and explain how repeated categories are combined.",
+  "acceptanceCriteria": [
+    "Show at least two categories and one repeated category separated by another row.",
+    "Include a zero-minute record and show that its category remains present.",
+    "Explain accumulation versus overwriting and confirm nested inputs stay unchanged."
+  ]
+}

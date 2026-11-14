@@ -1,0 +1,92 @@
+{
+  "id": "french-daily-plans",
+  "contentVersion": 1,
+  "title": "Talk about tomorrow in French",
+  "level": "beginner",
+  "objectives": [
+    "Build a plan with je vais plus an infinitive",
+    "Ask when an activity will happen",
+    "Confirm a day and time with a partner"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "french-daily-plans-q1",
+      "prompt": "Which means \"I am going to read\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Je vais à lire"
+        },
+        {
+          "id": "b",
+          "text": "Je vais lire"
+        },
+        {
+          "id": "c",
+          "text": "Je lire vais"
+        }
+      ]
+    },
+    {
+      "id": "french-daily-plans-q2",
+      "prompt": "What does demain mean?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tomorrow"
+        },
+        {
+          "id": "b",
+          "text": "Yesterday"
+        },
+        {
+          "id": "c",
+          "text": "A clock"
+        }
+      ]
+    },
+    {
+      "id": "french-daily-plans-q3",
+      "prompt": "What does À quelle heure ? ask?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Which name?"
+        },
+        {
+          "id": "b",
+          "text": "Which hobby?"
+        },
+        {
+          "id": "c",
+          "text": "At what time?"
+        }
+      ]
+    },
+    {
+      "id": "french-daily-plans-q4",
+      "prompt": "What should follow a changed proposed time?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A clear confirmation of the new time"
+        },
+        {
+          "id": "b",
+          "text": "An invented meeting link"
+        },
+        {
+          "id": "c",
+          "text": "Silence because the old time is still certain"
+        }
+      ]
+    }
+  ],
+  "conversation": {
+    "targetLanguage": "fr",
+    "minimumPracticeMinutes": 15,
+    "guide": "conversation.md"
+  }
+}

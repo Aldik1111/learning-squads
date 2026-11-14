@@ -1,0 +1,18 @@
+{
+  "python-group-records-q1": {
+    "correctOptionId": "b",
+    "explanation": "A new bucket starts at zero; existing buckets retain their accumulated value."
+  },
+  "python-group-records-q2": {
+    "correctOptionId": "c",
+    "explanation": "Both read records contribute, even when separated."
+  },
+  "python-group-records-q3": {
+    "correctOptionId": "a",
+    "explanation": "Presence and positive duration are separate facts."
+  },
+  "python-group-records-q4": {
+    "correctOptionId": "b",
+    "explanation": "Normalization is deliberately outside this grouping contract."
+  }
+}

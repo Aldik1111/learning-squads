@@ -1,0 +1,11 @@
+{
+  "id": "ai-verify-answers-task",
+  "version": 1,
+  "title": "Audit a draft announcement",
+  "description": "Use the fictional study-room note to identify supported, conflicting, and unsupported claims, then write a corrected announcement.",
+  "acceptanceCriteria": [
+    "Check the time, price, booking rule, and capacity separately.",
+    "Connect each verdict to the supplied note and leave unknown capacity unknown.",
+    "Include the corrected announcement and one lesson from the comparison."
+  ]
+}

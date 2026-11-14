@@ -1,0 +1,88 @@
+{
+  "id": "python-clean-labels",
+  "contentVersion": 1,
+  "title": "Normalize labels before using them",
+  "level": "beginner",
+  "objectives": [
+    "Chain string operations deliberately",
+    "Discard labels that become empty",
+    "Keep source data intact"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "python-clean-labels-q1",
+      "prompt": "What is \"  Deep Work  \".strip().lower()?",
+      "options": [
+        {
+          "id": "a",
+          "text": "\"deepwork\""
+        },
+        {
+          "id": "b",
+          "text": "\"deep work\""
+        },
+        {
+          "id": "c",
+          "text": "\"  deep work  \""
+        }
+      ]
+    },
+    {
+      "id": "python-clean-labels-q2",
+      "prompt": "When should the empty check happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "After stripping"
+        },
+        {
+          "id": "b",
+          "text": "Only before stripping"
+        },
+        {
+          "id": "c",
+          "text": "Only after sorting"
+        }
+      ]
+    },
+    {
+      "id": "python-clean-labels-q3",
+      "prompt": "What happens to two labels that both become \"study\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep both"
+        },
+        {
+          "id": "b",
+          "text": "Keep neither"
+        },
+        {
+          "id": "c",
+          "text": "Keep exactly one"
+        }
+      ]
+    },
+    {
+      "id": "python-clean-labels-q4",
+      "prompt": "Which action breaks the exercise contract?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Creating a new list"
+        },
+        {
+          "id": "b",
+          "text": "Calling lower()"
+        },
+        {
+          "id": "c",
+          "text": "Replacing items in the input list"
+        }
+      ]
+    }
+  ],
+  "exercise": "exercise.json"
+}

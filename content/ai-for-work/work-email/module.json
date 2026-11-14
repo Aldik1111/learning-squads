@@ -1,0 +1,87 @@
+{
+  "id": "ai-work-email",
+  "contentVersion": 1,
+  "title": "Draft an email without inventing commitments",
+  "level": "beginner",
+  "objectives": [
+    "Supply facts, audience, and a communication goal",
+    "Separate an approved request from a promise",
+    "Review a draft before sending"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "ai-work-email-q1",
+      "prompt": "Friday is only proposed. Which sentence preserves that?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Thanks for agreeing to Friday"
+        },
+        {
+          "id": "b",
+          "text": "Could you share feedback by Friday?"
+        },
+        {
+          "id": "c",
+          "text": "Your Friday deadline is confirmed"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-email-q2",
+      "prompt": "What should the prompt include?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only \"write an email\""
+        },
+        {
+          "id": "b",
+          "text": "A made-up discount"
+        },
+        {
+          "id": "c",
+          "text": "Audience, facts, goal, and constraints"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-email-q3",
+      "prompt": "The draft says \"attached\" but no file is attached. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Review and correct it before sending"
+        },
+        {
+          "id": "b",
+          "text": "Send because the model wrote it"
+        },
+        {
+          "id": "c",
+          "text": "Ignore it if the tone is friendly"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-email-q4",
+      "prompt": "What does completing this lesson authorize?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Automatic sending to customers"
+        },
+        {
+          "id": "b",
+          "text": "Producing and reviewing a fictional draft"
+        },
+        {
+          "id": "c",
+          "text": "Uploading confidential inboxes"
+        }
+      ]
+    }
+  ]
+}

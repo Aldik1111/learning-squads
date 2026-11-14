@@ -1,0 +1,87 @@
+{
+  "id": "ai-verify-answers",
+  "contentVersion": 1,
+  "title": "Check a confident answer against evidence",
+  "level": "beginner",
+  "objectives": [
+    "Separate claims from supporting evidence",
+    "Spot invented details in a plausible answer",
+    "Rewrite uncertain claims honestly"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "ai-verify-answers-q1",
+      "prompt": "A source says the room is not announced. What should the revised answer say?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Room 4, because it sounds likely"
+        },
+        {
+          "id": "b",
+          "text": "The room is not announced"
+        },
+        {
+          "id": "c",
+          "text": "Delete the date too"
+        }
+      ]
+    },
+    {
+      "id": "ai-verify-answers-q2",
+      "prompt": "Does a citation-shaped URL prove a claim?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No; inspect the page and its support"
+        },
+        {
+          "id": "b",
+          "text": "Yes, if it starts with HTTPS"
+        },
+        {
+          "id": "c",
+          "text": "Yes, if the model sounds certain"
+        }
+      ]
+    },
+    {
+      "id": "ai-verify-answers-q3",
+      "prompt": "The source omits capacity. Which verdict is justified?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Capacity is definitely zero"
+        },
+        {
+          "id": "b",
+          "text": "Capacity is unsupported by this source"
+        },
+        {
+          "id": "c",
+          "text": "Capacity must be 30"
+        }
+      ]
+    },
+    {
+      "id": "ai-verify-answers-q4",
+      "prompt": "Which is the strongest task evidence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A second confident model answer"
+        },
+        {
+          "id": "b",
+          "text": "A longer announcement"
+        },
+        {
+          "id": "c",
+          "text": "A claim table tied to source passages"
+        }
+      ]
+    }
+  ]
+}

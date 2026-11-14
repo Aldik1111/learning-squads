@@ -1,0 +1,18 @@
+{
+  "python-dictionary-summary-q1": {
+    "correctOptionId": "a",
+    "explanation": "Dictionary iteration visits keys; values() explicitly provides values."
+  },
+  "python-dictionary-summary-q2": {
+    "correctOptionId": "b",
+    "explanation": "The zero score still belongs to one entry."
+  },
+  "python-dictionary-summary-q3": {
+    "correctOptionId": "c",
+    "explanation": "len counts dictionary entries, independent of their values."
+  },
+  "python-dictionary-summary-q4": {
+    "correctOptionId": "b",
+    "explanation": "A fixed result shape makes the empty case usable without special guessing."
+  }
+}

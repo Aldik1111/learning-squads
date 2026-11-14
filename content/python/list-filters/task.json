@@ -1,0 +1,11 @@
+{
+  "id": "python-list-filters-task",
+  "version": 1,
+  "title": "Filter a study-session list",
+  "description": "Implement the filter, then describe one boundary case and the change that made your solution work. Add an HTTPS code link only if you want to.",
+  "acceptanceCriteria": [
+    "Show an example containing an exact-boundary match and a repeated value.",
+    "Explain why the output order and input list remain unchanged.",
+    "Summarize your check results; a quiz score alone is not the task result."
+  ]
+}

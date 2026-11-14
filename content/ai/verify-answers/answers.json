@@ -1,0 +1,18 @@
+{
+  "ai-verify-answers-q1": {
+    "correctOptionId": "b",
+    "explanation": "Preserve the known facts and identify the room as unknown."
+  },
+  "ai-verify-answers-q2": {
+    "correctOptionId": "a",
+    "explanation": "A real URL can still be irrelevant or fail to support the specific claim."
+  },
+  "ai-verify-answers-q3": {
+    "correctOptionId": "b",
+    "explanation": "Missing evidence does not justify inventing a value or declaring a particular alternative true."
+  },
+  "ai-verify-answers-q4": {
+    "correctOptionId": "c",
+    "explanation": "The table makes the comparison and unresolved details reviewable."
+  }
+}

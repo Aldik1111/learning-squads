@@ -1,0 +1,93 @@
+{
+  "id": "python-summarize-scores",
+  "exerciseVersion": 1,
+  "title": "Explain a score summary",
+  "entrypoint": "summarize_scores",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "One positional argument: a dictionary of string names to non-negative integer scores.",
+  "outputDescription": "A dictionary with exactly count and total integer fields. Preserve the input dictionary.",
+  "preserveInput": true,
+  "cases": [
+    {
+      "id": "case-1",
+      "label": "Empty",
+      "args": [
+        {}
+      ],
+      "expected": {
+        "count": 0,
+        "total": 0
+      }
+    },
+    {
+      "id": "case-2",
+      "label": "Zero score",
+      "args": [
+        {
+          "Ari": 0
+        }
+      ],
+      "expected": {
+        "count": 1,
+        "total": 0
+      }
+    },
+    {
+      "id": "case-3",
+      "label": "Single score",
+      "args": [
+        {
+          "Ari": 7
+        }
+      ],
+      "expected": {
+        "count": 1,
+        "total": 7
+      }
+    },
+    {
+      "id": "case-4",
+      "label": "Mixed",
+      "args": [
+        {
+          "Ari": 0,
+          "Bo": 7,
+          "Cy": 3
+        }
+      ],
+      "expected": {
+        "count": 3,
+        "total": 10
+      }
+    },
+    {
+      "id": "case-5",
+      "label": "Repeated scores",
+      "args": [
+        {
+          "A": 4,
+          "B": 4
+        }
+      ],
+      "expected": {
+        "count": 2,
+        "total": 8
+      }
+    },
+    {
+      "id": "case-6",
+      "label": "Large values",
+      "args": [
+        {
+          "A": 1000,
+          "B": 25
+        }
+      ],
+      "expected": {
+        "count": 2,
+        "total": 1025
+      }
+    }
+  ]
+}

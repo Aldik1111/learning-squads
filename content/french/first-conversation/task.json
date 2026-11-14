@@ -1,0 +1,11 @@
+{
+  "id": "french-first-conversation-task",
+  "version": 1,
+  "title": "Write your first French exchange",
+  "description": "Create a fictional six-line opening and describe one phrase you practiced or improved.",
+  "acceptanceCriteria": [
+    "Include a greeting, name introduction, and return question.",
+    "Use a polite repetition request and a goodbye.",
+    "Keep address consistent and add a short reflection without private partner details."
+  ]
+}

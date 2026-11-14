@@ -1,0 +1,11 @@
+{
+  "id": "french-daily-plans-task",
+  "version": 1,
+  "title": "Confirm a French plan",
+  "description": "Write a fictional exchange about tomorrow, including a changed time and the final confirmation.",
+  "acceptanceCriteria": [
+    "Use je vais plus an infinitive and ask about a time.",
+    "Show the change from one proposed time to another.",
+    "Explain the infinitive pattern and keep any real appointment details private."
+  ]
+}

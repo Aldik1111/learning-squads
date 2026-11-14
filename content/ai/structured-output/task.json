@@ -1,0 +1,11 @@
+{
+  "id": "ai-structured-output-task",
+  "version": 1,
+  "title": "Design and check an extraction contract",
+  "description": "Create an action-item JSON contract, one supported example, and one example with missing information.",
+  "acceptanceCriteria": [
+    "Specify exact keys, allowed value types, and the null rule.",
+    "Check each populated value against a short fictional source.",
+    "Show a missing-owner or missing-deadline example and explain why parsing alone is insufficient."
+  ]
+}

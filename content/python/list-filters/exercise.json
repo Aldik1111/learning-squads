@@ -1,0 +1,100 @@
+{
+  "id": "python-keep-at-least",
+  "exerciseVersion": 1,
+  "title": "Filter a study-session list",
+  "entrypoint": "keep_at_least",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "Two positional arguments: a list of integers and an integer minimum.",
+  "outputDescription": "A new list containing values >= minimum in original order, including duplicates. Do not change either input.",
+  "preserveInput": true,
+  "cases": [
+    {
+      "id": "case-1",
+      "label": "Empty input",
+      "args": [
+        [],
+        2
+      ],
+      "expected": []
+    },
+    {
+      "id": "case-2",
+      "label": "Exact boundary",
+      "args": [
+        [
+          2
+        ],
+        2
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "id": "case-3",
+      "label": "No matches",
+      "args": [
+        [
+          1,
+          2
+        ],
+        3
+      ],
+      "expected": []
+    },
+    {
+      "id": "case-4",
+      "label": "Order and duplicates",
+      "args": [
+        [
+          4,
+          2,
+          4,
+          3
+        ],
+        3
+      ],
+      "expected": [
+        4,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "case-5",
+      "label": "Negative minimum",
+      "args": [
+        [
+          -3,
+          -1,
+          0,
+          -1
+        ],
+        -1
+      ],
+      "expected": [
+        -1,
+        0,
+        -1
+      ]
+    },
+    {
+      "id": "case-6",
+      "label": "All match",
+      "args": [
+        [
+          5,
+          4,
+          3
+        ],
+        0
+      ],
+      "expected": [
+        5,
+        4,
+        3
+      ]
+    }
+  ]
+}

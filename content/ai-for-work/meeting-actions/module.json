@@ -1,0 +1,87 @@
+{
+  "id": "ai-work-meeting-actions",
+  "contentVersion": 1,
+  "title": "Separate meeting decisions from suggestions",
+  "level": "beginner",
+  "objectives": [
+    "Distinguish a decision, proposal, and action",
+    "Record only stated owners and dates",
+    "Keep unresolved questions visible"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "ai-work-meeting-actions-q1",
+      "prompt": "Ari suggested a logo, but the team kept the old one. What is the decision?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Create the suggested logo"
+        },
+        {
+          "id": "b",
+          "text": "Keep the current logo for the demo"
+        },
+        {
+          "id": "c",
+          "text": "Assign Ari to redesign it"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-meeting-actions-q2",
+      "prompt": "No owner was chosen for mobile testing. What belongs in owner?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A guessed participant"
+        },
+        {
+          "id": "b",
+          "text": "The first speaker"
+        },
+        {
+          "id": "c",
+          "text": "null or an explicitly unknown marker"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-meeting-actions-q3",
+      "prompt": "Why include an evidence phrase?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To make extraction reviewable"
+        },
+        {
+          "id": "b",
+          "text": "To prove every suggestion was approved"
+        },
+        {
+          "id": "c",
+          "text": "To avoid reading the notes"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-meeting-actions-q4",
+      "prompt": "Does the meeting date automatically become each task deadline?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Only for short meetings"
+        }
+      ]
+    }
+  ]
+}

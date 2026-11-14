@@ -1,0 +1,11 @@
+{
+  "id": "ai-work-meeting-actions-task",
+  "version": 1,
+  "title": "Extract decisions and open actions",
+  "description": "Turn the fictional logo/demo notes into a reviewable meeting summary without assigning missing owners.",
+  "acceptanceCriteria": [
+    "Separate the rejected/proposed logo idea from the actual decision.",
+    "Include Bo’s explicit action and date, and keep mobile ownership unresolved.",
+    "Attach evidence phrases and explain one classification you checked."
+  ]
+}

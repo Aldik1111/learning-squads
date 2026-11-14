@@ -1,0 +1,11 @@
+{
+  "id": "ai-clear-requests-task",
+  "version": 1,
+  "title": "Improve one unclear request",
+  "description": "Write a vague request, improve it with context and constraints, and explain how you would judge the response. Use fictional information.",
+  "acceptanceCriteria": [
+    "Include the original and revised request.",
+    "Name the intended audience, desired result, and at least one constraint.",
+    "Explain two concrete checks for a useful answer; using an AI account is optional."
+  ]
+}

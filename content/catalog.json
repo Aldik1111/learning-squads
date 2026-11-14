@@ -2,8 +2,131 @@
   "formatVersion": 1,
   "locale": "en",
   "courses": [
-    {"id": "python", "title": "Python", "category": "programming", "collaborationMode": "group", "modules": [{"id": "python-first-function", "directory": "python/first-function"}]},
-    {"id": "how-to-use-ai", "title": "How to use AI", "category": "ai", "collaborationMode": "group", "modules": [{"id": "ai-clear-requests", "directory": "ai/clear-requests"}]},
-    {"id": "spanish", "title": "Spanish", "category": "languages", "collaborationMode": "language-partner", "modules": [{"id": "spanish-first-conversation", "directory": "spanish/first-conversation"}]}
+    {
+      "id": "python",
+      "title": "Python",
+      "category": "programming",
+      "collaborationMode": "group",
+      "modules": [
+        {
+          "id": "python-first-function",
+          "directory": "python/first-function"
+        },
+        {
+          "id": "python-list-filters",
+          "directory": "python/list-filters"
+        },
+        {
+          "id": "python-dictionary-summary",
+          "directory": "python/dictionary-summary"
+        }
+      ],
+      "description": "Build useful Python functions with loops, lists, and dictionaries, then check them with real code exercises."
+    },
+    {
+      "id": "how-to-use-ai",
+      "title": "How to use AI",
+      "category": "ai",
+      "collaborationMode": "group",
+      "modules": [
+        {
+          "id": "ai-clear-requests",
+          "directory": "ai/clear-requests"
+        },
+        {
+          "id": "ai-verify-answers",
+          "directory": "ai/verify-answers"
+        },
+        {
+          "id": "ai-structured-output",
+          "directory": "ai/structured-output"
+        }
+      ],
+      "description": "Write clear requests, verify claims, and define structured outputs you can check."
+    },
+    {
+      "id": "spanish",
+      "title": "Spanish",
+      "category": "languages",
+      "collaborationMode": "language-partner",
+      "modules": [
+        {
+          "id": "spanish-first-conversation",
+          "directory": "spanish/first-conversation"
+        },
+        {
+          "id": "spanish-daily-plans",
+          "directory": "spanish/daily-plans"
+        },
+        {
+          "id": "spanish-preferences",
+          "directory": "spanish/preferences"
+        }
+      ],
+      "description": "Practice introductions, daily plans, and preferences through short lessons and one-to-one Spanish conversations."
+    },
+    {
+      "id": "python-automation",
+      "title": "Python automation",
+      "category": "programming",
+      "collaborationMode": "group",
+      "modules": [
+        {
+          "id": "python-clean-labels",
+          "directory": "python-automation/clean-labels"
+        },
+        {
+          "id": "python-group-records",
+          "directory": "python-automation/group-records"
+        },
+        {
+          "id": "python-build-report",
+          "directory": "python-automation/build-report"
+        }
+      ],
+      "description": "Clean labels, group activity records, and create repeatable reports with small Python functions."
+    },
+    {
+      "id": "ai-for-work",
+      "title": "AI for work",
+      "category": "ai",
+      "collaborationMode": "group",
+      "modules": [
+        {
+          "id": "ai-work-email",
+          "directory": "ai-for-work/work-email"
+        },
+        {
+          "id": "ai-work-meeting-actions",
+          "directory": "ai-for-work/meeting-actions"
+        },
+        {
+          "id": "ai-work-review-workflow",
+          "directory": "ai-for-work/review-workflow"
+        }
+      ],
+      "description": "Draft careful emails, extract meeting actions, and review AI-assisted work using fictional examples."
+    },
+    {
+      "id": "french",
+      "title": "French",
+      "category": "languages",
+      "collaborationMode": "language-partner",
+      "modules": [
+        {
+          "id": "french-first-conversation",
+          "directory": "french/first-conversation"
+        },
+        {
+          "id": "french-daily-plans",
+          "directory": "french/daily-plans"
+        },
+        {
+          "id": "french-preferences",
+          "directory": "french/preferences"
+        }
+      ],
+      "description": "Start speaking French with polite introductions, everyday plans, and conversations about preferences."
+    }
   ]
 }

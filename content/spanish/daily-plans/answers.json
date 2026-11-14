@@ -1,0 +1,18 @@
+{
+  "spanish-daily-plans-q1": {
+    "correctOptionId": "a",
+    "explanation": "The first-person pattern is voy a followed by the infinitive leer."
+  },
+  "spanish-daily-plans-q2": {
+    "correctOptionId": "b",
+    "explanation": "Hora refers to the time of the activity."
+  },
+  "spanish-daily-plans-q3": {
+    "correctOptionId": "c",
+    "explanation": "Mañana means tomorrow in this planning phrase; hoy means today."
+  },
+  "spanish-daily-plans-q4": {
+    "correctOptionId": "b",
+    "explanation": "A clock time alone may refer to different instants in different places."
+  }
+}

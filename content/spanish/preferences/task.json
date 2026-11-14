@@ -1,0 +1,11 @@
+{
+  "id": "spanish-preferences-task",
+  "version": 1,
+  "title": "Find a shared activity in Spanish",
+  "description": "Write a fictional dialogue that compares two preferences and reaches a mutually acceptable activity.",
+  "acceptanceCriteria": [
+    "Include one correct gusta sentence and one correct gustan sentence.",
+    "Ask a preference question and respond with a real choice within the fictional scenario.",
+    "Explain one language correction and show the agreed activity."
+  ]
+}

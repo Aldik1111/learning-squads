@@ -1,0 +1,18 @@
+{
+  "ai-work-email-q1": {
+    "correctOptionId": "b",
+    "explanation": "A question asks for agreement without claiming it already exists."
+  },
+  "ai-work-email-q2": {
+    "correctOptionId": "c",
+    "explanation": "These details help the draft match the actual communication task."
+  },
+  "ai-work-email-q3": {
+    "correctOptionId": "a",
+    "explanation": "Attachment claims must match the actual message."
+  },
+  "ai-work-email-q4": {
+    "correctOptionId": "b",
+    "explanation": "The exercise neither sends messages nor authorizes disclosure of real confidential data."
+  }
+}

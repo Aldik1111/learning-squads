@@ -1,0 +1,92 @@
+{
+  "id": "french-first-conversation",
+  "contentVersion": 1,
+  "title": "Start a friendly conversation in French",
+  "level": "beginner",
+  "objectives": [
+    "Greet a partner and introduce yourself",
+    "Use polite address consistently",
+    "Ask for repetition without ending the conversation"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "french-first-conversation-q1",
+      "prompt": "Which phrase introduces your name?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Je m’appelle Alex"
+        },
+        {
+          "id": "b",
+          "text": "Au revoir"
+        },
+        {
+          "id": "c",
+          "text": "Et vous ?"
+        }
+      ]
+    },
+    {
+      "id": "french-first-conversation-q2",
+      "prompt": "Which politely asks for repetition?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Merci"
+        },
+        {
+          "id": "b",
+          "text": "Bonjour"
+        },
+        {
+          "id": "c",
+          "text": "Pouvez-vous répéter, s’il vous plaît ?"
+        }
+      ]
+    },
+    {
+      "id": "french-first-conversation-q3",
+      "prompt": "How is vous used in this lesson’s opening?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for a close friend"
+        },
+        {
+          "id": "b",
+          "text": "As polite address to a new partner"
+        },
+        {
+          "id": "c",
+          "text": "Only to introduce yourself"
+        }
+      ]
+    },
+    {
+      "id": "french-first-conversation-q4",
+      "prompt": "Must you share your real full name to practice?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "No; a fictional first name is enough"
+        },
+        {
+          "id": "c",
+          "text": "Only if you make a mistake"
+        }
+      ]
+    }
+  ],
+  "conversation": {
+    "targetLanguage": "fr",
+    "minimumPracticeMinutes": 15,
+    "guide": "conversation.md"
+  }
+}

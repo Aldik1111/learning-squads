@@ -1,0 +1,11 @@
+{
+  "id": "python-clean-labels-task",
+  "version": 1,
+  "title": "Clean a messy label batch",
+  "description": "Implement the cleaner and explain one case where the order of transformations changes the result.",
+  "acceptanceCriteria": [
+    "Show mixed case, surrounding whitespace, and a whitespace-only label.",
+    "Keep duplicates and internal spaces in your example.",
+    "Describe the output and how you checked input preservation."
+  ]
+}

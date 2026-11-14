@@ -1,0 +1,92 @@
+{
+  "id": "spanish-daily-plans",
+  "contentVersion": 1,
+  "title": "Make a simple plan in Spanish",
+  "level": "beginner",
+  "objectives": [
+    "Use voy a with an infinitive for a plan",
+    "Ask about a time and clarify the day",
+    "Confirm a shared plan in a short exchange"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "spanish-daily-plans-q1",
+      "prompt": "Which means \"I am going to read\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Voy a leer"
+        },
+        {
+          "id": "b",
+          "text": "Voy leer"
+        },
+        {
+          "id": "c",
+          "text": "Vas a leer"
+        }
+      ]
+    },
+    {
+      "id": "spanish-daily-plans-q2",
+      "prompt": "What does ¿A qué hora? ask for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A name"
+        },
+        {
+          "id": "b",
+          "text": "A time"
+        },
+        {
+          "id": "c",
+          "text": "A preference"
+        }
+      ]
+    },
+    {
+      "id": "spanish-daily-plans-q3",
+      "prompt": "Which word means tomorrow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hoy"
+        },
+        {
+          "id": "b",
+          "text": "Ahora"
+        },
+        {
+          "id": "c",
+          "text": "Mañana"
+        }
+      ]
+    },
+    {
+      "id": "spanish-daily-plans-q4",
+      "prompt": "Two online partners agree to six. What still needs clarification?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nothing; six is universal"
+        },
+        {
+          "id": "b",
+          "text": "The date, time zone, and morning/evening context"
+        },
+        {
+          "id": "c",
+          "text": "Their private home addresses"
+        }
+      ]
+    }
+  ],
+  "conversation": {
+    "targetLanguage": "es",
+    "minimumPracticeMinutes": 15,
+    "guide": "conversation.md"
+  }
+}

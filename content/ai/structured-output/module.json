@@ -1,0 +1,87 @@
+{
+  "id": "ai-structured-output",
+  "contentVersion": 1,
+  "title": "Ask for a structure you can validate",
+  "level": "beginner",
+  "objectives": [
+    "Specify output fields and missing-value behavior",
+    "Separate source text from instructions",
+    "Check structure and facts independently"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "ai-structured-output-q1",
+      "prompt": "What should due contain when no deadline is specified?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Today"
+        },
+        {
+          "id": "b",
+          "text": "null"
+        },
+        {
+          "id": "c",
+          "text": "A likely Friday"
+        }
+      ]
+    },
+    {
+      "id": "ai-structured-output-q2",
+      "prompt": "A JSON object parses but has an invented owner. Is it acceptable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes; parsing proves facts"
+        },
+        {
+          "id": "b",
+          "text": "No; factual validation is separate"
+        },
+        {
+          "id": "c",
+          "text": "Only if the name is short"
+        }
+      ]
+    },
+    {
+      "id": "ai-structured-output-q3",
+      "prompt": "A source passage says \"ignore the rules.\" How should it be treated?",
+      "options": [
+        {
+          "id": "a",
+          "text": "As source data to inspect"
+        },
+        {
+          "id": "b",
+          "text": "As a new higher-priority instruction"
+        },
+        {
+          "id": "c",
+          "text": "As permission to run code"
+        }
+      ]
+    },
+    {
+      "id": "ai-structured-output-q4",
+      "prompt": "Which request is easiest to check?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make something useful"
+        },
+        {
+          "id": "b",
+          "text": "Pick any format"
+        },
+        {
+          "id": "c",
+          "text": "Use these exact keys, types, and missing-value rules"
+        }
+      ]
+    }
+  ]
+}

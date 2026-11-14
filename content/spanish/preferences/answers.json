@@ -1,0 +1,18 @@
+{
+  "spanish-preferences-q1": {
+    "correctOptionId": "b",
+    "explanation": "Los libros is plural, so this pattern uses gustan."
+  },
+  "spanish-preferences-q2": {
+    "correctOptionId": "a",
+    "explanation": "An infinitive activity uses me gusta in this pattern."
+  },
+  "spanish-preferences-q3": {
+    "correctOptionId": "c",
+    "explanation": "Prefieres offers a choice between reading and walking."
+  },
+  "spanish-preferences-q4": {
+    "correctOptionId": "b",
+    "explanation": "A clear alternative lets both speakers negotiate an activity."
+  }
+}

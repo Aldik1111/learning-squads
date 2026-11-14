@@ -1,0 +1,11 @@
+{
+  "id": "python-first-function-task",
+  "version": 1,
+  "title": "Explain your completed-habit counter",
+  "description": "Implement the existing count_completed exercise, then explain a boundary case in your own words.",
+  "acceptanceCriteria": [
+    "Show an empty input and a mixed list of true/false values with expected counts.",
+    "Explain why false values do not increase the count.",
+    "Describe your check results and confirm the input is unchanged."
+  ]
+}

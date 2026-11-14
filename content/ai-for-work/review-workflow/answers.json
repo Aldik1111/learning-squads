@@ -1,0 +1,18 @@
+{
+  "ai-work-review-workflow-q1": {
+    "correctOptionId": "b",
+    "explanation": "Source support can be checked claim by claim."
+  },
+  "ai-work-review-workflow-q2": {
+    "correctOptionId": "c",
+    "explanation": "A previous example does not establish a fact for this one."
+  },
+  "ai-work-review-workflow-q3": {
+    "correctOptionId": "a",
+    "explanation": "A factual failure is not cancelled out by good formatting."
+  },
+  "ai-work-review-workflow-q4": {
+    "correctOptionId": "b",
+    "explanation": "This is a local review record, not a general performance estimate."
+  }
+}

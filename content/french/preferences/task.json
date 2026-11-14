@@ -1,0 +1,11 @@
+{
+  "id": "french-preferences-task",
+  "version": 1,
+  "title": "Compare preferences in French",
+  "description": "Write a fictional dialogue where two people compare activities and agree on one.",
+  "acceptanceCriteria": [
+    "Include a like, a dislike, and a preference phrase.",
+    "Ask an either-or question and show a response to a different first choice.",
+    "State the agreed activity and explain one language improvement."
+  ]
+}

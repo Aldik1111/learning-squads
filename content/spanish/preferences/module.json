@@ -1,0 +1,92 @@
+{
+  "id": "spanish-preferences",
+  "contentVersion": 1,
+  "title": "Find an activity you both enjoy",
+  "level": "beginner",
+  "objectives": [
+    "Express a like with me gusta or me gustan",
+    "Ask about a partner’s preference",
+    "Choose an activity without pretending to agree"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "spanish-preferences-q1",
+      "prompt": "Which fits \"I like books\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Me gusta los libros"
+        },
+        {
+          "id": "b",
+          "text": "Me gustan los libros"
+        },
+        {
+          "id": "c",
+          "text": "Me gustan leer"
+        }
+      ]
+    },
+    {
+      "id": "spanish-preferences-q2",
+      "prompt": "Which fits an activity?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Me gusta caminar"
+        },
+        {
+          "id": "b",
+          "text": "Me gustan caminar"
+        },
+        {
+          "id": "c",
+          "text": "Me gusto caminar"
+        }
+      ]
+    },
+    {
+      "id": "spanish-preferences-q3",
+      "prompt": "What does ¿Prefieres leer o caminar? ask?",
+      "options": [
+        {
+          "id": "a",
+          "text": "What time it is"
+        },
+        {
+          "id": "b",
+          "text": "What your name is"
+        },
+        {
+          "id": "c",
+          "text": "Which activity you prefer"
+        }
+      ]
+    },
+    {
+      "id": "spanish-preferences-q4",
+      "prompt": "If you prefer another activity, what is useful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pretend to agree"
+        },
+        {
+          "id": "b",
+          "text": "State your preference politely and propose an alternative"
+        },
+        {
+          "id": "c",
+          "text": "Stop listening"
+        }
+      ]
+    }
+  ],
+  "conversation": {
+    "targetLanguage": "es",
+    "minimumPracticeMinutes": 15,
+    "guide": "conversation.md"
+  }
+}

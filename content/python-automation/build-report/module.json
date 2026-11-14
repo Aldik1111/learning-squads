@@ -1,0 +1,88 @@
+{
+  "id": "python-build-report",
+  "contentVersion": 1,
+  "title": "Turn totals into a repeatable report",
+  "level": "beginner",
+  "objectives": [
+    "Sort keys without mutating the source",
+    "Format integer values into readable lines",
+    "Keep presentation separate from calculation"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "python-build-report-q1",
+      "prompt": "Why sort the keys?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To change totals"
+        },
+        {
+          "id": "b",
+          "text": "To produce consistent line order"
+        },
+        {
+          "id": "c",
+          "text": "To remove zero totals"
+        }
+      ]
+    },
+    {
+      "id": "python-build-report-q2",
+      "prompt": "What is the required line for read with total 0?",
+      "options": [
+        {
+          "id": "a",
+          "text": "\"read: 0\""
+        },
+        {
+          "id": "b",
+          "text": "\"read: \""
+        },
+        {
+          "id": "c",
+          "text": "No line"
+        }
+      ]
+    },
+    {
+      "id": "python-build-report-q3",
+      "prompt": "What must the function return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "One printed message"
+        },
+        {
+          "id": "b",
+          "text": "A list of formatted strings"
+        },
+        {
+          "id": "c",
+          "text": "The original dictionary"
+        }
+      ]
+    },
+    {
+      "id": "python-build-report-q4",
+      "prompt": "Does sorted(totals) modify totals?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes, it deletes values"
+        },
+        {
+          "id": "b",
+          "text": "Yes, it sorts the dictionary in place"
+        },
+        {
+          "id": "c",
+          "text": "No, it returns a new list of keys"
+        }
+      ]
+    }
+  ],
+  "exercise": "exercise.json"
+}

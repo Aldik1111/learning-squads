@@ -1,0 +1,11 @@
+{
+  "id": "spanish-daily-plans-task",
+  "version": 1,
+  "title": "Write and confirm a Spanish plan",
+  "description": "Create a fictional short exchange that proposes an activity, changes a time, and confirms the final plan.",
+  "acceptanceCriteria": [
+    "Use voy a plus an infinitive and ask ¿A qué hora? or an equivalent question.",
+    "Show the changed time and a clear final confirmation.",
+    "Add one phrase you needed to repeat or improve; keep real scheduling details private."
+  ]
+}

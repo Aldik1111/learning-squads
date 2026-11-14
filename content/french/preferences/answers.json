@@ -1,0 +1,18 @@
+{
+  "french-preferences-q1": {
+    "correctOptionId": "a",
+    "explanation": "Je préfère introduces the preferred activity."
+  },
+  "french-preferences-q2": {
+    "correctOptionId": "b",
+    "explanation": "The written pattern places n’ before aime and pas after it."
+  },
+  "french-preferences-q3": {
+    "correctOptionId": "c",
+    "explanation": "The question offers a choice between two activities."
+  },
+  "french-preferences-q4": {
+    "correctOptionId": "b",
+    "explanation": "A respectful alternative keeps both speakers involved in choosing."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "ai-work-review-workflow",
+  "contentVersion": 1,
+  "title": "Build a small human review workflow",
+  "level": "beginner",
+  "objectives": [
+    "Choose concrete review criteria",
+    "Test drafts against normal and missing-data cases",
+    "Keep human approval separate from generation"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "ai-work-review-workflow-q1",
+      "prompt": "Which is the most concrete factual review check?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The draft feels polished"
+        },
+        {
+          "id": "b",
+          "text": "Every claim is supported by the brief"
+        },
+        {
+          "id": "c",
+          "text": "The draft is longer"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-review-workflow-q2",
+      "prompt": "A missing-data test omits the time. What should a draft do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reuse a previous time"
+        },
+        {
+          "id": "b",
+          "text": "Invent the most convenient time"
+        },
+        {
+          "id": "c",
+          "text": "Keep the time unknown or request clarification"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-review-workflow-q3",
+      "prompt": "A draft passes formatting but invents a link. What next?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Correct and recheck the unsupported claim"
+        },
+        {
+          "id": "b",
+          "text": "Publish because most checks passed"
+        },
+        {
+          "id": "c",
+          "text": "Ignore facts if the tone is friendly"
+        }
+      ]
+    },
+    {
+      "id": "ai-work-review-workflow-q4",
+      "prompt": "What does a 3/4 checklist result mean here?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The model is 75% accurate everywhere"
+        },
+        {
+          "id": "b",
+          "text": "Three listed checks passed for this draft"
+        },
+        {
+          "id": "c",
+          "text": "The draft is automatically approved"
+        }
+      ]
+    }
+  ]
+}

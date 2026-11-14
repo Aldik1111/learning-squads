@@ -1,0 +1,18 @@
+{
+  "french-first-conversation-q1": {
+    "correctOptionId": "a",
+    "explanation": "Je m’appelle introduces the name you use in the conversation."
+  },
+  "french-first-conversation-q2": {
+    "correctOptionId": "c",
+    "explanation": "This asks the partner to repeat rather than pretending you understood."
+  },
+  "french-first-conversation-q3": {
+    "correctOptionId": "b",
+    "explanation": "Vous can politely address one person; it also has a plural use."
+  },
+  "french-first-conversation-q4": {
+    "correctOptionId": "b",
+    "explanation": "The exercise works with fictional details and does not require private information."
+  }
+}

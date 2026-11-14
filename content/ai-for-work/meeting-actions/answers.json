@@ -1,0 +1,18 @@
+{
+  "ai-work-meeting-actions-q1": {
+    "correctOptionId": "b",
+    "explanation": "The explicit agreement takes precedence over the earlier suggestion."
+  },
+  "ai-work-meeting-actions-q2": {
+    "correctOptionId": "c",
+    "explanation": "The summary must preserve the unresolved assignment."
+  },
+  "ai-work-meeting-actions-q3": {
+    "correctOptionId": "a",
+    "explanation": "A source phrase lets a reviewer check each classification and field."
+  },
+  "ai-work-meeting-actions-q4": {
+    "correctOptionId": "b",
+    "explanation": "A deadline needs its own support in the notes."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "french-daily-plans-q1": {
+    "correctOptionId": "b",
+    "explanation": "The future pattern is the appropriate form of aller followed directly by an infinitive."
+  },
+  "french-daily-plans-q2": {
+    "correctOptionId": "a",
+    "explanation": "Demain places the plan tomorrow."
+  },
+  "french-daily-plans-q3": {
+    "correctOptionId": "c",
+    "explanation": "This question asks for the activity’s time."
+  },
+  "french-daily-plans-q4": {
+    "correctOptionId": "a",
+    "explanation": "Repeating the updated plan helps both people confirm the same details."
+  }
+}

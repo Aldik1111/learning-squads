@@ -1,0 +1,114 @@
+{
+  "id": "python-group-minutes",
+  "exerciseVersion": 1,
+  "title": "Build a category total",
+  "entrypoint": "group_minutes",
+  "starterFile": "starter.py",
+  "referenceFile": "authoring/reference.py",
+  "inputDescription": "One positional argument: a list of dictionaries with category (string) and minutes (non-negative integer). Category strings may be empty.",
+  "outputDescription": "A dictionary of exact category strings to summed integer minutes. Preserve the list and every input record.",
+  "preserveInput": true,
+  "cases": [
+    {
+      "id": "case-1",
+      "label": "Empty",
+      "args": [
+        []
+      ],
+      "expected": {}
+    },
+    {
+      "id": "case-2",
+      "label": "Single",
+      "args": [
+        [
+          {
+            "category": "read",
+            "minutes": 5
+          }
+        ]
+      ],
+      "expected": {
+        "read": 5
+      }
+    },
+    {
+      "id": "case-3",
+      "label": "Interleaved",
+      "args": [
+        [
+          {
+            "category": "read",
+            "minutes": 3
+          },
+          {
+            "category": "walk",
+            "minutes": 5
+          },
+          {
+            "category": "read",
+            "minutes": 4
+          }
+        ]
+      ],
+      "expected": {
+        "read": 7,
+        "walk": 5
+      }
+    },
+    {
+      "id": "case-4",
+      "label": "Keep zero",
+      "args": [
+        [
+          {
+            "category": "rest",
+            "minutes": 0
+          }
+        ]
+      ],
+      "expected": {
+        "rest": 0
+      }
+    },
+    {
+      "id": "case-5",
+      "label": "Exact keys",
+      "args": [
+        [
+          {
+            "category": "Read",
+            "minutes": 1
+          },
+          {
+            "category": "read",
+            "minutes": 2
+          }
+        ]
+      ],
+      "expected": {
+        "Read": 1,
+        "read": 2
+      }
+    },
+    {
+      "id": "case-6",
+      "label": "Empty category",
+      "args": [
+        [
+          {
+            "category": "",
+            "minutes": 0
+          },
+          {
+            "category": "",
+            "minutes": 2
+          }
+        ]
+      ],
+      "expected": {
+        "": 2
+      }
+    }
+  ]
+}

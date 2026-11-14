@@ -1,0 +1,18 @@
+{
+  "python-list-filters-q1": {
+    "correctOptionId": "a",
+    "explanation": "Both occurrences meet the inclusive boundary; filtering preserves duplicates."
+  },
+  "python-list-filters-q2": {
+    "correctOptionId": "b",
+    "explanation": "Returning after the loop lets every item contribute."
+  },
+  "python-list-filters-q3": {
+    "correctOptionId": "c",
+    "explanation": "No items are appended, so the new result list stays empty."
+  },
+  "python-list-filters-q4": {
+    "correctOptionId": "b",
+    "explanation": "This contract preserves repeated values and their original order."
+  }
+}

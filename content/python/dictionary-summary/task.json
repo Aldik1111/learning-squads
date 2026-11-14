@@ -1,0 +1,11 @@
+{
+  "id": "python-dictionary-summary-task",
+  "version": 1,
+  "title": "Explain a score summary",
+  "description": "Build the summary function and explain why zero scores and missing entries are different.",
+  "acceptanceCriteria": [
+    "Include an empty dictionary and a dictionary containing a zero score.",
+    "Show the exact count/total result shape.",
+    "Confirm the input remains unchanged and describe one debugging insight."
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "id": "python-group-records",
+  "contentVersion": 1,
+  "title": "Combine records by category",
+  "level": "beginner",
+  "objectives": [
+    "Read a list of record dictionaries",
+    "Accumulate totals by key",
+    "Keep zero-minute categories visible"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "python-group-records-q1",
+      "prompt": "Why use totals.get(category, 0)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To remove the category"
+        },
+        {
+          "id": "b",
+          "text": "To supply zero for a new category"
+        },
+        {
+          "id": "c",
+          "text": "To sort records"
+        }
+      ]
+    },
+    {
+      "id": "python-group-records-q2",
+      "prompt": "Records read=3, walk=5, read=4 produce what read total?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "id": "python-group-records-q3",
+      "prompt": "What happens to a single zero-minute category?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It remains with total 0"
+        },
+        {
+          "id": "b",
+          "text": "It is always removed"
+        },
+        {
+          "id": "c",
+          "text": "Its total becomes 1"
+        }
+      ]
+    },
+    {
+      "id": "python-group-records-q4",
+      "prompt": "Are Read and read combined here?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes, always"
+        },
+        {
+          "id": "b",
+          "text": "No, keys remain exact"
+        },
+        {
+          "id": "c",
+          "text": "Only if adjacent"
+        }
+      ]
+    }
+  ],
+  "exercise": "exercise.json"
+}

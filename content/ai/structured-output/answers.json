@@ -1,0 +1,18 @@
+{
+  "ai-structured-output-q1": {
+    "correctOptionId": "b",
+    "explanation": "The agreed missing-value rule is null, not a guessed deadline."
+  },
+  "ai-structured-output-q2": {
+    "correctOptionId": "b",
+    "explanation": "Valid syntax does not establish source support."
+  },
+  "ai-structured-output-q3": {
+    "correctOptionId": "a",
+    "explanation": "Untrusted source text does not gain authority over the extraction instructions."
+  },
+  "ai-structured-output-q4": {
+    "correctOptionId": "c",
+    "explanation": "A defined contract provides concrete checks for the result."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "python-list-filters",
+  "contentVersion": 1,
+  "title": "Keep the values you need",
+  "level": "beginner",
+  "objectives": [
+    "Filter integers with an inclusive boundary",
+    "Preserve the order and repeated values",
+    "Build a new list without changing the input"
+  ],
+  "lesson": "lesson.md",
+  "answerKey": "answers.json",
+  "quiz": [
+    {
+      "id": "python-list-filters-q1",
+      "prompt": "Which values remain from [4, 2, 4] with minimum 4?",
+      "options": [
+        {
+          "id": "a",
+          "text": "[4, 4]"
+        },
+        {
+          "id": "b",
+          "text": "[4]"
+        },
+        {
+          "id": "c",
+          "text": "[]"
+        }
+      ]
+    },
+    {
+      "id": "python-list-filters-q2",
+      "prompt": "Where should the final return go?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Inside the first matching branch"
+        },
+        {
+          "id": "b",
+          "text": "After the loop"
+        },
+        {
+          "id": "c",
+          "text": "Before creating the result"
+        }
+      ]
+    },
+    {
+      "id": "python-list-filters-q3",
+      "prompt": "What is the result for []?",
+      "options": [
+        {
+          "id": "a",
+          "text": "None"
+        },
+        {
+          "id": "b",
+          "text": "[0]"
+        },
+        {
+          "id": "c",
+          "text": "[]"
+        }
+      ]
+    },
+    {
+      "id": "python-list-filters-q4",
+      "prompt": "Why avoid converting the result to a set?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A set increases every value"
+        },
+        {
+          "id": "b",
+          "text": "It removes repeated observations"
+        },
+        {
+          "id": "c",
+          "text": "A set cannot hold integers"
+        }
+      ]
+    }
+  ],
+  "exercise": "exercise.json"
+}

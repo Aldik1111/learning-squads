@@ -1,0 +1,18 @@
+{
+  "python-clean-labels-q1": {
+    "correctOptionId": "b",
+    "explanation": "strip removes only edge whitespace; lower changes case."
+  },
+  "python-clean-labels-q2": {
+    "correctOptionId": "a",
+    "explanation": "Whitespace-only strings become empty after stripping."
+  },
+  "python-clean-labels-q3": {
+    "correctOptionId": "a",
+    "explanation": "This contract preserves repeated records."
+  },
+  "python-clean-labels-q4": {
+    "correctOptionId": "c",
+    "explanation": "The caller must retain its original input."
+  }
+}

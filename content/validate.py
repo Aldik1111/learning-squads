@@ -8,6 +8,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parent
+EXPECTED_COURSES = {"python", "how-to-use-ai", "spanish", "python-automation", "ai-for-work", "french"}
 
 
 def require(condition, message):
@@ -47,7 +48,7 @@ def check_module(path, expected_id):
     lesson = referenced(path.parent, module["lesson"])
     require(lesson.read_text(encoding="utf-8").startswith("# "), f"No lesson heading: {lesson}")
     questions = module["quiz"]
-    require(questions, f"Empty quiz: {path}")
+    require(len(questions) == 4, f"Each beginner module needs four quiz questions: {path}")
     ids = [q["id"] for q in questions]
     unique(ids, "question ID")
     answers = read_json(referenced(path.parent, module["answerKey"]))
@@ -72,6 +73,31 @@ def check_module(path, expected_id):
     return module, ids
 
 
+def check_task(base, module_id):
+    task = read_json(referenced(base, "task.json"))
+    require(set(task) == {"id", "version", "title", "description", "acceptanceCriteria"},
+            f"Unexpected task fields: {base}")
+    require(task["id"] == module_id + "-task", f"Task ID mismatch: {base}")
+    require(type(task["version"]) is int and task["version"] > 0, f"Invalid task version: {base}")
+    require(text(task["title"]) and text(task["description"]), f"Missing task instructions: {base}")
+    criteria = task["acceptanceCriteria"]
+    require(isinstance(criteria, list) and len(criteria) >= 2 and all(text(item) for item in criteria),
+            f"Task needs concrete acceptance criteria: {base}")
+    unique(criteria, "task acceptance criterion")
+    return task["id"]
+
+
+def same_value(actual, expected):
+    # Match the browser runner's recursive type check: bool is not integer 1.
+    if type(actual) is not type(expected):
+        return False
+    if isinstance(expected, list):
+        return len(actual) == len(expected) and all(same_value(a, b) for a, b in zip(actual, expected))
+    if isinstance(expected, dict):
+        return actual.keys() == expected.keys() and all(same_value(actual[k], v) for k, v in expected.items())
+    return actual == expected
+
+
 def passing_cases(function, cases, preserve_input):
     passed = 0
     for case in cases:
@@ -81,8 +107,7 @@ def passing_cases(function, cases, preserve_input):
             actual = function(*arguments)
         except Exception:
             continue
-        # bool is a Python int subclass; True must not pass an expected integer 1.
-        if (type(actual) is type(case["expected"]) and actual == case["expected"]
+        if (same_value(actual, case["expected"])
                 and (not preserve_input or arguments == before)):
             passed += 1
     return passed
@@ -95,7 +120,7 @@ def check_exercise(path):
             "Invalid exercise version")
     require(type(exercise["preserveInput"]) is bool, "Invalid preserveInput flag")
     cases = exercise["cases"]
-    require(cases, "Exercise needs cases")
+    require(len(cases) >= 6, "Exercise needs at least six meaningful cases")
     unique([case["id"] for case in cases], "case ID")
     for case in cases:
         require(text(case["label"]) and isinstance(case["args"], list), "Invalid case")
@@ -107,23 +132,59 @@ def check_exercise(path):
     preserve = exercise["preserveInput"]
     require(passing_cases(reference_fn, cases, preserve) == len(cases), "Reference failed examples")
     require(passing_cases(starter_fn, cases, preserve) < len(cases), "Starter already solves exercise")
-    if exercise["id"] == "python-count-completed":
-        # Regression probes: do the examples catch common beginner mistakes?
-        def modifies_input(habits):
-            total = sum(habits)
-            habits.clear()
-            return total
+    # Every exercise must detect a correct answer obtained by destroying input.
+    def modifies_first_input(*args):
+        result = reference_fn(*args)
+        args[0].clear()
+        return result
 
-        mistakes = {
+    mistakes = {"changes input": modifies_first_input}
+    if exercise["id"] == "python-count-completed":
+        mistakes.update({
             "constant zero": lambda habits: 0,
             "counts all entries": len,
             "returns boolean": lambda habits: bool(sum(habits)),
             "returns after first entry": lambda habits: int(habits[0]) if habits else 0,
-            "changes input": modifies_input,
-        }
-        for label, function in mistakes.items():
-            require(passing_cases(function, cases, preserve) < len(cases), f"Cases miss: {label}")
-        print(f"Python: {len(cases)} cases pass; starter and {len(mistakes)} incorrect variants rejected.")
+        })
+    elif exercise["id"] == "python-keep-at-least":
+        mistakes.update({
+            "excludes exact boundary": lambda values, minimum: [x for x in values if x > minimum],
+            "drops duplicates": lambda values, minimum: list(dict.fromkeys(x for x in values if x >= minimum)),
+            "sorts instead of preserving order": lambda values, minimum: sorted(x for x in values if x >= minimum),
+        })
+    elif exercise["id"] == "python-summarize-scores":
+        mistakes.update({
+            "counts only positive scores": lambda scores: {"count": sum(x > 0 for x in scores.values()), "total": sum(scores.values())},
+            "counts instead of summing": lambda scores: {"count": len(scores), "total": len(scores)},
+            "extra output key": lambda scores: {"count": len(scores), "total": sum(scores.values()), "average": 0},
+            "nested boolean instead of integer": lambda scores: {"count": bool(scores), "total": sum(scores.values())},
+        })
+    elif exercise["id"] == "python-normalize-labels":
+        mistakes.update({
+            "checks emptiness before cleaning": lambda labels: [x.strip().lower() for x in labels if x],
+            "does not lowercase": lambda labels: [x.strip() for x in labels if x.strip()],
+            "drops duplicates": lambda labels: list(dict.fromkeys(x.strip().lower() for x in labels if x.strip())),
+            "removes internal spaces": lambda labels: [x.replace(" ", "").lower() for x in labels if x.strip()],
+        })
+    elif exercise["id"] == "python-group-minutes":
+        mistakes.update({
+            "overwrites repeated category": lambda records: {x["category"]: x["minutes"] for x in records},
+            "drops zero-minute categories": lambda records: {k: v for k, v in reference_fn(records).items() if v},
+            "normalizes exact keys": lambda records: {k.lower(): v for k, v in reference_fn(records).items()},
+            "drops empty category": lambda records: {k: v for k, v in reference_fn(records).items() if k},
+        })
+    elif exercise["id"] == "python-report-lines":
+        mistakes.update({
+            "uses insertion order": lambda totals: [f"{k}: {v}" for k, v in totals.items()],
+            "drops zero totals": lambda totals: [f"{k}: {totals[k]}" for k in sorted(totals) if totals[k]],
+            "wrong separator": lambda totals: [f"{k}={totals[k]}" for k in sorted(totals)],
+            "returns a single string": lambda totals: "\n".join(reference_fn(totals)),
+        })
+    else:
+        raise ValueError(f"Missing incorrect-solution probes: {exercise['id']}")
+    for label, function in mistakes.items():
+        require(passing_cases(function, cases, preserve) < len(cases), f"{exercise['id']} cases miss: {label}")
+    print(f"{exercise['id']}: {len(cases)} cases pass; starter and {len(mistakes)} incorrect variants rejected.")
     return exercise["id"]
 
 
@@ -132,11 +193,12 @@ def main():
     require(catalog["formatVersion"] == 1, "Unsupported proposed content format")
     require(text(catalog["locale"]), "Missing locale")
     courses = catalog["courses"]
-    require(courses, "Empty course catalog")
+    require({course["id"] for course in courses} == EXPECTED_COURSES, "Expected the six approved courses")
     unique([course["id"] for course in courses], "course ID")
-    module_ids, question_ids, exercise_ids = [], [], []
+    module_ids, question_ids, exercise_ids, task_ids = [], [], [], []
     for course in courses:
-        require(text(course["title"]) and course["modules"], "Missing course title/modules")
+        require(text(course["title"]) and text(course["description"]), "Missing course title/description")
+        require(len(course["modules"]) == 3, "Each approved course needs three modules")
         require(course.get("category") in {"programming", "languages", "ai"}, "Unknown course category")
         require(course.get("collaborationMode") in {"group", "language-partner", "self-paced"}, "Unknown collaboration mode")
         require(course["category"] != "languages" or course["collaborationMode"] == "language-partner",
@@ -146,12 +208,23 @@ def main():
             module, ids = check_module(path, entry["id"])
             module_ids.append(module["id"])
             question_ids.extend(ids)
+            task_ids.append(check_task(path.parent, module["id"]))
+            require(("exercise" in module) == (course["category"] == "programming"),
+                    "Each programming module needs a Python exercise; other categories do not")
+            require(("conversation" in module) == (course["category"] == "languages"),
+                    "Each language module needs a conversation guide; other categories do not")
+            if "conversation" in module:
+                expected_language = {"spanish": "es", "french": "fr"}[course["id"]]
+                require(module["conversation"]["targetLanguage"] == expected_language, "Conversation target language mismatch")
+                require(module["conversation"]["minimumPracticeMinutes"] == 15, "Each language module has 15 minutes of practice")
             if "exercise" in module:
                 exercise_ids.append(check_exercise(referenced(path.parent, module["exercise"])))
     unique(module_ids, "catalog module ID")
     unique(question_ids, "global question ID")
     unique(exercise_ids, "exercise ID")
-    print(f"Content PASS: {len(courses)} courses, {len(module_ids)} modules, {len(question_ids)} questions.")
+    unique(task_ids, "task ID")
+    print(f"Content PASS: {len(courses)} courses, {len(module_ids)} modules, {len(question_ids)} questions, "
+          f"{len(task_ids)} tasks, {len(exercise_ids)} Python exercises.")
     print("API, browser runner, progress, UI and deployment are NOT checked.")
 
 
