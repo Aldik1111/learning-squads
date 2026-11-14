@@ -30,8 +30,18 @@ B владеет каркасом, зависимостями, lock-файлом
 Python выполняется в отделённой среде без доступа к сессии; worker сам по себе не граница безопасности.
 
 ## Проверки
-Запускайте проверки, относящиеся к изменению. Фактические команды добавит B в T01.
-До приложения работает только scripts/check_repository.py.
+Запускайте проверки, относящиеся к изменению. Команды приложения и БД описаны в README.md.
+scripts/check_repository.py проверяет только структуру репозитория и не заменяет проверки приложения.
 Проверяйте многопользовательские сценарии независимыми браузерными контекстами.
 Миграции не переписывайте после применения; не сбрасывайте общую БД без согласования.
 Отвечайте владельцу по-русски, кратко; точно отделяйте план, реализованное, проверенное и выложенное.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
