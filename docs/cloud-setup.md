@@ -73,3 +73,7 @@ Vercel settings с branch scope обеих переменных и отсутс�
 Это проверка изоляции конфигурации и перечисленных экранов, не новый API suite и не повтор независимой приёмки B. Полные Python и многопользовательские проверки по-прежнему относятся к историческому SHA `d922e3ce6cf1dd19bb680c646e19432ed30ce29e`, а не автоматически к этому выпуску. Настоящая внешняя Meet-связь здесь не проверялась.
 
 Основание поведения Vercel: [переменные отдельной Git-ветки](https://vercel.com/docs/environment-variables/manage-across-environments), [изменения переменных применяются только к новым deployments](https://vercel.com/docs/environment-variables). Существующие deployments сменой scope не переписываются.
+
+## 15.11.2026 — migration012 / #27
+
+В проекте `xoczdfnefjufvyhpvuho` транзакцией применена additive012: CREATE OR REPLACE существующего ls_create_call, без сброса данных и изменения grants/RLS. SQL Editor подтвердил multilingual_matching=true по pg_get_functiondef. В Vercel опубликован `ec8b7bef2d29e0ccd7137cfa92c7c7997808f334`, deployment `APjkYgBBYVcEEJanUMdjZo3eQy6E`, GitHub Vercel status success. Публичный адрес — существующий release alias; main не менялся.
